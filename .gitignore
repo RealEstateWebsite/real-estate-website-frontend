@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 .git.zip
 .git
+
+package-lock.json
