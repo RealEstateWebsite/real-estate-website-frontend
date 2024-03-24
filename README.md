@@ -26,7 +26,7 @@ This file contains various environment variables that you can configure.
 
 **REACT_APP_GOOGLE_MAP_ID** - Your Google Map ID
 
-## Folder Structure
+## Folder Structure For The Frontend
 
 ```
 .
