@@ -21,21 +21,27 @@ export default function Header({ ...props }) {
               <Heading as="h6">
                 <Link to='/'>Home</Link>
               </Heading>
-              <Img src="images/img_arrow_down.svg" alt="home_two" className="h-[16px] w-[16px] mt-0.5" />
+              {/* <Img src="images/img_arrow_down.svg" alt="home_two" className="h-[16px] w-[16px] mt-0.5" /> */}
             </div>
             <div className="flex flex-row justify-start items-start w-[25%] gap-1.5">
-              <Heading as="h6">Listing</Heading>
-              <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" />
+              <Heading as="h6">
+                <Link to='/listing'>Listing</Link>
+              </Heading>
+              {/* <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" /> */}
             </div>
             <div className="flex flex-row justify-start items-start w-[25%] gap-1.5">
-              <Heading as="h6">Agents</Heading>
-              <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" />
+              <Heading as="h6">
+                <Link to='/agentlist'>Agents</Link>
+              </Heading>
+              {/* <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" /> */}
             </div>
           </div>
           <Heading as="h6" className="text-center">
-            Property{" "}
+            <Link to='/propertydetails'>Property{" "}</Link>
           </Heading>
-          <Heading as="h6">Blog</Heading>
+          <Heading as="h6">
+            <Link to='/blogpage'>Blog</Link>
+          </Heading>
         </div>
         <div className="flex flex-row justify-start items-center w-[19%] md:w-full gap-2.5">
           <Input
