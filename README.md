@@ -1,6 +1,8 @@
 ## food_website
 
 Generated with ❤️ from [DhiWise](https://www.dhiwise.com)
+Edited by @emmy-akintz
+Backend created by @imisi99
 
 ## Description
 

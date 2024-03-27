@@ -1,6 +1,7 @@
 import React from "react";
 import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading, Text } from "./..";
+import { Link } from "react-router-dom";
 
 export default function Header1({ ...props }) {
   const [searchBarValue2, setSearchBarValue2] = React.useState("");
@@ -16,24 +17,30 @@ export default function Header1({ ...props }) {
         </div>
         <div className="flex flex-row sm:flex-col justify-center w-[41%] md:w-full sm:gap-5">
           <div className="flex flex-row justify-start items-start w-[14%] sm:w-full gap-1.5">
-            <Heading as="h6">Home</Heading>
-            <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px] mt-0.5" />
+            <Heading as="h6">
+              <Link to='/'>Home</Link>
+            </Heading>
+            {/* <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px] mt-0.5" /> */}
           </div>
           <div className="flex flex-row w-[40%] sm:w-full ml-[50px] gap-10 md:ml-5">
             <div className="flex flex-row justify-start items-start w-[40%] gap-1.5">
-              <Heading as="h6">Listing</Heading>
-              <Img src="images/img_arrow_down.svg" alt="listing_two" className="h-[16px] w-[16px]" />
+              <Heading as="h6">
+                <Link to='/listing'>Listing</Link>
+              </Heading>
+              {/* <Img src="images/img_arrow_down.svg" alt="listing_two" className="h-[16px] w-[16px]" /> */}
             </div>
             <div className="flex flex-row justify-start items-start w-[40%] gap-1.5">
-              <Heading as="h6">Agents</Heading>
-              <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" />
+              <Heading as="h6">
+                <Link to='/agentlist'>Agents</Link>
+              </Heading>
+              {/* <Img src="images/img_arrow_down.svg" alt="arrowdown_one" className="h-[16px] w-[16px]" /> */}
             </div>
           </div>
           <Heading as="h6" className="ml-10 sm:ml-5 text-center">
-            Property{" "}
+            <Link to='/propertydetails'>Property{" "}</Link>
           </Heading>
           <Heading as="h6" className="ml-10 sm:ml-5">
-            Blog
+            <Link to='/blogpage'>Blog</Link>
           </Heading>
         </div>
         <div className="flex flex-row justify-start items-center w-[19%] md:w-full gap-2.5">
