@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .routers.user import user
-from .routers.estate import estate
+from routers.estate import estate
 
 app = FastAPI()
 

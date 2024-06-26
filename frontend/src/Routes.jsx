@@ -3,6 +3,8 @@ import { useRoutes } from "react-router-dom";
 import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 import LandingPage from "pages/LandingPage";
+import LogIn from "./modals/LogIn";
+import CreateAccount from "./modals/CreateAccount";
 import AboutUs from "pages/AboutUs";
 import Listing from "pages/Listing";
 import ListingMapView from "pages/ListingMapView";
@@ -24,6 +26,14 @@ const ProjectRoutes = () => {
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/login",
+        element: <LogIn isOpen={true} />,
+      },
+      {
+        path: "/create-account",
+        element: <CreateAccount isOpen={true} />,
       },
       {
         path: "aboutus",

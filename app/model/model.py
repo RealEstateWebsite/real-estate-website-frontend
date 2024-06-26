@@ -1,4 +1,4 @@
-from database import data
+from .database import data
 from sqlalchemy import Column, String, Integer, Float, Boolean
 
 
@@ -11,6 +11,7 @@ class UserModel(data):
     username = Column(String(15), nullable=False, unique=True)
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
+    is_admin = Column(Boolean, nullable=False)
 
 
 class Food(data):
