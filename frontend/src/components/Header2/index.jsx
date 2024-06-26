@@ -1,6 +1,7 @@
 import React from "react";
 import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading, Text } from "./..";
+import LogIn from "modals/LogIn";
 
 export default function Header2({ ...props }) {
   const [searchBarValue, setSearchBarValue] = React.useState("");
@@ -52,9 +53,10 @@ export default function Header2({ ...props }) {
             }
             className="w-[55%] gap-2 text-gray-900 font-bold"
           />
-          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]">
+          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" onClick={() => setIsOpen(true)}>
             Log in
           </Button>
+          <LogIn isOpen={isOpen} />
         </div>
       </div>
     </header>
