@@ -8,6 +8,7 @@ class UserSignin(BaseModel):
     username: Annotated[str, Field(min_length=8, max_length=12)]
     email: Annotated[EmailStr, Field(examples=['example@gmail.com'])]
     password: Annotated[str, Field(min_length=8)]
+    is_admin: Annotated[bool, Field()]
 
 
 class UserLogin(BaseModel):
@@ -43,3 +44,8 @@ class NewPassword(BaseModel):
 class Password(BaseModel):
     password: Annotated[str, Field(min_length=8)]
     password1: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str

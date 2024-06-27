@@ -11,74 +11,84 @@ const Home = () => {
         </a>
         . Quickly use below links to navigate through all pages.
       </p>
-      <ul style={{ listStyle: "none", padding: "0" }}>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/" style={{ color: "#87CEFA", textDecoration: "none" }}>
+      <ul style={{listStyle: "none", padding: "0"}}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/" style={{color: "#87CEFA", textDecoration: "none"}}>
             LandingPage
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/aboutus" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/login" style={{color: "#87CEFA", textDecoration: "none"}}>
+            Login
+          </Link>
+        </li>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/create-account" style={{color: "#87CEFA", textDecoration: "none"}}>
+            Create Account
+          </Link>
+        </li>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/aboutus" style={{color: "#87CEFA", textDecoration: "none"}}>
             AboutUs
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/listing" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/listing" style={{color: "#87CEFA", textDecoration: "none"}}>
             Listing
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/listingmapview" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/listingmapview" style={{color: "#87CEFA", textDecoration: "none"}}>
             ListingMapView
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/propertydetails" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/propertydetails" style={{color: "#87CEFA", textDecoration: "none"}}>
             PropertyDetails
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/agentlist" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/agentlist" style={{color: "#87CEFA", textDecoration: "none"}}>
             AgentList
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/agentprofile" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/agentprofile" style={{color: "#87CEFA", textDecoration: "none"}}>
             AgentProfile
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/contactpage" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/contactpage" style={{color: "#87CEFA", textDecoration: "none"}}>
             ContactPage
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/blogpage" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/blogpage" style={{color: "#87CEFA", textDecoration: "none"}}>
             BlogPage
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/blogdetails" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/blogdetails" style={{color: "#87CEFA", textDecoration: "none"}}>
             BlogDetails
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/error" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/error" style={{color: "#87CEFA", textDecoration: "none"}}>
             Error
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/faq" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/faq" style={{color: "#87CEFA", textDecoration: "none"}}>
             FAQ
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/privacypolicy" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/privacypolicy" style={{color: "#87CEFA", textDecoration: "none"}}>
             PrivacyPolicy
           </Link>
         </li>
-        <li style={{ marginBottom: "10px" }}>
-          <Link to="/license" style={{ color: "#87CEFA", textDecoration: "none" }}>
+        <li style={{marginBottom: "10px"}}>
+          <Link to="/license" style={{color: "#87CEFA", textDecoration: "none"}}>
             License
           </Link>
         </li>

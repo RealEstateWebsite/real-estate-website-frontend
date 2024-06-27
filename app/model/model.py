@@ -1,4 +1,4 @@
-from database import data
+from .database import data
 from sqlalchemy import Column, String, Integer, Float, Boolean
 
 
@@ -6,11 +6,12 @@ class UserModel(data):
     __tablename__ = 'user'
 
     id = Column(Integer, index=True, primary_key=True)
-    firstname = Column(nullable=False)
+    firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     username = Column(String(15), nullable=False, unique=True)
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
+    is_admin = Column(Boolean, nullable=False)
 
 
 class Food(data):
