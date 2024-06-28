@@ -12,6 +12,7 @@ app.include_router(estate, prefix='/estate', tags=['Order'])
 
 @app.get('/')
 def testing():
-    return 'This is testing of the api'
+    return 'This is the beginning of something great'
+
 
 model.data.metadata.create_all(bind=engine)
