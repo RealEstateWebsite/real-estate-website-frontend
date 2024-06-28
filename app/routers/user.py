@@ -9,6 +9,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 from ..model.model import UserModel
 from ..schemas.user_schema import *
+from ..schemas.admin_schema import *
 from ..model.database import begin
 
 user = APIRouter()
@@ -70,7 +71,7 @@ user_dependency = Annotated[str, Depends(get_user)]
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-@user.post('/signup')
+@user.post('/signup', status_code=status.HTTP_201_CREATED)
 async def user_sign_in(form: UserSignin, db: db_dependency):
     existing_username = db.query(UserModel).filter(UserModel.username == form.username).first()
     existing_email = db.query(UserModel).filter(UserModel.email == form.email).first()
@@ -86,7 +87,7 @@ async def user_sign_in(form: UserSignin, db: db_dependency):
         username=form.username,
         email=form.email,
         password=hashed.hash(form.password),
-        is_admin=False
+        is_admin=True
     )
 
     db.add(user)
@@ -96,8 +97,8 @@ async def user_sign_in(form: UserSignin, db: db_dependency):
     return 'Sign-up Successful'
 
 
-@user.post('/admin/sign-up')
-async def admin_sign_up(form: UserSignin, db: db_dependency, admin: user_dependency):
+@user.post('/admin/sign-up', status_code=status.HTTP_201_CREATED)
+async def admin_sign_up(form: CreateAdminUserSchema, db: db_dependency, admin: user_dependency):
     if not admin:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credential!')
 
@@ -107,8 +108,8 @@ async def admin_sign_up(form: UserSignin, db: db_dependency, admin: user_depende
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied!')
 
     user = UserModel(
-        firstname=form.firstname,
-        lastname=form.lastname,
+        firstname='admin',
+        lastname='admin',
         username=form.username,
         email=form.email,
         password=hashed.hash(form.password),
@@ -120,6 +121,50 @@ async def admin_sign_up(form: UserSignin, db: db_dependency, admin: user_depende
     db.refresh(user)
 
     return 'Admin User has been created'
+
+
+@user.put('/user-to-admin', status_code=status.HTTP_201_CREATED)
+async def user_to_admin(form: ToAdmin, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials!')
+
+    admin = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+    if not admin.is_admin:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission denied!')
+
+    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(UserModel.email == form.email).first()
+    if not existing_user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found!')
+
+    existing_user.is_admin = True
+
+    db.add(existing_user)
+    db.commit()
+    db.refresh(existing_user)
+
+    return 'User status now admin'
+
+
+@user.put('/admin-to-user', status_code=status.HTTP_201_CREATED)
+async def admin_to_user(form: ToAdmin, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials!')
+
+    admin = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+    if not admin.is_admin:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission denied!')
+
+    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(UserModel.email == form.email).first()
+    if not existing_user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found!')
+
+    existing_user.is_admin = False
+
+    db.add(existing_user)
+    db.commit()
+    db.refresh(existing_user)
+
+    return 'User status now user'
 
 
 @user.post('/login', response_model=Token)
