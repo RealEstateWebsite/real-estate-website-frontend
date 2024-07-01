@@ -193,7 +193,14 @@ async def view_profile(db: db_dependency, user: user_dependency):
     if not data:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while fetching user data')
 
-    return data
+    data_pack = {
+        "firstname": data.firstname,
+        "lastname": data.lastname,
+        "username": data.username,
+        "email": data.email
+    }
+
+    return data_pack
 
 
 @user.put('/me/update-profile', status_code=status.HTTP_202_ACCEPTED)
@@ -247,4 +254,3 @@ async def delete_user(password: DeleteUser, db: db_dependency, user: user_depend
 
     db.delete(user_data)
     db.commit()
-
