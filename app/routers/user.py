@@ -181,3 +181,76 @@ async def login(form: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_de
         'access_token': token,
         'token_type': 'bearer'
     }
+
+
+@user.get('/me', status_code=status.HTTP_200_OK)
+async def view_profile(db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
+
+    data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+
+    if not data:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while fetching user data')
+
+    data_pack = {
+        "firstname": data.firstname,
+        "lastname": data.lastname,
+        "username": data.username,
+        "email": data.email
+    }
+
+    return data_pack
+
+
+@user.put('/me/update-profile', status_code=status.HTTP_202_ACCEPTED)
+async def update_user_profile(form: UpdateProfile, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+
+    user_data.firstname = form.firstname
+    user_data.lastname = form.lastname
+    user_data.email = form.email
+    user_data.username = form.username
+
+    db.add(user_data)
+    db.commit()
+    db.refresh(user_data)
+
+
+@user.put('/me/change-password', status_code=status.HTTP_202_ACCEPTED)
+async def change_password(password: NewPassword, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+
+    verify = hashed.verify(password.password, user_data.password)
+    if not verify:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
+
+    user_data.password = password.new_password
+
+    db.add(user_data)
+    db.commit()
+    db.refresh(user_data)
+
+
+# @user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
+# async def forgot_password(password: ForgotPassword, db: db_dependency, user: user_dependency):
+
+@user.delete('/me/delete-user')
+async def delete_user(password: DeleteUser, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+
+    verify = hashed.hash(password.password, user_data.password)
+    if not verify:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
+
+    db.delete(user_data)
+    db.commit()

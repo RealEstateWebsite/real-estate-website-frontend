@@ -28,7 +28,6 @@ class UpdateProfile(BaseModel):
     lastname: Annotated[str, Field(min_length=3, max_length=50)]
     username: Annotated[str, Field(min_length=8, max_length=12)]
     email: Annotated[EmailStr, Field(examples=['example@gmail.com'])]
-    address: Annotated[str, Field(max_length=70)]
 
 
 class ForgotPassword(BaseModel):
@@ -43,6 +42,10 @@ class NewPassword(BaseModel):
 class Password(BaseModel):
     password: Annotated[str, Field(min_length=8)]
     password1: str
+
+
+class DeleteUser(BaseModel):
+    password: str
 
 
 class Token(BaseModel):
