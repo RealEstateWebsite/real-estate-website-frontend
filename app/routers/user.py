@@ -173,7 +173,7 @@ async def login(form: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_de
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
 
-    token = authentication(user_id=user.id, username=user.username, is_admin=user.is_admin, limit=timedelta(minutes=15))
+    token = authentication(user_id=user.id, username=user.username, is_admin=user.is_admin, limit=timedelta(minutes=1))
     if not token:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Unable to generate token try later')
 
@@ -238,8 +238,13 @@ async def change_password(password: NewPassword, db: db_dependency, user: user_d
     db.refresh(user_data)
 
 
-# @user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
-# async def forgot_password(password: ForgotPassword, db: db_dependency, user: user_dependency):
+@user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
+async def forgot_password(email: ForgotPassword, db: db_dependency):
+    valid_email = db.query(UserModel).filter(UserModel.email == email.email).first()
+    if not valid_email:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid email')
+# Send an email with the link to reset password
+
 
 @user.delete('/me/delete-user')
 async def delete_user(password: DeleteUser, db: db_dependency, user: user_dependency):
