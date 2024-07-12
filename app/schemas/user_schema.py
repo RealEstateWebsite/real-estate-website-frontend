@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from typing import Annotated
 import re
 
@@ -10,7 +10,7 @@ class UserSignin(BaseModel):
     email: Annotated[EmailStr, Field(examples=['example@gmail.com'])]
     password: Annotated[str, Field(min_length=8)]
 
-    @validator('password')
+    @field_validator('password')
     def validate_password(cls, value):
         if not re.search(r'[A-Z]', value):
             raise ValueError('Password must contain at least one upper case character')
@@ -47,7 +47,7 @@ class NewPassword(BaseModel):
     password: str
     new_password: Annotated[str, Field(min_length=8)]
 
-    @validator('new_password')
+    @field_validator('new_password')
     def validate_password(cls, value):
         if not re.search(r'[A-Z]', value):
             raise ValueError('Password must contain at least one upper case character')
@@ -60,7 +60,7 @@ class Password(BaseModel):
     password: Annotated[str, Field(min_length=8)]
     password1: str
 
-    @validator('password')
+    @field_validator('password')
     def validate_password(cls, value):
         if not re.search(r'[A-Z]', value):
             raise ValueError('Password must contain at least one upper case character')

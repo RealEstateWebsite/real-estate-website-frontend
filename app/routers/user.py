@@ -1,7 +1,7 @@
 import datetime
 from datetime import datetime, timedelta
-from fastapi import APIRouter, Depends, HTTPException
-from typing import Annotated
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from starlette import status
@@ -11,8 +11,28 @@ from ..model.model import UserModel
 from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..model.database import begin
+from dotenv import load_dotenv
+import os
+
 
 user = APIRouter()
+
+load_dotenv()
+PASSWORD = os.getenv('PASSWORD')
+USERNAME = os.getenv('USERNAME')
+
+conf = ConnectionConfig(
+    MAIL_USERNAME=USERNAME,
+    MAIL_PASSWORD=PASSWORD,
+    MAIL_FROM='isongrichard234@gmail.com',
+    MAIL_PORT=587,
+    MAIL_SERVER='smtp.example.com',
+    MAIL_FROM_NAME='Imisioluwa Isong',
+    MAIL_TLS=True,
+    MAIL_SSL=False,
+    USE_CREDENTIALS=True,
+    VALIDATE_CERTS=True
+)
 
 
 def get_db():
@@ -67,6 +87,18 @@ async def get_user(token: Annotated[str, Depends(bearer)]):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='logged out due to inactivity')
 
 
+async def send_email(background_tasks: BackgroundTasks, email, username, body):
+    message = MessageSchema(
+        subject=f'Hi, {username}',
+        recipients=[email],
+        body=body,
+        subtype='html'
+    )
+
+    fm = FastMail(conf)
+    background_tasks.add_task(fm.send_message, message)
+
+
 user_dependency = Annotated[str, Depends(get_user)]
 db_dependency = Annotated[Session, Depends(get_db)]
 
@@ -94,6 +126,9 @@ async def user_sign_in(form: UserSignin, db: db_dependency):
     db.commit()
     db.refresh(user)
 
+    body = 'Congratulations on making the right choice to trade with us'
+    await send_email(background_tasks=BackgroundTasks, email=user.email, username=user.username, body=body)
+
     return 'Sign-up Successful'
 
 
@@ -119,6 +154,9 @@ async def admin_sign_up(form: CreateAdminUserSchema, db: db_dependency, admin: u
     db.add(user)
     db.commit()
     db.refresh(user)
+
+    body = 'Congratulations on making the right choice to trade with us'
+    await send_email(BackgroundTasks, user.email, user.username, body)
 
     return 'Admin User has been created'
 
