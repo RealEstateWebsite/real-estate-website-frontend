@@ -64,7 +64,7 @@ export default function Header({ ...props }) {
           <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" onClick={() => setIsOpen(true)}>
             Log in
           </Button>
-          <LogIn isOpen={isOpen} />
+          <LogIn isOpen={isOpen} setIsOpen={() => setIsOpen(false)} />
         </div>
       </div>
     </header>
