@@ -1,42 +1,42 @@
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/MarkoOneRegular.ttf");
+  src: url("/fonts/MarkoOneRegular.ttf");
   font-family: "Marko One";
   font-weight: 400;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/ManropeSemiBold.ttf");
+  src: url("/fonts/ManropeSemiBold.ttf");
   font-family: "Manrope";
   font-weight: 600;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/ManropeBold.ttf");
+  src: url("/fonts/ManropeBold.ttf");
   font-family: "Manrope";
   font-weight: 700;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/ManropeExtraBold.ttf");
+  src: url("/fonts/ManropeExtraBold.ttf");
   font-family: "Manrope";
   font-weight: 800;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/ManropeRegular.ttf");
+  src: url("/fonts/ManropeRegular.ttf");
   font-family: "Manrope";
   font-weight: 400;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/public/fonts/ManropeMedium.ttf");
+  src: url("/fonts/ManropeMedium.ttf");
   font-family: "Manrope";
   font-weight: 500;
 }
