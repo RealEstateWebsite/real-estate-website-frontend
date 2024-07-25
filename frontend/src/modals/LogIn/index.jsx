@@ -14,7 +14,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                     Log in
                   </Heading>
-                  <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={setIsOpen}>
+                  <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => setIsOpen(false)}>
                     <Img src="images/img_frame_1000001678.svg" />
                   </Button>
                 </div>
