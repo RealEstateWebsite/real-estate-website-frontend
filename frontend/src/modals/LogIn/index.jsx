@@ -1,6 +1,7 @@
 import React from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
+import { Link } from "react-router-dom";
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   return (
@@ -70,12 +71,14 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
           <div className="flex flex-row sm:flex-col justify-center w-full gap-2 sm:gap-2">
             <a href="#" className="ml-[25px] sm:ml-5">
               <Heading size="lg" as="h2" className="!text-gray-600_02 tracking-[-0.40px] text-center">
-                Don’t have an account?
+                Don&apos;t have an account?
               </Heading>
             </a>
             <a href="#" className="mr-[25px] sm:mr-5">
               <Heading size="lg" as="h3" className="tracking-[-0.40px]">
-                Create Account
+                <Link to='/create-account'>
+                  Create Account
+                </Link>
               </Heading>
             </a>
           </div>

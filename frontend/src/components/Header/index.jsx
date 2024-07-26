@@ -3,7 +3,7 @@ import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading, Text } from "./..";
 import { Link } from "react-router-dom";
 import LogIn from "modals/LogIn";
-// handle outside click function
+
 export default function Header({ ...props }) {
   const [searchBarValue1, setSearchBarValue1] = React.useState("");
   const [isOpen, setIsOpen] = useState(false)
