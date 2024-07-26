@@ -1,4 +1,7 @@
 import datetime
+import os
+import logging
+import aiosmtplib
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
@@ -12,7 +15,6 @@ from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..model.database import begin
 from dotenv import load_dotenv
-import os
 
 
 user = APIRouter()
@@ -24,12 +26,12 @@ USERNAME = os.getenv('USERNAME')
 conf = ConnectionConfig(
     MAIL_USERNAME=USERNAME,
     MAIL_PASSWORD=PASSWORD,
-    MAIL_FROM='isongrichard234@gmail.com',
+    MAIL_FROM='isongrichard234@yahoo.com',
     MAIL_PORT=587,
-    MAIL_SERVER='smtp.example.com',
+    MAIL_SERVER='smtp.mail.yahoo.com',
     MAIL_FROM_NAME='Imisioluwa Isong',
-    MAIL_TLS=True,
-    MAIL_SSL=False,
+    MAIL_STARTTLS=True,
+    MAIL_SSL_TLS=False,
     USE_CREDENTIALS=True,
     VALIDATE_CERTS=True
 )
@@ -96,7 +98,12 @@ async def send_email(background_tasks: BackgroundTasks, email, username, body):
     )
 
     fm = FastMail(conf)
-    background_tasks.add_task(fm.send_message, message)
+    try:
+        background_tasks.add_task(fm.send_message, message)
+    except aiosmtplib.SMTPException as e:
+        logging.error(f'An error occurred as: {e}')
+    except Exception as e:
+        logging.error(f'An error occurred as: {e}')
 
 
 user_dependency = Annotated[str, Depends(get_user)]
@@ -104,7 +111,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 
 @user.post('/signup', status_code=status.HTTP_201_CREATED)
-async def user_sign_in(form: UserSignin, db: db_dependency):
+async def user_sign_in(background_tasks: BackgroundTasks, form: UserSignin, db: db_dependency):
     existing_username = db.query(UserModel).filter(UserModel.username == form.username).first()
     existing_email = db.query(UserModel).filter(UserModel.email == form.email).first()
 
@@ -127,7 +134,7 @@ async def user_sign_in(form: UserSignin, db: db_dependency):
     db.refresh(user)
 
     body = 'Congratulations on making the right choice to trade with us'
-    await send_email(background_tasks=BackgroundTasks, email=user.email, username=user.username, body=body)
+    await send_email(background_tasks, user.email, user.username, body)
 
     return 'Sign-up Successful'
 
