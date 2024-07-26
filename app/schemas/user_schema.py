@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from typing import Annotated
+import re
 
 
 class UserSignin(BaseModel):
@@ -8,6 +9,14 @@ class UserSignin(BaseModel):
     username: Annotated[str, Field(min_length=8, max_length=12)]
     email: Annotated[EmailStr, Field(examples=['example@gmail.com'])]
     password: Annotated[str, Field(min_length=8)]
+
+    @field_validator('password')
+    def validate_password(cls, value):
+        if not re.search(r'[A-Z]', value):
+            raise ValueError('Password must contain at least one upper case character')
+        if not re.search(r'[!@#$%^&*(),.?|{}:;<>]', value):
+            raise ValueError('Password must contain at least one special character')
+        return value
 
 
 class UserLogin(BaseModel):
@@ -38,10 +47,26 @@ class NewPassword(BaseModel):
     password: str
     new_password: Annotated[str, Field(min_length=8)]
 
+    @field_validator('new_password')
+    def validate_password(cls, value):
+        if not re.search(r'[A-Z]', value):
+            raise ValueError('Password must contain at least one upper case character')
+        if not re.search(r'[!@#$%^&*(),.?|{}:;<>]', value):
+            raise ValueError('Password must contain at least one special character')
+        return value
+
 
 class Password(BaseModel):
     password: Annotated[str, Field(min_length=8)]
     password1: str
+
+    @field_validator('password')
+    def validate_password(cls, value):
+        if not re.search(r'[A-Z]', value):
+            raise ValueError('Password must contain at least one upper case character')
+        if not re.search(r'[!@#$%^&*(),.?|{}:;<>]', value):
+            raise ValueError('Password must contain at least one special character')
+        return value
 
 
 class DeleteUser(BaseModel):

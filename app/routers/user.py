@@ -1,7 +1,10 @@
 import datetime
+import os
+import logging
+import aiosmtplib
 from datetime import datetime, timedelta
-from fastapi import APIRouter, Depends, HTTPException
-from typing import Annotated
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from starlette import status
@@ -11,8 +14,27 @@ from ..model.model import UserModel
 from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..model.database import begin
+from dotenv import load_dotenv
+
 
 user = APIRouter()
+
+load_dotenv()
+PASSWORD = os.getenv('PASSWORD')
+USERNAME = os.getenv('USERNAME')
+
+conf = ConnectionConfig(
+    MAIL_USERNAME=USERNAME,
+    MAIL_PASSWORD=PASSWORD,
+    MAIL_FROM='isongrichard234@yahoo.com',
+    MAIL_PORT=587,
+    MAIL_SERVER='smtp.mail.yahoo.com',
+    MAIL_FROM_NAME='Imisioluwa Isong',
+    MAIL_STARTTLS=True,
+    MAIL_SSL_TLS=False,
+    USE_CREDENTIALS=True,
+    VALIDATE_CERTS=True
+)
 
 
 def get_db():
@@ -67,12 +89,29 @@ async def get_user(token: Annotated[str, Depends(bearer)]):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='logged out due to inactivity')
 
 
+async def send_email(background_tasks: BackgroundTasks, email, username, body):
+    message = MessageSchema(
+        subject=f'Hi, {username}',
+        recipients=[email],
+        body=body,
+        subtype='html'
+    )
+
+    fm = FastMail(conf)
+    try:
+        background_tasks.add_task(fm.send_message, message)
+    except aiosmtplib.SMTPException as e:
+        logging.error(f'An error occurred as: {e}')
+    except Exception as e:
+        logging.error(f'An error occurred as: {e}')
+
+
 user_dependency = Annotated[str, Depends(get_user)]
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
 @user.post('/signup', status_code=status.HTTP_201_CREATED)
-async def user_sign_in(form: UserSignin, db: db_dependency):
+async def user_sign_in(background_tasks: BackgroundTasks, form: UserSignin, db: db_dependency):
     existing_username = db.query(UserModel).filter(UserModel.username == form.username).first()
     existing_email = db.query(UserModel).filter(UserModel.email == form.email).first()
 
@@ -93,6 +132,9 @@ async def user_sign_in(form: UserSignin, db: db_dependency):
     db.add(user)
     db.commit()
     db.refresh(user)
+
+    body = 'Congratulations on making the right choice to trade with us'
+    await send_email(background_tasks, user.email, user.username, body)
 
     return 'Sign-up Successful'
 
@@ -119,6 +161,9 @@ async def admin_sign_up(form: CreateAdminUserSchema, db: db_dependency, admin: u
     db.add(user)
     db.commit()
     db.refresh(user)
+
+    body = 'Congratulations on making the right choice to trade with us'
+    await send_email(BackgroundTasks, user.email, user.username, body)
 
     return 'Admin User has been created'
 
@@ -173,7 +218,7 @@ async def login(form: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_de
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
 
-    token = authentication(user_id=user.id, username=user.username, is_admin=user.is_admin, limit=timedelta(minutes=15))
+    token = authentication(user_id=user.id, username=user.username, is_admin=user.is_admin, limit=timedelta(minutes=1))
     if not token:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Unable to generate token try later')
 
@@ -238,8 +283,13 @@ async def change_password(password: NewPassword, db: db_dependency, user: user_d
     db.refresh(user_data)
 
 
-# @user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
-# async def forgot_password(password: ForgotPassword, db: db_dependency, user: user_dependency):
+@user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
+async def forgot_password(email: ForgotPassword, db: db_dependency):
+    valid_email = db.query(UserModel).filter(UserModel.email == email.email).first()
+    if not valid_email:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid email')
+# Send an email with the link to reset password
+
 
 @user.delete('/me/delete-user')
 async def delete_user(password: DeleteUser, db: db_dependency, user: user_dependency):
