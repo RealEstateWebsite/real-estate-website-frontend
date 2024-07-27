@@ -1,6 +1,11 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field
+from typing import Annotated
 
 
-class NewOrder(BaseModel):
-    name: str
+class AddHouse(BaseModel):
+    bed_no: Annotated[int, Field(min_length=1)]
+    size: Annotated[float, Field()]
+    price: Annotated[float, Field()]
+    location: Annotated[str, Field()]
+    description: Annotated[str, Field()]
+
