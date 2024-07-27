@@ -1,8 +1,21 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from typing import Annotated
+from ..model.database import begin
+
 
 estate = APIRouter()
 
+def get_db():
+    db = begin()
+    try:
+        yield db
+    finally:
+        db.close()
 
-@estate.get('/order-food')
-async def order_testing():
-    return 'Testing order route'
+
+db_dependency = Annotated[Session, Depends(get_db)]
+
+@estate.get('/get-all-estate')
+async def get_estate_list(db: db_dependency):
+    estate_list = db.query()
