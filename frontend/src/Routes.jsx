@@ -18,6 +18,8 @@ import Error from "pages/Error";
 import FAQ from "pages/FAQ";
 import PrivacyPolicy from "pages/PrivacyPolicy";
 import License from "pages/License";
+import EnterOTP from "modals/EnterOTP";
+import ResetPassword from "modals/ResetPassword";
 
 const ProjectRoutes = () => {
   return useRoutes([
@@ -34,6 +36,14 @@ const ProjectRoutes = () => {
       {
         path: "/create-account",
         element: <CreateAccount isOpen={true} />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword isOpen={true} />,
+      },
+      {
+        path: "/enter-otp",
+        element: <EnterOTP isOpen={true} />,
       },
       {
         path: "aboutus",

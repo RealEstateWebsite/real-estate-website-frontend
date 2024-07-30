@@ -1,6 +1,7 @@
 import React from "react";
 import { Heading, Button, Text, Img } from "../../components";
 import { default as ModalProvider } from "react-modal";
+import { Link } from "react-router-dom";
 
 export default function EnterOTP({ isOpen, ...props }) {
   return (
@@ -84,7 +85,9 @@ export default function EnterOTP({ isOpen, ...props }) {
             </a>
             <a href="#" className="mr-[58px] md:mr-5">
               <Heading size="lg" as="h3" className="tracking-[-0.40px]">
-                Log in
+                <Link to="/login">
+                  Log in
+                </Link>
               </Heading>
             </a>
           </div>

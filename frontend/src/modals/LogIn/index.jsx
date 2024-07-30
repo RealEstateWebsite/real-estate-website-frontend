@@ -48,7 +48,9 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
               />
               <a href="#">
                 <Heading size="md" as="h2" className="text-right !font-bold">
-                  Forgot Password
+                  <Link to="/reset-password">
+                    Forgot Password
+                  </Link>
                 </Heading>
               </a>
             </div>
