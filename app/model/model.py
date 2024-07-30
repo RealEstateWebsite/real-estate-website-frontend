@@ -14,23 +14,15 @@ class UserModel(data):
     is_admin = Column(Boolean, nullable=False)
 
 
-class Food(data):
-    __tablename__ = 'food'
+class Housing(data):
+    __tablename__ = 'houses'
 
     id = Column(Integer, index=True, primary_key=True)
-    name = Column(String, nullable=False)
+    bedroom_space = Column(Integer, nullable=True)
+    size = Column(Float, nullable=False)
     price = Column(Float, nullable=False)
-    availability = Column(Boolean, nullable=False, default=True)
-
-
-class Order(data):
-    __tablename__ = 'order'
-
-    id = Column(Integer, index=True, primary_key=True)
-    food = Column(String, nullable=False)
-    quantity = Column(Integer, nullable=False, default=1)
-    order_address = Column(String, nullable=True)
-    price_paid = Column(Float, nullable=False)
+    location = Column(String, nullable=False)
+    description = Column(String, nullable=False)
 
 
 class Transaction(data):
