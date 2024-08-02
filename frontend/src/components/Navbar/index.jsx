@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading, Text } from "..";
 import { Link, useNavigate } from "react-router-dom";
-import LogIn from "modals/LogIn";
 
 const tab = [
   {
@@ -92,7 +91,6 @@ export default function Header({ ...props }) {
           <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" onClick={() => navigate("/login")}>
             Log in
           </Button>
-          <LogIn isOpen={isOpen} setIsOpen={() => setIsOpen(false)} />
         </div>
       </div>
     </header>
