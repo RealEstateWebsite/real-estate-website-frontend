@@ -4,7 +4,7 @@ import { CloseSVG } from "../../assets/images";
 import { Button, Img, Heading, SelectBox, Input } from "../../components";
 import BlogPageColumnactive from "../../components/BlogPageColumnactive";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },

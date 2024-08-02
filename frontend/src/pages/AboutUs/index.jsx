@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Button, Input, Text, Heading, Img } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 export default function AboutUsPage() {
   return (

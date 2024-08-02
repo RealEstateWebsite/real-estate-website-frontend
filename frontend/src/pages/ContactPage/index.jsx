@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, TextArea, Input, Text } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 export default function ContactPagePage() {
   return (

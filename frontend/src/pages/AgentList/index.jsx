@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Button, Img, Heading, RatingBar, SelectBox, Input } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },

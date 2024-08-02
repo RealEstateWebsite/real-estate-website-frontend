@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../components";
 import BlogPageColumnactive from "../../components/BlogPageColumnactive";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 import { ReactTable } from "../../components/ReactTable";
 import { createColumnHelper } from "@tanstack/react-table";
 

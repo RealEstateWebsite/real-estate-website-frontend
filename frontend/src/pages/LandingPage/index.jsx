@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Heading, Img, Text, Button, Input } from "../../components";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
 

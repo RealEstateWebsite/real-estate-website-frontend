@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../components";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 export default function LicensePage() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Text, Heading, Input, Img } from "../../components";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 
 export default function FAQPage() {
   const [searchBarValue23, setSearchBarValue23] = React.useState("");
