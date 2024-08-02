@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading, Text } from "..";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogIn from "modals/LogIn";
 
 const tab = [
@@ -29,7 +29,7 @@ const tab = [
 
 export default function Header({ ...props }) {
   const [searchBarValue1, setSearchBarValue1] = React.useState("");
-  const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate();
 
   return (
     <header {...props}>
@@ -89,7 +89,7 @@ export default function Header({ ...props }) {
             }
             className="w-[55%] gap-2 text-gray-900 font-bold"
           />
-          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" onClick={() => setIsOpen(true)}>
+          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" onClick={() => navigate("/login")}>
             Log in
           </Button>
           <LogIn isOpen={isOpen} setIsOpen={() => setIsOpen(false)} />
