@@ -35,7 +35,7 @@ const GoogleMap = ({ children, showMarker = false, className, ...restProps }) =>
     });
   }, []);
 
-  const apiKey = import.meta.env?.VITE_GOOGLE_MAP_ID || "";
+  const apiKey = import.meta.env? import.meta.env.VITE_GOOGLE_MAP_ID : "";
 
   return (
     <Wrapper apiKey={apiKey}>

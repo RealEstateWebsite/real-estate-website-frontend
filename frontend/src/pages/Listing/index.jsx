@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Button, Img, GoogleMap, SelectBox, Input, Heading } from "../../components";
 import Footer from "../../components/Footer";
@@ -17,10 +16,6 @@ export default function ListingPage() {
 
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] overflow-auto bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-[60px]">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />

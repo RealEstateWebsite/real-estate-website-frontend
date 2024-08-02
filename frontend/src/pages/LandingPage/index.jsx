@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Heading, Img, Text, Button, Input } from "../../components";
 import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
@@ -8,10 +7,6 @@ import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
 export default function LandingPagePage() {
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-auto bg-white-A700">
         <div className="flex flex-col items-center justify-start w-full">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />

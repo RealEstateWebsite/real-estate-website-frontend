@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../components";
 import BlogPageColumnactive from "../../components/BlogPageColumnactive";
 import Footer from "../../components/Footer";
@@ -101,10 +100,6 @@ export default function BlogDetailsPage() {
 
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[110px] bg-gray-50_01">
         <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
         <div className="flex flex-col items-center justify-start w-full gap-[111px]">
