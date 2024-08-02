@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, TextArea, Input, Text } from "../../components";
 import Footer from "../../components/Footer";
-import Header1 from "../../components/Header1";
+import Header from "../../components/Header";
 
 export default function ContactPagePage() {
   return (
@@ -13,7 +13,7 @@ export default function ContactPagePage() {
       </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] overflow-auto bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-[60px]">
-          <Header1 className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
+          <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full gap-11 md:px-5 max-w-[1200px]">
               <div className="flex flex-col items-center justify-start w-full pt-0.5 gap-[15px]">

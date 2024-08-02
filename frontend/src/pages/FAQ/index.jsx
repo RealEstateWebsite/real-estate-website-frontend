@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Text, Heading, Input, Img } from "../../components";
-import Header2 from "../../components/Header2";
+import Header from "../../components/Header";
 
 export default function FAQPage() {
   const [searchBarValue23, setSearchBarValue23] = React.useState("");
@@ -13,7 +13,7 @@ export default function FAQPage() {
         <meta name="description" content="Web site created using create-react-app" />
       </Helmet>
       <div className="flex flex-col items-center justify-center w-full md:h-auto pb-64 gap-[68px] md:pb-5 bg-gray-50_01">
-        <Header2 className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
+        <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
         <div className="flex flex-row justify-center w-full">
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full pt-[7px] gap-[33px] md:px-5 max-w-[1200px]">

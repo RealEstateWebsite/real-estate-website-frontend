@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Text, Heading } from "../../components";
 import Footer from "../../components/Footer";
-import Header2 from "../../components/Header2";
+import Header from "../../components/Header";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-[60px]">
-          <Header2 className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
+          <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
           <div className="flex flex-col items-start justify-start w-full pl-[120px] pr-14 md:px-5">
             <div className="flex flex-col items-center justify-start w-full gap-[60px] mx-auto max-w-[1054px]">
               <div className="flex flex-col items-center justify-start w-full gap-10">
