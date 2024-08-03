@@ -1,18 +1,13 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../components";
-import Header1 from "../../components/Header1";
+import Header from "../../components/Navbar";
 
 export default function LicensePage() {
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-[60px]">
-          <Header1 className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
+          <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
           <div className="flex flex-row justify-start w-full pl-[120px] pr-14 md:px-5">
             <div className="flex flex-col items-center justify-start w-full gap-[60px] mx-auto max-w-[996px]">
               <div className="flex flex-col items-center justify-start w-full gap-10">

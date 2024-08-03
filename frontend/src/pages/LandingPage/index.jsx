@@ -1,17 +1,13 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Heading, Img, Text, Button, Input } from "../../components";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
+import { Link } from "react-router-dom";
 
 export default function LandingPagePage() {
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-auto bg-white-A700">
         <div className="flex flex-col items-center justify-start w-full">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
@@ -216,12 +212,12 @@ export default function LandingPagePage() {
                   <Heading size="4xl" as="h2" className="tracking-[-0.72px]">
                     Featured Properties
                   </Heading>
-                  <div className="flex flex-row justify-start items-center mt-[7px] gap-2 sm:mt-0">
+                  <Link to="/propertydetails" className="flex flex-row justify-start items-center mt-[7px] gap-2 sm:mt-0">
                     <Heading size="md" as="h3" className="mt-0.5 !text-orange-A700 !font-bold">
                       Explore All
                     </Heading>
                     <Img src="images/img_icon_24px_v.svg" alt="icon24pxv_one" className="h-[24px] w-[24px]" />
-                  </div>
+                  </Link>
                 </div>
                 <div className="flex flex-row md:flex-col justify-start w-full md:gap-5">
                   <Button size="xs" shape="square" className="text-gray-900 font-bold min-w-[159px]">

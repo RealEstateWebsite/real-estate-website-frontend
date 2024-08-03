@@ -1,17 +1,12 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Img, Heading, Button, TextArea, Radio, RadioGroup, Text, RatingBar, GoogleMap } from "../../components";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 
 export default function PropertyDetailsPage() {
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] overflow-auto bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-[60px]">
           <div className="flex flex-col items-center justify-start w-full gap-10">

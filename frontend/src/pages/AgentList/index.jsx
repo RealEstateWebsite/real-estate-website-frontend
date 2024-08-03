@@ -1,9 +1,8 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Button, Img, Heading, RatingBar, SelectBox, Input } from "../../components";
 import Footer from "../../components/Footer";
-import Header1 from "../../components/Header1";
+import Header from "../../components/Navbar";
 
 const dropDownOptions = [
   { label: "Option1", value: "option1" },
@@ -16,13 +15,9 @@ export default function AgentListPage() {
 
   return (
     <>
-      <Helmet>
-        <title>food-website</title>
-        <meta name="description" content="Web site created using create-react-app" />
-      </Helmet>
       <div className="flex flex-col items-center justify-start w-full gap-[100px] overflow-auto bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-14">
-          <Header1 className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
+          <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-start justify-start w-full pt-[5px] gap-[18px] md:px-5 max-w-[1200px]">
               <Heading size="4xl" as="h1" className="tracking-[-0.72px]">

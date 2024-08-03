@@ -1,9 +1,11 @@
 import React from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
+  const navigate = useNavigate();
+  
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
       <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
@@ -15,7 +17,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                     Log in
                   </Heading>
-                  <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => setIsOpen(false)}>
+                  <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => navigate("/")}>
                     <Img src="images/img_frame_1000001678.svg" />
                   </Button>
                 </div>
