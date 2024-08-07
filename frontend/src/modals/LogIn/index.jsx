@@ -2,6 +2,7 @@ import React from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
+import { FaTimes } from 'react-icons/fa'
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     Log in
                   </Heading>
                   <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => navigate("/")}>
-                    <Img src="images/img_frame_1000001678.svg" />
+                    {/* <Img src="images/img_frame_1000001678.svg" /> */}
+                    <FaTimes />
                   </Button>
                 </div>
                 <Input
