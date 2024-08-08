@@ -1,7 +1,5 @@
 import datetime
 import os
-import logging
-import aiosmtplib
 from fastapi import HTTPException, Depends
 from typing import Annotated
 from starlette import status
@@ -57,7 +55,7 @@ def authorization(username: str, password: str, db):
 
 def authentication(user_id: int, username: str, is_admin: bool, limit):
     encode = {'sub': username, 'id': user_id, 'admin': is_admin}
-    exp = datetime.now() + limit
+    exp = datetime.datetime.now() + limit
     encode.update({'exp': exp})
     return jwt.encode(encode, SECRET, algorithm=Algorithm)
 
@@ -93,9 +91,5 @@ async def send_email(background_tasks, email, username, body):
     )
 
     fm = FastMail(conf)
-    try:
-        background_tasks.add_task(fm.send_message, message)
-    except aiosmtplib.SMTPException as e:
-        logging.error(f'An error occurred as: {e}')
-    except Exception as e:
-        logging.error(f'An error occurred as: {e}')
+
+    background_tasks.add_task(fm.send_message, message)
