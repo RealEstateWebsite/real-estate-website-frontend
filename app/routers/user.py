@@ -3,15 +3,12 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
-from ..model.model import UserModel
+from ..model.model import UserModel, OTPModel
 from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..schemas.config import get_user, get_db, send_email, authentication, authorization, hashed
 
-
 user = APIRouter()
-
-
 
 user_dependency = Annotated[str, Depends(get_user)]
 db_dependency = Annotated[Session, Depends(get_db)]
@@ -33,17 +30,21 @@ async def user_sign_in(background_tasks: BackgroundTasks, form: UserSignin, db: 
         username=form.username,
         email=form.email,
         password=hashed.hash(form.password),
-        is_admin=True
+        is_admin=False
     )
 
     db.add(user)
     db.commit()
     db.refresh(user)
 
-    body = 'Congratulations on making the right choice to trade with us'
-    await send_email(background_tasks, user.email, user.username, body)
+    body = f'Hi {user.firstname} \n Congratulations on making the right choice to trade with us'
+    html_body = f'<strong>Hi {user.firstname}, \nCongratulations on making the right choice to trade with us</strong>'
+    subject = 'Welcome to our platform'
 
-    return 'Sign-up Successful'
+    if send_email(user.email, html_body, body, subject):
+        return 'Sign-up Successful'
+    else:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while sending email')
 
 
 @user.post('/admin/sign-up', status_code=status.HTTP_201_CREATED)
@@ -70,7 +71,7 @@ async def admin_sign_up(form: CreateAdminUserSchema, db: db_dependency, admin: u
     db.refresh(user)
 
     body = 'Congratulations on making the right choice to trade with us'
-    await send_email(BackgroundTasks, user.email, user.username, body)
+    # send_email(BackgroundTasks, user.email, user.username, body)
 
     return 'Admin User has been created'
 
@@ -84,7 +85,8 @@ async def user_to_admin(form: ToAdmin, db: db_dependency, user: user_dependency)
     if not admin.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission denied!')
 
-    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(UserModel.email == form.email).first()
+    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(
+        UserModel.email == form.email).first()
     if not existing_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found!')
 
@@ -106,7 +108,8 @@ async def admin_to_user(form: ToAdmin, db: db_dependency, user: user_dependency)
     if not admin.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission denied!')
 
-    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(UserModel.email == form.email).first()
+    existing_user = db.query(UserModel).filter(UserModel.username == form.username).filter(
+        UserModel.email == form.email).first()
     if not existing_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found!')
 
@@ -183,25 +186,60 @@ async def change_password(password: NewPassword, db: db_dependency, user: user_d
     if not verify:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
 
-    user_data.password = password.new_password
+    user_data.password = hashed.hash(password.new_password)
 
     db.add(user_data)
     db.commit()
     db.refresh(user_data)
 
 
-@user.put('/me/forgot-password', status_code=status.HTTP_202_ACCEPTED)
-async def forgot_password(email: ForgotPassword, db: db_dependency):
+@user.post('/me/verify-email', status_code=status.HTTP_202_ACCEPTED)
+async def otp_generator(email: ForgotPassword, db: db_dependency):
     valid_email = db.query(UserModel).filter(UserModel.email == email.email).first()
     if not valid_email:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid email')
-# Send an email with the link to reset password
+
+    html_body = f'<strong>Hi {valid_email.firstname}, \nUse the following OTP to reset your password 123456</strong>'
+    body = f'Hi {valid_email.firstname}, \nUse the following OTP to reset your password 123456'
+
+    if not send_email(email.email, html_body, body, 'Reset Password'):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while sending email')
+    else:
+        return 'Email sent successfully'
+
+
+@user.post('/verify-otp', status_code=status.HTTP_202_ACCEPTED)
+async def veriy_otp(otp: OTP, db: db_dependency):
+    verify = db.query(OTPModel).filter(OTPModel.otp == otp.otp).first()
+
+    user = db.query(UserModel).filter(UserModel.id == verify.user_id).first()
+    if not verify:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid OTP')
+    return 'OTP verified'
+
+
+@user.put('/me/password-reset', status_code=status.HTTP_202_ACCEPTED)
+async def change_password(password: Password, db: db_dependency):
+
+    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+
+    if not password.password != password.password1:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Password does not match')
+
+    user_data.password = hashed.hash(password.password)
+
+    db.add(user_data)
+    db.commit()
+    db.refresh(user_data)
 
 
 @user.delete('/me/delete-user')
 async def delete_user(password: DeleteUser, db: db_dependency, user: user_dependency):
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    if not user.get('admin'):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
 
     user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
 

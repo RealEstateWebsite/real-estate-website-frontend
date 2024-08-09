@@ -7,27 +7,14 @@ from ..model.database import begin
 from dotenv import load_dotenv
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
-from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from postmarker.core import PostmarkClient
 from jose import jwt, JWTError
 from ..model.model import UserModel
 
 
 load_dotenv()
-PASSWORD = os.getenv('PASSWORD')
-USERNAME = os.getenv('USERNAME')
-
-conf = ConnectionConfig(
-    MAIL_USERNAME=USERNAME,
-    MAIL_PASSWORD=PASSWORD,
-    MAIL_FROM='isongrichard234@yahoo.com',
-    MAIL_PORT=587,
-    MAIL_SERVER='smtp.mail.yahoo.com',
-    MAIL_FROM_NAME='Imisioluwa Isong',
-    MAIL_STARTTLS=True,
-    MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True,
-    VALIDATE_CERTS=True
-)
+postmark = PostmarkClient(server_token=os.getenv('POSTMARK'))
+conf = os.getenv('FROM')
 
 
 def get_db():
@@ -82,14 +69,17 @@ async def get_user(token: Annotated[str, Depends(bearer)]):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='logged out due to inactivity')
 
 
-async def send_email(background_tasks, email, username, body):
-    message = MessageSchema(
-        subject=f'Hi, {username}',
-        recipients=[email],
-        body=body,
-        subtype='html'
+def send_email(user_email, html_body, body, subject):
+    response = postmark.emails.send(
+        From=conf,
+        To=user_email,
+        Subject=subject,
+        HtmlBody=html_body,
+        TextBody=body,
+        MessageStream='outbound'
     )
 
-    fm = FastMail(conf)
-
-    background_tasks.add_task(fm.send_message, message)
+    if response['ErrorCode'] == 0:
+        return True
+    else:
+        return False

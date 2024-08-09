@@ -1,5 +1,5 @@
 from .database import data
-from sqlalchemy import Column, String, Integer, Float, Boolean
+from sqlalchemy import Column, String, Integer, Float, Boolean, ForeignKey, DateTime
 
 
 class UserModel(data):
@@ -29,3 +29,15 @@ class Transaction(data):
     __tablename__ = 'transaction'
 
     id = Column(Integer, index=True, primary_key=True)
+
+
+class OTPModel(data):
+    __tablename__ = 'otp'
+
+    id = Column(Integer, index=True, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    otp = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    is_used = Column(Boolean, nullable=False, default=False)
+
