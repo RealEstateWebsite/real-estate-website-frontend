@@ -25,12 +25,6 @@ class Housing(data):
     description = Column(String, nullable=False)
 
 
-class Transaction(data):
-    __tablename__ = 'transaction'
-
-    id = Column(Integer, index=True, primary_key=True)
-
-
 class OTPModel(data):
     __tablename__ = 'otp'
 
@@ -40,4 +34,3 @@ class OTPModel(data):
     created_at = Column(DateTime, nullable=False)
     expires_at = Column(DateTime, nullable=False)
     is_used = Column(Boolean, nullable=False, default=False)
-
