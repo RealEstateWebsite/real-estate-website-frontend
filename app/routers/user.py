@@ -402,7 +402,7 @@ async def view_delete_request(db: db_dependency, user: user_dependency):
     if not user.get('admin'):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
 
-    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status is False).first()
+    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status == False).all()
 
     return user_data
 
@@ -415,6 +415,9 @@ async def approve_delete_request(user_id: DeleteRequest, db: db_dependency, user
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
 
     user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.user_id == user_id.user_id).first()
+
+    if not user_data:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Request not found')
 
     user_data.status = True
 
@@ -433,13 +436,14 @@ async def delete_user(db: db_dependency, user: user_dependency):
     if not user.get('admin'):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
 
-    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status is True).all()
+    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status == True).all()
 
     if not user_data:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No pending request found')
 
     for data in user_data:
         user_account = db.query(UserModel).filter(UserModel.id == data.user_id).first()
+        db.delete(data)
         db.delete(user_account)
         html_body = (f'''
             <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
