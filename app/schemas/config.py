@@ -16,6 +16,8 @@ from datetime import datetime, timedelta
 load_dotenv()
 postmark = PostmarkClient(server_token=os.getenv('POSTMARK'))
 conf = os.getenv('FROM')
+secret = os.getenv('SECRET')
+algorithm = os.getenv('ALGORITHM')
 
 
 def get_db():
@@ -27,8 +29,8 @@ def get_db():
 
 
 hashed = CryptContext(schemes=['bcrypt'])
-SECRET = 'Testing'
-Algorithm = 'HS256'
+SECRET = secret
+Algorithm = algorithm
 
 
 def authorization(username: str, password: str, db):

@@ -24,3 +24,5 @@ app.include_router(estate, prefix='/estate', tags=['Estate'])
 def testing():
     return 'This is the beginning of something great'
 
+
+model.data.metadata.create_all(bind=engine)

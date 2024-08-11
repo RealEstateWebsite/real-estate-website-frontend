@@ -34,3 +34,11 @@ class OTPModel(data):
     created_at = Column(DateTime, nullable=False)
     expires_at = Column(DateTime, nullable=False)
     is_used = Column(Boolean, nullable=False, default=False)
+
+
+class AccountDeletionRequest(data):
+    __tablename__ = 'deletion_request'
+
+    id = Column(Integer, index=True, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    status = Column(Boolean, nullable=False, default=False)

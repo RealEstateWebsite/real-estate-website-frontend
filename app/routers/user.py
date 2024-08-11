@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
-from ..model.model import OTPModel
+from ..model.model import OTPModel, AccountDeletionRequest
 from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..schemas.config import *
@@ -171,7 +171,7 @@ async def login(form: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_de
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
 
-    token = authentication(user.id, user.username, user.is_admin, timedelta(minutes=30), 'login')
+    token = authentication(user.id, user.username, user.is_admin, timedelta(days=1), 'login')
     if not token:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Unable to generate token try later')
 
@@ -276,7 +276,7 @@ async def otp_generator(email: ForgotPassword, db: db_dependency):
         </p>
         <p style="font-size: 14px; color: #757575;">
             Cheers,<br/>
-            <strong>Your Friendly Support Team</strong>
+            <strong>Estate API</strong>
         </p>
     </div>
 ''')
@@ -295,6 +295,9 @@ async def verify_otp(otp: OTP, db: db_dependency):
     verify = db.query(OTPModel).filter(OTPModel.otp == otp.otp).first()
     if not verify:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid OTP')
+
+    if verify.is_used:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='OTP already used')
 
     verify.is_used = True
     db.commit()
@@ -333,21 +336,138 @@ async def reset_password(password: Password, db: db_dependency, token: str = Dep
     return {'message': 'Password reset successful'}
 
 
-@user.delete('/me/delete-user')
-async def delete_user(password: DeleteUser, db: db_dependency, user: user_dependency):
+@user.post('/me/delete-account', status_code=status.HTTP_202_ACCEPTED)
+async def delete_account_request(password: DeleteAccount, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+    if not user_data:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
+
+    verify = hashed.verify(password.password, user_data.password)
+
+    if not verify:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
+
+    request = AccountDeletionRequest(
+        user_id=user.get('user_id'),
+        status=False
+    )
+
+    db.add(request)
+    db.commit()
+    db.refresh(request)
+
+    html_body = (f'''
+        <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+            <h2 style="color: #ff6b6b;">Hi {user_data.firstname},</h2>
+            <p style="font-size: 16px;">
+                <em>We have received your request to delete your account.</em><br/>
+                Your request is being processed and will be reviewed by our team.
+            </p>
+            <p style="font-size: 16px;">
+                If you didn't request this, please contact our support team immediately to prevent any further action.
+            </p>
+            <p style="font-size: 14px; color: #757575;">
+                Once the request is approved, your account and all associated data will be permanently deleted.
+            </p>
+            <p style="font-size: 14px; color: #757575;">
+                Thank you for your time with us.
+            </p>
+            <p style="font-size: 14px; color: #757575;">
+                Best Regards,<br/>
+                <strong>Estate API</strong>
+            </p>
+        </div>
+    ''')
+
+    body = (
+        f'Hi {user_data.firstname},\nWe have received your request to delete your account. Your request is being '
+        f'processed and will be reviewed by our team. If you didn’t request this, please contact our support team '
+        f'immediately to prevent any further action. Once the request is approved, your account and all associated '
+        f'data will be permanently deleted.')
+
+    if not send_email(user_data.email, html_body, body, 'Account Deletion Request'):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while sending email')
+
+    return {'message': 'Account deletion request sent successfully'}
+
+
+@user.get('/admin/view-delete-request')
+async def view_delete_request(db: db_dependency, user: user_dependency):
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
 
     if not user.get('admin'):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
 
-    user_data = db.query(UserModel).filter(UserModel.id == user.get('user_id')).first()
+    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status is False).first()
 
-    verify = hashed.hash(password.password, user_data.password)
-    if not verify:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid Credentials')
+    return user_data
 
-    db.delete(user_data)
+
+@user.put('/admin/approve-delete-request', status_code=status.HTTP_202_ACCEPTED)
+async def approve_delete_request(user_id: DeleteRequest, db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+    if not user.get('admin'):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
+
+    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.user_id == user_id.user_id).first()
+
+    user_data.status = True
+
+    db.add(user_data)
+    db.commit()
+    db.refresh(user_data)
+
+    return {'message': 'Request approved successfully'}
+
+
+@user.delete('/admin/delete-user')
+async def delete_user(db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    if not user.get('admin'):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
+
+    user_data = db.query(AccountDeletionRequest).filter(AccountDeletionRequest.status is True).all()
+
+    if not user_data:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No pending request found')
+
+    for data in user_data:
+        user_account = db.query(UserModel).filter(UserModel.id == data.user_id).first()
+        db.delete(user_account)
+        html_body = (f'''
+            <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <h2 style="color: #ff6b6b;">Hi {user_account.firstname},</h2>
+                <p style="font-size: 16px;">
+                    <em>We are sorry to see you go.</em><br/>
+                    Your account has been successfully deleted from our system.
+                </p>
+                <p style="font-size: 16px;">
+                    If you didn't request this, please contact our support team immediately.
+                </p>
+                <p style="font-size: 14px; color: #757575;">
+                    We hope to see you again soon.
+                </p>
+                <p style="font-size: 14px; color: #757575;">
+                    Best Regards,<br/>
+                    <strong>Estate API</strong>
+                </p>
+            </div>
+        ''')
+
+        body = (
+            f'Hi {user_account.firstname},\nWe are sorry to see you go. Your account has been successfully deleted. '
+            f'If you didn’t request this, please contact our support team immediately.')
+
+        if not send_email(user_account.email, html_body, body, 'Account Deletion'):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Error while sending email')
+
     db.commit()
 
     return {'message': 'User deleted successfully'}
