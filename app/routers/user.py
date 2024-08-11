@@ -5,21 +5,11 @@ from ..model.model import OTPModel
 from ..schemas.user_schema import *
 from ..schemas.admin_schema import *
 from ..schemas.config import *
-from fastapi_utils.tasks import repeat_every
 
 user = APIRouter()
 
 user_dependency = Annotated[str, Depends(get_user)]
 db_dependency = Annotated[Session, Depends(get_db)]
-
-
-@user.on_event('startup')
-@repeat_every(seconds=60)
-async def delete_expired_otp(db: db_dependency):
-    expired_otp = db.query(OTPModel).filter(OTPModel.expires_at < datetime.utcnow()).all()
-    for otp in expired_otp:
-        db.delete(otp)
-    db.commit()
 
 
 @user.post('/signup', status_code=status.HTTP_201_CREATED)
@@ -361,3 +351,22 @@ async def delete_user(password: DeleteUser, db: db_dependency, user: user_depend
     db.commit()
 
     return {'message': 'User deleted successfully'}
+
+
+@user.post('/admin/delete-otp', status_code=status.HTTP_202_ACCEPTED)
+async def delete_expired_otp(db: db_dependency, user: user_dependency):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized user')
+
+    if not user.get('admin'):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Permission Denied')
+
+    expired_otp = db.query(OTPModel).filter(OTPModel.expires_at < datetime.utcnow()).all()
+    if not expired_otp:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No expired OTP found')
+
+    for otp in expired_otp:
+        db.delete(otp)
+    db.commit()
+
+    return {'message': 'Expired OTP deleted successfully'}
