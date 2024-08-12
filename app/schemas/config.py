@@ -1,6 +1,7 @@
 import os
 import random
 from fastapi import HTTPException, Depends
+from sqlalchemy.orm import Session
 from typing import Annotated
 from starlette import status
 from ..model.database import begin
@@ -76,6 +77,10 @@ async def get_user(token: Annotated[str, Depends(bearer)]):
     except JWTError as e:
         print(f'An error occurred as: {e}')
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='logged out due to inactivity')
+
+
+user_dependency = Annotated[str, Depends(get_user)]
+db_dependency = Annotated[Session, Depends(get_db)]
 
 
 def create_token(user_id: int, purpose: str):

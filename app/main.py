@@ -3,6 +3,7 @@ from .routers.user import user
 from .model import model as model
 from .model.database import engine
 from .routers.estate import estate
+from .routers.admin import admin
 from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
@@ -18,6 +19,7 @@ app.add_middleware(
 )
 app.include_router(user, prefix='/user', tags=['User'])
 app.include_router(estate, prefix='/estate', tags=['Estate'])
+app.include_router(admin, prefix='/admin', tags=['Admin'])
 
 
 @app.get('/')
