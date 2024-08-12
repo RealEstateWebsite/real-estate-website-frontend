@@ -1,5 +1,5 @@
 from .database import data
-from sqlalchemy import Column, String, Integer, Float, Boolean
+from sqlalchemy import Column, String, Integer, Float, Boolean, ForeignKey, DateTime
 
 
 class UserModel(data):
@@ -25,7 +25,20 @@ class Housing(data):
     description = Column(String, nullable=False)
 
 
-class Transaction(data):
-    __tablename__ = 'transaction'
+class OTPModel(data):
+    __tablename__ = 'otp'
 
     id = Column(Integer, index=True, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    otp = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    is_used = Column(Boolean, nullable=False, default=False)
+
+
+class AccountDeletionRequest(data):
+    __tablename__ = 'deletion_request'
+
+    id = Column(Integer, index=True, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    status = Column(Boolean, nullable=False, default=False)

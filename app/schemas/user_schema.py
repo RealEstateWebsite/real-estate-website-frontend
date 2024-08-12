@@ -69,8 +69,16 @@ class Password(BaseModel):
         return value
 
 
-class DeleteUser(BaseModel):
+class OTP(BaseModel):
+    otp: str
+
+
+class DeleteAccount(BaseModel):
     password: str
+
+
+class DeleteRequest(BaseModel):
+    user_id: str
 
 
 class Token(BaseModel):
