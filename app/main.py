@@ -5,9 +5,14 @@ from .model.database import engine
 from .routers.estate import estate
 from .routers.admin import admin
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+FRONTEND = os.getenv('FRONTEND')
 
 origins = [
-    'http://localhost:5173/'
+    FRONTEND
 ]
 app = FastAPI()
 app.add_middleware(
