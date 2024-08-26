@@ -4,7 +4,7 @@ import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTimes } from 'react-icons/fa'
 
-console.log(import.meta.env.BACKEND);
+console.log(import.meta.env.VITE_BACKEND);
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
