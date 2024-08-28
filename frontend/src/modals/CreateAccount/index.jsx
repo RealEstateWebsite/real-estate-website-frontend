@@ -7,35 +7,42 @@ import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 export default function CreateAccount({ isOpen, ...props }) {
 
   const [passwordVisible, setPasswordVisible] = useState(false)
-  const [lastName, setLastName] = useState("")
   //to store the form data and be used for client side validation
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    userName: "",
     password: "",
   });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-
+//handling the password toggle
   const handlePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   const validateInputs = () => {
+    //retrieving the values from the document
     setFormData({firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
+      userName: document.getElementById("userName"),
       email: document.getElementById("email").value,
       password: document.getElementById("password").value
     })
     console.log(formData)
-    let  {firstName, lastName, email, password} = formData ;
-    
-    if (!firstName || !lastName || !email || !password) {
+    let  {firstName, lastName, userName, email, password} = formData ;
+    //to check and alert for any empty field
+    if (!firstName || !lastName || !userName || !email || !password) {
       alert("Please fill in all fields.");
       return false;
+    }
+    //attempted email validation
+    if(!email.includes('@')){
+      alert("Please enter a valid email")
+      return false
     }
       return true;
   };
@@ -43,21 +50,20 @@ export default function CreateAccount({ isOpen, ...props }) {
   const handleSubmit = () => {
     if (!validateInputs()) return;
 
-    // Replace with the actual API endpoint and method
-    // fetch("https://example.com/api/create-account", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Account created successfully:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error creating account:", error);
-    //   });
+    fetch("http://localhost:5173/user/signup/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Account created successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error creating account:", error);
+      });
 
     console.log("You have signed up successfully")
   };
@@ -97,6 +103,16 @@ export default function CreateAccount({ isOpen, ...props }) {
                     placeholder="Last Name"
                     onChange={handleInputChange}
                     prefix={<Img src="images/img_icon_24px_user.svg" alt="Last Name" />}
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                  />
+                  <Input
+                    shape="round"
+                    type="text"
+                    name="User Name"
+                    id="userName"
+                    placeholder="User Name"
+                    onChange={handleInputChange}
+                    prefix={<Img src="images/img_user_icon.svg" alt="Last Name" />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
                   />
                   <Input 
