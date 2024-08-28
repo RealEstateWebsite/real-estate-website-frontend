@@ -1,10 +1,68 @@
-import React from "react";
+import React, {useState} from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function CreateAccount({ isOpen, ...props }) {
+
+  const [passwordVisible, setPasswordVisible] = useState(false)
+  const [lastName, setLastName] = useState("")
+  //to store the form data and be used for client side validation
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handlePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const validateInputs = () => {
+    setFormData({firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    })
+    console.log(formData)
+    let  {firstName, lastName, email, password} = formData ;
+    
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill in all fields.");
+      return false;
+    }
+      return true;
+  };
+
+  const handleSubmit = () => {
+    if (!validateInputs()) return;
+
+    // Replace with the actual API endpoint and method
+    // fetch("https://example.com/api/create-account", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("Account created successfully:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error creating account:", error);
+    //   });
+
+    console.log("You have signed up successfully")
+  };
+
+
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
       <div className="flex flex-row justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
@@ -26,14 +84,18 @@ export default function CreateAccount({ isOpen, ...props }) {
                     type="text"
                     name="First Name"
                     placeholder="First Name"
+                    id="firstName"
                     prefix={<Img src="images/img_icon_24px_user.svg" alt="First Name" />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    onChange={handleInputChange}
                   />
                   <Input
                     shape="round"
                     type="text"
                     name="Last Name"
+                    id="lastName"
                     placeholder="Last Name"
+                    onChange={handleInputChange}
                     prefix={<Img src="images/img_icon_24px_user.svg" alt="Last Name" />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
                   />
@@ -41,18 +103,26 @@ export default function CreateAccount({ isOpen, ...props }) {
                     shape="round"
                     type="email"
                     name="email"
-                    placeholder="email address"
+                    id="email"
+                    placeholder="Email"
                     prefix={<Img src="images/img_icon_24px_email.svg" alt="icon / 24px / email" />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    onChange={handleInputChange}
                   />
                   <Input
                     shape="round"
-                    type="password"
+                    type={passwordVisible ? "text" : "password"}
                     name="password"
                     placeholder="Password"
-                    prefix={<Img src="images/img_icon_20px_lock.svg" alt="icon / 20px / lock " />}
-                    suffix={<Img src="images/img_icon_20px_eyehide.svg" alt="icon / 20px / eye-hide" />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    id="password"
+                    prefix={<Img src="images/img_icon_20px_lock.svg" alt="Lock" />}
+                    suffix={
+                      <span onClick={handlePasswordVisibility} className="cursor-pointer">
+                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                      </span>
+                    }
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -66,7 +136,7 @@ export default function CreateAccount({ isOpen, ...props }) {
             />
           </div>
           <div className="flex flex-col items-center justify-start w-[60%] gap-[18px]">
-            <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold">
+            <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" onClick={handleSubmit}>
               Create Account
             </Button>
             <Button
