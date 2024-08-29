@@ -126,5 +126,5 @@ def send_email(user_email, html_body, body, subject):
 
 
 def create_otp():
-    otp = random.randint(100000, 999999)
+    otp = random.randint(1000, 9999)
     return str(otp)

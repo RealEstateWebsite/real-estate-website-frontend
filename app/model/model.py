@@ -8,7 +8,7 @@ class UserModel(data):
     id = Column(Integer, index=True, primary_key=True)
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
-    username = Column(String(15), nullable=False, unique=True)
+    username = Column(String, nullable=False, unique=True)
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     is_admin = Column(Boolean, nullable=False)
@@ -34,6 +34,13 @@ class OTPModel(data):
     created_at = Column(DateTime, nullable=False)
     expires_at = Column(DateTime, nullable=False)
     is_used = Column(Boolean, nullable=False, default=False)
+
+
+class StateModel(data):
+    __tablename__ = 'state'
+
+    id = Column(Integer, index=True, primary_key=True)
+    state = Column(String, nullable=False)
 
 
 class AccountDeletionRequest(data):
