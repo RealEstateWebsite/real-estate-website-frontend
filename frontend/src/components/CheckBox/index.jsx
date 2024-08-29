@@ -46,7 +46,7 @@ const CheckBox = React.forwardRef(
             id={id}
             {...restProps}
           />
-          <label htmlFor={id}>{label}</label>
+          <label htmlFor={id} className="ml-2">{label}</label>
         </div>
         {children}
       </>

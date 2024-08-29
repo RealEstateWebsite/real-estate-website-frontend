@@ -4,7 +4,7 @@ import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTimes } from 'react-icons/fa'
 
-console.log(import.meta.env.BACKEND);
+console.log(import.meta.env.VITE_BACKEND);
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
           <div className="flex flex-row sm:flex-col justify-center w-full gap-2 sm:gap-2">
             <a href="#" className="ml-[25px] sm:ml-5">
               <Heading size="lg" as="h2" className="!text-gray-600_02 tracking-[-0.40px] text-center">
-                Don&apos;t have an account?
+                Don't have an account?
               </Heading>
             </a>
             <a href="#" className="mr-[25px] sm:mr-5">
