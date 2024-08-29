@@ -28,7 +28,7 @@ export default function CreateAccount({ isOpen, ...props }) {
     //retrieving the values from the document
     setFormData({firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
-      userName: document.getElementById("userName"),
+      userName: document.getElementById("userName").value,
       email: document.getElementById("email").value,
       password: document.getElementById("password").value
     })
@@ -50,7 +50,7 @@ export default function CreateAccount({ isOpen, ...props }) {
   const handleSubmit = () => {
     if (!validateInputs()) return;
 
-    fetch("http://localhost:5173/user/signup/", {
+    fetch("https://estate-api-wn9c.onrender.com/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     placeholder="First Name"
                     id="firstName"
                     prefix={<Img src="images/img_icon_24px_user.svg" alt="First Name" />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                     onChange={handleInputChange}
                   />
                   <Input
@@ -103,7 +103,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     placeholder="Last Name"
                     onChange={handleInputChange}
                     prefix={<Img src="images/img_icon_24px_user.svg" alt="Last Name" />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                   />
                   <Input
                     shape="round"
@@ -113,7 +113,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     placeholder="User Name"
                     onChange={handleInputChange}
                     prefix={<Img src="images/img_user_icon.svg" alt="Last Name" />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black "
                   />
                   <Input 
                     shape="round"
@@ -122,7 +122,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     id="email"
                     placeholder="Email"
                     prefix={<Img src="images/img_icon_24px_email.svg" alt="icon / 24px / email" />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid "
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                     onChange={handleInputChange}
                   />
                   <Input
@@ -133,11 +133,11 @@ export default function CreateAccount({ isOpen, ...props }) {
                     id="password"
                     prefix={<Img src="images/img_icon_20px_lock.svg" alt="Lock" />}
                     suffix={
-                      <span onClick={handlePasswordVisibility} className="cursor-pointer">
-                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                      <span onClick={handlePasswordVisibility} className="cursor-pointer" >
+                        {passwordVisible ? <FaEyeSlash color={"gray"} /> : <FaEye color={"gray"} />}
                       </span>
                     }
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid focus:outline-none text-black"
                     onChange={handleInputChange}
                   />
                 </div>
