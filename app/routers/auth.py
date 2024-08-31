@@ -14,7 +14,7 @@ auth = APIRouter()
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
-redirect_uri = 'http://localhost:8006/auth/callback'
+redirect_uri = 'https://estate-api-wn9c.onrender.com/auth/callback'
 
 
 @auth.get("/login")
