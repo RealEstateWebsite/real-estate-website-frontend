@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaEye } from 'react-icons/fa'
 
 console.log(import.meta.env.VITE_BACKEND);
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
-  
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handlePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  }
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
       <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
@@ -27,20 +31,26 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 </div>
                 <Input
                   shape="round"
-                  type="email"
-                  name="email"
-                  placeholder="user / email address"
-                  prefix={<Img src="images/img_icon_24px_user.svg" alt="icon / 24px / user" />}
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  prefix={<Img src="images/img_user_icon.svg" alt="icon / 24px / user" />}
                   className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
                 />
                 <Input
                   shape="round"
-                  type="password"
+                  type={passwordVisible ? "text" : "password"}
                   name="password"
                   placeholder="Password"
-                  prefix={<Img src="images/img_icon_20px_lock.svg" alt="icon / 20px / lock " />}
-                  suffix={<Img src="images/img_icon_20px_eyehide.svg" alt="icon / 20px / eye-hide" />}
-                  className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
+                  id="password"
+                  prefix={<Img src="images/img_icon_20px_lock.svg" alt="Lock" />}
+                  suffix={
+                    <span onClick={handlePasswordVisibility} className="cursor-pointer" >
+                      {passwordVisible ? <FaEyeSlash color={"gray"} /> : <FaEye color={"gray"} />}
+                    </span>
+                  }
+                  className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid focus:outline-none text-black"
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
