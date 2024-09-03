@@ -37,9 +37,6 @@ const Input = React.forwardRef(
     },
     ref,
   ) => {
-    const handleChange = (e) => {
-      if (onChange) onChange(e?.target?.value);
-    };
 
     return (
       <>
@@ -48,7 +45,7 @@ const Input = React.forwardRef(
         >
           {!!label && label}
           {!!prefix && prefix}
-          <input ref={ref} type={type} name={name} onChange={handleChange} placeholder={placeholder} {...restProps} />
+          <input ref={ref} type={type} name={name} onChange={onChange} placeholder={placeholder} {...restProps}  />
           {!!suffix && suffix}
         </div>
       </>
@@ -64,6 +61,8 @@ Input.propTypes = {
   label: PropTypes.string,
   prefix: PropTypes.node,
   suffix: PropTypes.node,
+  id: PropTypes.string,
+  onChange: PropTypes.func,
   shape: PropTypes.oneOf(["square", "round"]),
   size: PropTypes.oneOf(["sm", "xs", "md"]),
   variant: PropTypes.oneOf(["fill"]),

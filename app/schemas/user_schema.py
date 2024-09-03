@@ -6,7 +6,7 @@ import re
 class UserSignin(BaseModel):
     firstname: Annotated[str, Field(min_length=3, max_length=50)]
     lastname: Annotated[str, Field(min_length=3, max_length=50)]
-    username: Annotated[str, Field(min_length=8, max_length=12)]
+    username: Annotated[str, Field(min_length=8, max_length=100)]
     email: Annotated[EmailStr, Field(examples=['example@gmail.com'])]
     password: Annotated[str, Field(min_length=8)]
 

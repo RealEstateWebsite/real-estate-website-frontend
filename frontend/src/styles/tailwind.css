@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input:-webkit-autofill {
+    @apply text-black bg-white-A700; /* Adjust text and background color */
+    box-shadow: 0 0 0 1000px white inset; /* Keep the background consistent */
+    transition: background-color 5000s ease-in-out 0s; /* Prevent background change */
+  }
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    @apply text-black bg-white-A700; /* Keep text and background color consistent */
+  }
+}
+
 [type="text"],
 input:where(:not([type])),
 [type="email"],
