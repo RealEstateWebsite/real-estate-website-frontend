@@ -2,16 +2,41 @@ import React, { useState } from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes, FaEye } from 'react-icons/fa'
+import { FaTimes, FaEye, FaEyeSlash, FaIdCard, FaKey } from 'react-icons/fa'
 
-console.log(import.meta.env.VITE_BACKEND);
+// console.log(import.meta.env.VITE_BACKEND);
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
+  const [details, setDetails] = useState({username: "", password: ""});
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handlePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  }
+  // let details = {username: username, password: password};
+
+  const handleInputChange = (e) => {
+    setDetails({...details, [e.target.id]: e.target.value});
+  }
+
+  const handleSubmit = () => {
+    fetch("https://estate-api-wn9c.onrender.com/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(details),
+    }).then(
+      (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          let result = response.json();
+          console.log(result)
+        }
+      }
+    )
   }
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
@@ -24,7 +49,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                     Log in
                   </Heading>
-                  <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => navigate("/")}>
+                  <Button size="sm" shape="square" className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all" onClick={() => navigate("/")}>
                     {/* <Img src="images/img_frame_1000001678.svg" /> */}
                     <FaTimes />
                   </Button>
@@ -33,9 +58,11 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   shape="round"
                   type="text"
                   name="username"
+                  id="username"
                   placeholder="Username"
-                  prefix={<Img src="images/img_user_icon.svg" alt="icon / 24px / user" />}
-                  className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
+                  prefix={<FaIdCard size={25} color={"gray"} />}
+                  className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
+                  onChange={handleInputChange}
                 />
                 <Input
                   shape="round"
@@ -45,7 +72,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   id="password"
                   prefix={<Img src="images/img_icon_20px_lock.svg" alt="Lock" />}
                   suffix={
-                    <span onClick={handlePasswordVisibility} className="cursor-pointer" >
+                    <span onClick={handlePasswordVisibility} className="cursor-pointer select-none" >
                       {passwordVisible ? <FaEyeSlash color={"gray"} /> : <FaEye color={"gray"} />}
                     </span>
                   }
@@ -58,21 +85,21 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
               <CheckBox
                 shape="round"
                 name="remember"
-                label="Remember"
+                label="Remember Me"
                 id="remember"
                 className="mb-0.5 gap-2 text-left font-bold"
               />
               <a href="#">
                 <Heading size="md" as="h2" className="text-right !font-bold">
                   <Link to="/reset-password">
-                    Forgot Password
+                    Forgot Password?
                   </Link>
                 </Heading>
               </a>
             </div>
           </div>
           <div className="flex flex-col items-center justify-start w-full gap-[18px]">
-            <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold">
+            <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" onClick={handleSubmit}>
               Log in
             </Button>
             <Button
