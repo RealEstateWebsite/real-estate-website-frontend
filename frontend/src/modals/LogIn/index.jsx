@@ -127,7 +127,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
             {error && <div className="text-red-600">{error}</div>}
             {success && <div className="text-green-600">{success}</div>}
             <div className="flex flex-col items-center justify-start w-full gap-[18px]">
-              <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" disabled={isLoading}>
+              <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" disabled={isLoading || isValidated}>
                 Log in
               </Button>
               <Button
