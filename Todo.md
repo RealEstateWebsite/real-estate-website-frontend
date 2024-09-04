@@ -5,3 +5,4 @@
 -Do the remember me for the login page
 -Do the i agree for the create account page
 -fix the create account page height scaling
+-login page has an error where when the eye icon is clicked, it submits straight away and returns an error

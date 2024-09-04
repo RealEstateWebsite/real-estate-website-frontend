@@ -9,7 +9,7 @@ import { POST_URL, validateEmail } from "utilities/common";
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false); // for the toggle switch || remember me
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +17,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const isValidated = !!(validateEmail(email) && password);
+  // const isValidated = !!(validateEmail(email) && password);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -28,13 +28,13 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
     setIsLoading(true);
 
     try {
-      const response = await POST_URL("/user/login", {
-        email,
+      const response = await POST_URL("https://estate-api-wn9c.onrender.com/user/login", {
+        username,
         password
       });
       const data = await response.json();
       console.log(response, data);
-      setEmail("");
+      setUsername("");
       setPassword("");
 
       if (response.ok) {
@@ -69,20 +69,19 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                       Log in
                     </Heading>
-                    <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => navigate("/")}>
+                    <Button size="sm" shape="square" className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all" onClick={() => navigate("/")}>
                       {/* <Img src="images/img_frame_1000001678.svg" /> */}
                       <FaTimes />
                     </Button>
                   </div>
                   <Input
                     shape="round"
-                    type="email"
-                    name="email"
-                    placeholder="user / email address"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
                     prefix={<AiOutlineUser size={28} />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
-                    value={email}
-                    onChange={setEmail}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <Input
                     shape="round"
@@ -100,8 +99,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                       </button>
                     }
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
-                    value={password}
-                    onChange={setPassword}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -112,8 +110,10 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   label="Remember"
                   id="remember"
                   className="mb-0.5 gap-2 text-left font-bold"
-                  checked={checked}
-                  onChange={setChecked}
+                  onChange={() => {
+                    setChecked(!checked)
+                    console.log(checked)
+                  }}
                 />
                 <a href="#">
                   <Heading size="md" as="h2" className="text-right !font-bold">
@@ -127,7 +127,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
             {error && <div className="text-red-600">{error}</div>}
             {success && <div className="text-green-600">{success}</div>}
             <div className="flex flex-col items-center justify-start w-full gap-[18px]">
-              <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" disabled={isLoading || isValidated}>
+              <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" disabled={isLoading}>
                 Log in
               </Button>
               <Button
