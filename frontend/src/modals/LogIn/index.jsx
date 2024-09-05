@@ -70,7 +70,6 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                       Log in
                     </Heading>
                     <Button size="sm" shape="square" className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all" onClick={() => navigate("/")}>
-                      {/* <Img src="images/img_frame_1000001678.svg" /> */}
                       <FaTimes />
                     </Button>
                   </div>
