@@ -3,11 +3,13 @@ import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTimes, FaEye, FaEyeSlash, FaRegUser, FaIdCardAlt } from "react-icons/fa";
+import { validateEmail, validatePassword1, validatePassword2, validatePassword3 } from "utilities/common";
 
 export default function CreateAccount({ isOpen, ...props }) {
   const navigate = useNavigate();
 
   const [passwordVisible, setPasswordVisible] = useState(false)
+  const [agreed, setAgreed] = useState(false)
   //to store the form data and be used for client side validation
   const [formData, setFormData] = useState({
     firstname: "",
@@ -37,14 +39,34 @@ export default function CreateAccount({ isOpen, ...props }) {
     console.log(formData)
     let { firstname, lastname, username, email, password } = formData;
     //to check and alert for any empty field
-    if (!firstname || !lastname || !username || !email || !password) {
+    if (!firstname || !lastname || !username || !email) { //no longer need to check the password here
       alert("Please fill in all fields.");
       return false;
     }
-    //attempted email validation
-    if (!email.includes('@')) {
-      alert("Please enter a valid email")
-      return false
+
+    //checks the email validity
+    if(!validateEmail(email)) {
+      alert('Please input a valid email')
+    }
+
+    //ensures the password isn't null and checks for spaces in the password
+    if(!validatePassword1(password) || password.includes(' ')) {
+      alert('Please input a valid password')
+    }
+
+    //checks for a special char but doesn't include a lot of characters
+    if(!validatePassword2(password)) {
+      alert('Your password needs a special character or number')
+    }
+    //not sure if there's a need for validatePass3 because of the minlength property
+    //update: it doesn't work for some reason, perheps because of the component passing and all
+    if (!validatePassword3(password)) {
+      alert('Your password length is below 8 letters')
+    }
+
+    if(!agreed) {
+      alert('You must have agreed to our terms and conditions before signing up!')
+      return false;
     }
     return true;
   };
@@ -77,7 +99,8 @@ export default function CreateAccount({ isOpen, ...props }) {
             // });
             console.log(errorData.detail)
           })
-      }}
+        }
+      }
       )
       .catch((error) => {
         console.error("Error: " + error.message)
@@ -169,6 +192,7 @@ export default function CreateAccount({ isOpen, ...props }) {
               label="I agree to all Terms & Conditions"
               id="checklist"
               className="gap-2 !text-gray-600_02 text-left font-bold my-2 mx-auto"
+              onClick={ () => setAgreed(!agreed)}
             />
           </div>
           <div className="flex flex-col items-center justify-start w-[60%] gap-[18px]">
