@@ -28,7 +28,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
     setIsLoading(true);
 
     try {
-      const response = await POST_URL("https://estate-api-wn9c.onrender.com/user/login", {
+      const response = await POST_URL("user/login", {
         username,
         password
       });

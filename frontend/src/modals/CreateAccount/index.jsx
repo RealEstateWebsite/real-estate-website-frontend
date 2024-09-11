@@ -74,7 +74,7 @@ export default function CreateAccount({ isOpen, ...props }) {
   const handleSubmit = () => {
     if (!validateInputs()) return;
 
-    fetch("https://estate-api-wn9c.onrender.com/user/signup", {
+    fetch("https://estateapi-2t2c.onrender.com/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,11 +97,13 @@ export default function CreateAccount({ isOpen, ...props }) {
             //     console.log('Error:', error); // Fallback if no message property
             //   }
             // });
+            //errorData.detail is an array of objects with number keys and a msg inside
             console.log(errorData.detail)
-          })
+        //     errorData.detail.forEach((error) => {
+        //       console.log(`Error message: ${error.msg}` )
+        // }) this is for displaying each error that is returned
         }
-      }
-      )
+        )}})
       .catch((error) => {
         console.error("Error: " + error.message)
       });

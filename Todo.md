@@ -7,3 +7,5 @@
 -fix the create account page height scaling.. Done
 -login page has an error where when the eye icon is clicked, it submits straight away and returns an error
 -make an error handler for the create account. it should use an array to store and map through the values in the array and display them.
+-make the search bar appear like a modal coming from the top or fading in
+-the homepage shouldn't have a sell, buy or rent option. That should be kept in its own route
