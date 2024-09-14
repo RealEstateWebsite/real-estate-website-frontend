@@ -56,6 +56,34 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       }, 5000)
     }
   }
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await POST_URL("/auth/login");
+      const data = await response.json();
+      console.log(response, data);
+
+      if (response.ok) {
+        setSuccess("Login Successful", data.message);
+        const url = "/";
+        // console.log(url);
+        navigate("/");
+      } else {
+        setError("Login failed...", data.error)
+      }
+    } catch (error) {
+      console.error("Fetch error: ", error);
+      setError("Login failed", error.message);
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => {
+        setError("");
+        setSuccess("");
+      }, 5000)
+    }
+  }
 
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
@@ -135,6 +163,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 shape="round"
                 leftIcon={<Img src="images/img_icon_20px_google.svg" alt="icon / 20px / google" />}
                 className="w-full gap-2.5 sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid"
+                onClick={handleGoogleSignIn}
               >
                 Log in with Google
               </Button>
