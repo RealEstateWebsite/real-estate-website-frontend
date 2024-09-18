@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heading, Img, Text, Button, Input } from "../../components";
 import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
 import { Link } from "react-router-dom";
+import {FaEye, FaSearchLocation, FaWallet, FaRegSmile} from "react-icons/fa"
 
 export default function LandingPagePage() {
+
+  const [active, setActive] = useState(null)
   return (
     <>
       <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-auto bg-white-A700">
         <div className="flex flex-col items-center justify-start w-full">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
-          <div className="flex flex-row justify-end w-full py-[50px] md:py-5 bg-yellow-50">
+          <div className="flex flex-row justify-end w-full py-[50px] md:py-5 bg-yellow-50 px-[50px] md:px-6">
             <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1396px]">
               <div className="flex flex-col items-center justify-start w-[44%] md:w-full gap-10">
                 <div className="flex flex-col items-center justify-start w-full gap-[15px]">
@@ -19,23 +22,23 @@ export default function LandingPagePage() {
                     <>
                       Find a perfect property
                       <br />
-                      Where you&#39;ll love to live
+                      Where you'll love to live
                     </>
                   </Heading>
-                  <Text size="lg" as="p" className="!text-gray-700">
+                  <Text size="lg" as="p" className="!text-[#44465a]">
                     We helps businesses customize, automate and scale up their ad production and delivery.
                   </Text>
                 </div>
-                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-white-A700 rounded-[16px]">
+                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-blue-300 rounded-[16px]">
                   <Tabs
                     className="flex flex-col items-center justify-start w-full gap-[38px]"
                     selectedTabClassName="!text-white-A700 bg-gray-900 rounded-[10px]"
                     selectedTabPanelClassName="relative tab-panel--selected"
                   >
-                    <TabList className="flex flex-row justify-between w-full gap-[155px] p-[9px] sm:gap-10">
-                      <Tab className="mt-[5px] ml-[62px] md:ml-5 text-white-A700 text-lg font-bold">Buy</Tab>
-                      <Tab className="text-gray-900 text-lg font-bold">Sell</Tab>
-                      <Tab className="mr-[57px] md:mr-5 text-gray-900 text-lg font-bold">Rent</Tab>
+                    <TabList className="flex flex-row justify-between w-full gap-[110px] p-[9px] sm:gap-10">
+                      <Tab className={`py-2 px-4 md:ml-4 text-lg font-bold ${active == 0 ? 'bg-black text-white': ''}`} onClick={() => setActive(0)}>Buy</Tab>
+                      <Tab className="py-2 px-4 md:ml-4 text-gray-900 text-lg font-bold" onClick={() => setActive(1)}>Sell</Tab>
+                      <Tab className="py-2 px-4 text-gray-900 text-lg font-bold" onClick={() => setActive(2)}>Rent</Tab>
                     </TabList>
                     {[...Array(3)].map((_, index) => (
                       <TabPanel key={`tab-panel${index}`} className="items-center w-full absolute">
@@ -45,7 +48,7 @@ export default function LandingPagePage() {
                               <Input
                                 shape="round"
                                 name="city"
-                                placeholder="City/Street"
+                                placeholder="Location"
                                 suffix={<Img src="images/img_icon_20px_map.svg" alt="icon / 20px / map" />}
                                 className="w-full gap-[35px] font-semibold border-blue_gray-100_01 border border-solid"
                               />
@@ -53,19 +56,15 @@ export default function LandingPagePage() {
                                 shape="round"
                                 name="icon20pxupdowna"
                                 placeholder="Property Type"
-                                suffix={
-                                  <Img src="images/img_icon_20px_updown_arrow.svg" alt="icon / 20px / up-down arrow" />
-                                }
                                 className="w-full gap-[35px] font-semibold border-blue_gray-100_01 border border-solid"
                               />
                               <Input
                                 shape="round"
                                 name="price"
                                 placeholder="Price Range"
-                                suffix={
-                                  <Img src="images/img_icon_20px_updown_arrow.svg" alt="icon / 20px / up-down arrow" />
-                                }
                                 className="w-full gap-[35px] font-semibold border-blue_gray-100_01 border border-solid"
+                                step="1000"
+                                type="number"
                               />
                             </div>
                             <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold">
@@ -86,7 +85,7 @@ export default function LandingPagePage() {
         </div>
         <div className="flex flex-row justify-center w-full">
           <div className="flex flex-row md:flex-col justify-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
-            <div className="flex flex-col items-start justify-center w-[49%] md:h-auto gap-[49px] p-[50px] md:p-5 bg-red-100 rounded-[20px]">
+            <div className="flex flex-col items-start justify-center w-[49%] md:h-auto gap-[49px] p-[50px] md:p-5 bg-red-400 rounded-[20px]">
               <div className="flex flex-col items-center justify-start mt-[23px] gap-[15px]">
                 <Heading size="4xl" as="h2" className="tracking-[-0.72px]">
                   Simple & easy way to find your dream Appointment
@@ -100,8 +99,9 @@ export default function LandingPagePage() {
               </Button>
             </div>
             <div className="w-[49%] md:w-full gap-6 grid-cols-2 sm:grid-cols-1 sm:gap-5 grid">
-              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-deep_orange-50 rounded-[20px]">
-                <Img src="images/img_search_status.svg" alt="image" className="h-[30px] w-[30px] mt-[7px]" />
+              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
+                {/* <Img src="images/img_search_status.svg" alt="image" className="h-[30px] w-[30px] mt-[7px]" /> */}
+                <FaSearchLocation size={40} color={"#fd650b"} />
                 <Heading size="3xl" as="h3" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Search <br />
@@ -109,8 +109,9 @@ export default function LandingPagePage() {
                   </>
                 </Heading>
               </div>
-              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-deep_orange-50 rounded-[20px]">
-                <Img src="images/img_eye.svg" alt="eye_one" className="h-[30px] w-[30px] mt-[7px]" />
+              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
+                {/* <Img src="images/img_eye.svg" alt="eye_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
+                <FaEye size={40} color={"#FD650B"} />
                 <Heading size="3xl" as="h4" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Visit <br />
@@ -118,8 +119,9 @@ export default function LandingPagePage() {
                   </>
                 </Heading>
               </div>
-              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-deep_orange-50 rounded-[20px]">
-                <Img src="images/img_wallet.svg" alt="wallet_one" className="h-[30px] w-[30px] mt-[7px]" />
+              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
+                {/* <Img src="images/img_wallet.svg" alt="wallet_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
+                <FaWallet size={40} color={"#FD650B"} />
                 <Heading size="3xl" as="h5" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Get your <br />
@@ -127,8 +129,9 @@ export default function LandingPagePage() {
                   </>
                 </Heading>
               </div>
-              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-deep_orange-50 rounded-[20px]">
-                <Img src="images/img_emoji_happy.svg" alt="emojihappy_one" className="h-[30px] w-[30px] mt-[7px]" />
+              <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
+                {/* <Img src="images/img_emoji_happy.svg" alt="emojihappy_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
+                <FaRegSmile size={40} color={"#FD650B"} />
                 <Heading size="3xl" as="h6" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Enjoy your <br />
