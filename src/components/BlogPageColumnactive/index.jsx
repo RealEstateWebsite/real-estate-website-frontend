@@ -1,5 +1,5 @@
 import React from "react";
-import { Img, Heading, Button } from "./..";
+import { Img, Heading, Button } from "..";
 
 export default function BlogPageColumnactive({
   business = "Business",

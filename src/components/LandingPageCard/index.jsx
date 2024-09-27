@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Button, Img } from "./..";
+import { Heading, Button, Img } from "..";
 
 export default function LandingPageCard({
   imageOne = "images/img_image_260x384.png",
