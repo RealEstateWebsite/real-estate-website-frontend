@@ -12,8 +12,20 @@
   input:-webkit-autofill:focus {
     @apply text-black bg-white-A700; /* Keep text and background color consistent */
   }
+  .cutshort {
+    text-overflow: "";
+  }
 }
 
+/* @layer components {
+  .searchbar {
+    @apply block border-;
+  }
+
+  .searchbar > input {
+    @apply hover:w-[10vw] ;
+  }
+} */
 [type="text"],
 input:where(:not([type])),
 [type="email"],

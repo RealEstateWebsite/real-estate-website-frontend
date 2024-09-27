@@ -1,5 +1,5 @@
 export async function POST_URL(url, data, token) {
-    const response = await fetch(url, {
+    const response = await fetch(`https://estateapi-2t2c.onrender.com/${url}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

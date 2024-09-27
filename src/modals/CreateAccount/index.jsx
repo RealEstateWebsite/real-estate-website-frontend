@@ -1,68 +1,111 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
-import { Link } from "react-router-dom";
-import { FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaTimes, FaEye, FaEyeSlash, FaRegUser, FaIdCardAlt } from "react-icons/fa";
+import { validateEmail, validatePassword1, validatePassword2, validatePassword3 } from "utilities/common";
 
 export default function CreateAccount({ isOpen, ...props }) {
+  const navigate = useNavigate();
 
   const [passwordVisible, setPasswordVisible] = useState(false)
+  const [agreed, setAgreed] = useState(false)
   //to store the form data and be used for client side validation
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    userName: "",
+    username: "",
     password: "",
   });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-//handling the password toggle
+  //handling the password toggle
   const handlePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   const validateInputs = () => {
     //retrieving the values from the document
-    setFormData({firstName: document.getElementById("firstName").value,
-      lastName: document.getElementById("lastName").value,
-      userName: document.getElementById("userName").value,
+    setFormData({
+      firstname: document.getElementById("firstname").value,
+      lastname: document.getElementById("lastname").value,
+      username: document.getElementById("username").value,
       email: document.getElementById("email").value,
       password: document.getElementById("password").value
     })
     console.log(formData)
-    let  {firstName, lastName, userName, email, password} = formData ;
+    let { firstname, lastname, username, email, password } = formData;
     //to check and alert for any empty field
-    if (!firstName || !lastName || !userName || !email || !password) {
+    if (!firstname || !lastname || !username || !email) { //no longer need to check the password here
       alert("Please fill in all fields.");
       return false;
     }
-    //attempted email validation
-    if(!email.includes('@')){
-      alert("Please enter a valid email")
-      return false
+
+    //checks the email validity
+    if(!validateEmail(email)) {
+      alert('Please input a valid email')
     }
-      return true;
+
+    //ensures the password isn't null and checks for spaces in the password
+    if(!validatePassword1(password) || password.includes(' ')) {
+      alert('Please input a valid password')
+    }
+
+    //checks for a special char but doesn't include a lot of characters
+    if(!validatePassword2(password)) {
+      alert('Your password needs a special character or number')
+    }
+    //not sure if there's a need for validatePass3 because of the minlength property
+    //update: it doesn't work for some reason, perheps because of the component passing and all
+    if (!validatePassword3(password)) {
+      alert('Your password length is below 8 letters')
+    }
+
+    if(!agreed) {
+      alert('You must have agreed to our terms and conditions before signing up!')
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = () => {
     if (!validateInputs()) return;
 
-    fetch("https://estate-api-wn9c.onrender.com/user/signup", {
+    fetch("https://estateapi-2t2c.onrender.com/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Account created successfully:", data);
-      })
+      .then((response) => {
+        console.log(response.status)
+        if (response.ok) {
+          return response.json()
+        }
+        else {
+          // Handle non-OK responses
+          return response.json().then((errorData) => {
+            // Assuming errorData is an array of objects with messages
+            // errorData.forEach((error) => {
+            //   if (error.message) {
+            //     console.log(`Error: ${error.message}`); // Log each error message
+            //   } else {
+            //     console.log('Error:', error); // Fallback if no message property
+            //   }
+            // });
+            //errorData.detail is an array of objects with number keys and a msg inside
+            console.log(errorData.detail)
+        //     errorData.detail.forEach((error) => {
+        //       console.log(`Error message: ${error.msg}` )
+        // }) this is for displaying each error that is returned
+        }
+        )}})
       .catch((error) => {
-        console.error("Error creating account:", error);
+        console.error("Error: " + error.message)
       });
 
     console.log("You have signed up successfully")
@@ -70,7 +113,7 @@ export default function CreateAccount({ isOpen, ...props }) {
 
 
   return (
-    <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
+    <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px] h-full overflow-y-auto">
       <div className="flex flex-row justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
         <div className="flex flex-col items-center justify-start w-full mt-2.5 mb-[7px] gap-[29px]">
           <div className="flex flex-col items-start justify-start w-full gap-[15px]">
@@ -79,8 +122,8 @@ export default function CreateAccount({ isOpen, ...props }) {
                 <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                   Create Account
                 </Heading>
-                <Button size="sm" shape="square" className="w-[30px] hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all">
-                  <FaTimes className="rounded-sm "/>
+                <Button size="sm" shape="square" className="w-[30px] hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all" onClick={() => navigate("/")}>
+                  <FaTimes className="rounded-sm " />
                 </Button>
               </div>
               <div className="flex flex-row md:flex-col justify-center w-full gap-5">
@@ -90,8 +133,10 @@ export default function CreateAccount({ isOpen, ...props }) {
                     type="text"
                     name="First Name"
                     placeholder="First Name"
-                    id="firstName"
-                    prefix={<Img src="images/img_icon_24px_user.svg" alt="First Name" />}
+                    id="firstname"
+                    prefix={
+                      <FaRegUser size={24} color={"gray"} />
+                    }
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                     onChange={handleInputChange}
                   />
@@ -99,23 +144,23 @@ export default function CreateAccount({ isOpen, ...props }) {
                     shape="round"
                     type="text"
                     name="Last Name"
-                    id="lastName"
+                    id="lastname"
                     placeholder="Last Name"
                     onChange={handleInputChange}
-                    prefix={<Img src="images/img_icon_24px_user.svg" alt="Last Name" />}
+                    prefix={<FaRegUser size={24} color={"gray"} />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                   />
                   <Input
                     shape="round"
                     type="text"
                     name="User Name"
-                    id="userName"
+                    id="username"
                     placeholder="User Name"
                     onChange={handleInputChange}
                     prefix={<Img src="images/img_user_icon.svg" alt="Last Name" />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black "
                   />
-                  <Input 
+                  <Input
                     shape="round"
                     type="email"
                     name="email"
@@ -149,6 +194,7 @@ export default function CreateAccount({ isOpen, ...props }) {
               label="I agree to all Terms & Conditions"
               id="checklist"
               className="gap-2 !text-gray-600_02 text-left font-bold my-2 mx-auto"
+              onClick={ () => setAgreed(!agreed)}
             />
           </div>
           <div className="flex flex-col items-center justify-start w-[60%] gap-[18px]">

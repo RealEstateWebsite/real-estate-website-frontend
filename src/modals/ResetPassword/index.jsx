@@ -3,15 +3,34 @@ import { Heading, Button, Input, Img, Text } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { FaTimes, FaEnvelope } from "react-icons/fa";
+import { POST_URL, validateEmail } from "utilities/common";
 
 export default function ResetPassword({ isOpen, ...props }) {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(email)
-    navigate("/enter-otp")
+    if(validateEmail(email)) {
+      e.preventDefault()
+      try {
+        const response = await POST_URL("https://estateapi-2t2c.onrender.com/user/me/forgot-password", {
+          email
+        })
+        const data = await response.json()
+        console.log(response, data)
+        setEmail("")
+        if(response.ok) {
+          alert(data.message)
+          navigate("/enter-otp")
+        } else {
+          alert(data.error)
+        }
+      } catch (error) {
+        console.error("Fetch error: ", error)
+        alert(error.message)
+      }
+    }
   }
   return (
     <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
@@ -24,22 +43,23 @@ export default function ResetPassword({ isOpen, ...props }) {
                   <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
                     Reset Password
                   </Heading>
-                  <Button size="sm" shape="square" className="w-[30px]" aria-label="Close modal">
-                    <Img src="images/img_icon_24px_close.svg" />
-                  </Button>
+                  <Button size="sm" shape="square" className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all" onClick={() => navigate("/login")}>
+                      <FaTimes />
+                    </Button>
                 </div>
                 <Text as="p" className="!text-gray-900">
-                  Enter the email address associated with your account and we&#39;ll send you a link to reset your
+                  Enter the email address associated with your account and we'll send you a link to reset your
                   password.
                 </Text>
               </div>
               <Input
                 shape="round"
                 type="email"
-                name="password"
-                onChange={(value) =>setEmail(value)}
-                placeholder="user / email address"
-                prefix={<Img src="images/img_icon_24px_email.svg" alt="icon / 24px / email" />}
+                name="email"
+                onChange={(e) => setEmail(e.target.value)
+                }
+                placeholder="Email Address"
+                prefix={<FaEnvelope size={32} />}
                 className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
               />
             </div>
