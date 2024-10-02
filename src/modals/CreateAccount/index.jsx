@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Heading, Button, Img, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes, FaEye, FaEyeSlash, FaRegUser, FaIdCardAlt } from "react-icons/fa";
+import { FaTimes, FaEye, FaEyeSlash, FaRegUser, FaIdCardAlt, FaEnvelope} from "react-icons/fa";
+import {PiKeyhole, PiIdentificationCard, PiEnvelope} from "react-icons/pi"
 import { validateEmail, validatePassword1, validatePassword2, validatePassword3 } from "utilities/common";
 
 export default function CreateAccount({ isOpen, ...props }) {
@@ -157,7 +158,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     id="username"
                     placeholder="User Name"
                     onChange={handleInputChange}
-                    prefix={<Img src="images/img_user_icon.svg" alt="Last Name" />}
+                    prefix={<PiIdentificationCard size={28} color={"gray"} />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black "
                   />
                   <Input
@@ -166,7 +167,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    prefix={<Img src="images/img_icon_24px_email.svg" alt="icon / 24px / email" />}
+                    prefix={<PiEnvelope size={28} color={"gray"} />}
                     className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid text-black"
                     onChange={handleInputChange}
                   />
@@ -176,7 +177,7 @@ export default function CreateAccount({ isOpen, ...props }) {
                     name="password"
                     placeholder="Password"
                     id="password"
-                    prefix={<Img src="images/img_icon_20px_lock.svg" alt="Lock" />}
+                    prefix={<PiKeyhole size={32} color={"gray"} />}
                     suffix={
                       <span onClick={handlePasswordVisibility} className="cursor-pointer" >
                         {passwordVisible ? <FaEyeSlash color={"gray"} /> : <FaEye color={"gray"} />}
