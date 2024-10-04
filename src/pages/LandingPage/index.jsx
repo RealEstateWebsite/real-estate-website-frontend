@@ -4,7 +4,8 @@ import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
 import { Link } from "react-router-dom";
-import {FaEye, FaSearchLocation, FaWallet, FaRegSmile} from "react-icons/fa"
+import {FaEye, FaSearchLocation, FaWallet, FaRegSmile, FaDollarSign, FaFire} from "react-icons/fa"
+import {GoLocation} from "react-icons/go"
 
 export default function LandingPagePage() {
 
@@ -142,13 +143,13 @@ export default function LandingPagePage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-gray-50">
+        <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-gray-100">
           <div className="flex flex-row justify-center w-full mx-[70px] md:mx-5 max-w-[1200px]">
             <div className="flex flex-row md:flex-col w-full gap-[100px] md:gap-10">
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-                  <Img src="images/img_frame.svg" />
-                </Button>
+                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <FaDollarSign size={30} color="#fd650b" />
+                </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
                   <Heading size="5xl" as="h2" className="tracking-[-0.92px]">
                     $15.4M
@@ -163,9 +164,9 @@ export default function LandingPagePage() {
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-                  <Img src="images/img_frame_orange_a700.svg" />
-                </Button>
+                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <GoLocation size={28} color="#fd650b" />
+                </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
                   <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     25K+
@@ -176,9 +177,12 @@ export default function LandingPagePage() {
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
+                {/* <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
                   <Img src="images/img_icon.svg" />
-                </Button>
+                </Button> */}
+                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <FaFire size={28} color="#fd650b" />
+                </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
                   <Heading size="5xl" as="h6" className="tracking-[-0.92px]">
                     500
