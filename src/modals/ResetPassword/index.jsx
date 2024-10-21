@@ -75,14 +75,14 @@ export default function ResetPassword({ isOpen, ...props }) {
               className="w-full sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid"
               onClick={() => navigate('/login')}
             >
-              Return to sign in
+              Return to log in
             </Button>
           </div>
-          <div className="h-px w-full bg-blue_gray-100_01" />
-          <div className="flex flex-row sm:flex-col justify-center w-full gap-2 sm:gap-2">
+          {/* <div className="h-px w-full bg-blue_gray-100_01" /> */}
+          {/* <div className="flex flex-row sm:flex-col justify-center w-full gap-2 sm:gap-2">
             <p href="#" className="ml-[25px] sm:ml-5">
               <Heading size="lg" as="h2" className="!text-gray-600_02 tracking-[-0.40px] text-center">
-                Don&apos;t have an account?
+                Don't have an account?
               </Heading>
             </p>
             <Link to="/create-account" className="mr-[25px] sm:mr-5">
@@ -90,7 +90,7 @@ export default function ResetPassword({ isOpen, ...props }) {
                 Create Account
               </Heading>
             </Link>
-          </div>
+          </div> */}
         </div>
       </form>
     </ModalProvider>

@@ -30,7 +30,7 @@ export default function LandingPagePage() {
                     We helps businesses customize, automate and scale up their ad production and delivery.
                   </Text>
                 </div>
-                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-blue-300 rounded-[16px]">
+                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-[#2b2d42] rounded-[16px]">
                   <Tabs
                     className="flex flex-col items-center justify-start w-full gap-[38px]"
                     selectedTabClassName="!text-white-A700 bg-gray-900 rounded-[10px]"
