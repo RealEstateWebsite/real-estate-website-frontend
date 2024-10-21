@@ -41,11 +41,11 @@ const Input = React.forwardRef(
     return (
       <>
         <div
-          className={`${className} flex items-center justify-center ${shapes[shape] || ""} ${variants[variant]?.[color] || variants[variant] || ""} ${sizes[size] || ""}`}
+          className={`${className} flex items-center font-candara font-normal justify-center ${shapes[shape] || ""} ${variants[variant]?.[color] || variants[variant] || ""} ${sizes[size] || ""}`}
         >
           {!!label && label}
           {!!prefix && prefix}
-          <input ref={ref} type={type} className="text-black" name={name} onChange={onChange} placeholder={placeholder} {...restProps}  />
+          <input ref={ref} type={type} className="text-black placeholder:text-[14px] text-[16px]" name={name} onChange={onChange} placeholder={placeholder} {...restProps}  />
           {!!suffix && suffix}
         </div>
       </>

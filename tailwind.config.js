@@ -25,7 +25,7 @@ module.exports = {
         deep_orange: { 50: "#fbeee6", 400: "#ff8b46" },
       },
       boxShadow: { xs: "0px 30px  30px 0px #91aebb33" },
-      fontFamily: { manrope: "Manrope", markoone: "Marko One" },
+      fontFamily: { reemkufi: "ReemKufi", candara: "Candara" },
     },
   },
   plugins: [require("@tailwindcss/forms")],

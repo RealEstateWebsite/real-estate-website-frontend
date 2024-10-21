@@ -11,3 +11,4 @@
 -the homepage shouldn't have a sell, buy or rent option. That should be kept in its own route
 -the reset password page shouldn't have a create-account option there
 -many of the pages are not responsive
+-Do a complete overturn of the ui
