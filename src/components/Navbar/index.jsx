@@ -29,7 +29,6 @@ const tab = [
 export default function Header({ ...props }) {
   const [isMobile, setIsMobile] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [searchBarValue2, setSearchBarValue2] = useState("");
   window.addEventListener("orientationchange", () => {
     if (window.innerWidth < 600) {
       setIsMobile(true);
@@ -55,7 +54,7 @@ export default function Header({ ...props }) {
   const navigate = useNavigate();
 
   return (
-    <header {...props}>
+    <header {...props} className="bg-[#363020] w-full">
       <div className="flex justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1200px]">
         <div
           className="flex flex-row justify-start items-start gap-[11px] hover:cursor-pointer"
@@ -69,31 +68,11 @@ export default function Header({ ...props }) {
           <Text
             size="lg"
             as="p"
-            className="mt-[5px] !text-orange-A700 !font-markoone"
+            className="mt-[5px] text-[#a49966] !font-markoone"
           >
-            Relasto
+            Seraphim
           </Text>
         </div>
-        {isMobile === true && (
-          <Input
-            size="md"
-            shape="square"
-            name="search"
-            className="border-[1px] border-solid border-gray-200 pl-0 rounded-xl ml-4 cutshort flex flex-row justify-between"
-            placeholder="Search"
-            value={searchBarValue2}
-            onChange={(e) => setSearchBarValue2(e.target.value)}
-            prefix={<FaSearch className={"cursor-pointer w-[15vw] h-[4.75vh]"} color="#FD650B" />}
-            suffix={
-              searchBarValue2?.length > 0 ? (
-                <FaTimes
-                  onClick={() => setSearchBarValue2("")}
-                  size={24}
-                />
-              ) : null
-            }
-          />
-        )}
         {isMobile == false && (
           <div className="flex flex-row gap-10 md:justify-between w-[60%]">
             <div className="flex flex-row sm:flex-col justify-between items-center w-[75%] md:w-full sm:gap-10">
@@ -102,7 +81,7 @@ export default function Header({ ...props }) {
                   tab.map((row, index) => (
                     <div
                       key={index}
-                      className="flex flex-row justify-start items-start w-[25%] gap-1.5"
+                      className="flex flex-row justify-start items-start w-[25%] gap-1.5 text-[#d4dae4]"
                     >
                       <Heading as="h6">
                         <Link to={row.href}>{row.text}</Link>
@@ -126,25 +105,25 @@ export default function Header({ ...props }) {
         {
           isMobile == true && (
             <div>
-              <FaBars size={24} onClick={() => setOpenModal(!openModal)} />
+              <FaBars size={24} onClick={() => setOpenModal(!openModal)} color={"#605c4e"} />
               {openModal && (
                 <div className="">
-                  <div className="relative right-2 ">
-                    <div className="absolute bg-white-A700 -left-10 border-[0.8px] border-black border-solid">
-                      <ul className="px-4 py-3 flex flex-col gap-3 ">
-                        <li className="border-b-2 border-solid border-b-black pb-3 font-semibold">
+                  <div className="relative right-2 top-2 ">
+                    <div className="absolute bg-[#665b3e] -left-10 ">
+                      <ul className="px-4 py-3 flex flex-col gap-3 text-[#d4dae4]  ">
+                        <li className="pb-3 font-semibold hover:text-[#98b377] transition-all">
                           <Link to="/">Home</Link>
                         </li>
-                        <li className="border-b-2 border-solid border-b-black pb-3 font-semibold">
+                        <li className="pb-3 font-semibold">
                           <Link to="/listing">Listing</Link>
                         </li>
-                        <li className="border-b-2 border-solid border-b-black pb-3 font-semibold">
+                        <li className="pb-3 font-semibold">
                           <Link to="/agentlist">Agents</Link>
                         </li>
-                        <li className="border-b-2 border-solid border-b-black pb-3 font-semibold">
+                        <li className="pb-3 font-semibold">
                           <Link to="/propertydetails">Property</Link>
                         </li>
-                        <li className="font-semibold border-b-2 border-solid border-b-black pb-3">
+                        <li className="font-semibold pb-3">
                           <Link to="/blogpage">Blog</Link>
                         </li>
                         <li className="font-semibold">

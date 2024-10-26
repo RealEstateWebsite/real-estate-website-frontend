@@ -41,6 +41,10 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
         setSuccess("Login Successful", data.message);
         // const url = "/";
         // console.log(url);
+        let rememberMe = document.getElementById("remember").isChecked
+        if (rememberMe) {
+          console.log(rememberMe)
+        }
         navigate("/");
       } else {
         setError("Login failed...", data.error);
