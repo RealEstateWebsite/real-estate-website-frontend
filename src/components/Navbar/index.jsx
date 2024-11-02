@@ -57,41 +57,43 @@ export default function Header({ ...props }) {
       <div className="flex justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1200px]">
         <div
           className="flex flex-row justify-start items-start gap-[11px] hover:cursor-pointer"
-          onClick={() => navigate("/")}
         >
-          <Text
+          {/* <Text
             size="lg"
-            as="p"
+            as="h5"
             className="mt-[5px] text-[#a49966] font-reemkufi"
           >
             Seraphim
-          </Text>
+          </Text> */}
+        <h5 className="mt-[5px] text-[#a49966] font-reemkufi ">
+          Seraphim
+        </h5>
         </div>
         {isMobile == false && (
-          <div className="flex flex-row gap-10 md:justify-between w-[60%]">
-            <div className="flex flex-row sm:flex-col justify-between items-center w-[75%] md:w-full sm:gap-10">
+          <div className="flex flex-row gap-10 md:justify-between w-[80%]">
+            <div className="flex flex-row sm:flex-col justify-around items-center w-[75%] md:w-full sm:gap-10  ">
               <div className="flex flex-row w-[64%] sm:w-full gap-10">
                 {tab &&
                   tab.map((row, index) => (
                     <div
                       key={index}
-                      className="flex flex-row justify-start items-start w-[25%] gap-1.5 text-[#d4dae4] font-reemkufi font-normal"
+                      className="flex flex-row justify-start items-start w-[25%] gap-1.5 text-[#d4dae4] font-reemkufi "
                     >
-                      <Heading as="h6" className="text-[#d4dae4]">
+                      <Heading as="h6" className="text-[#d4dae4] text-[19.45px] font-[300]">
                         <Link to={row.href}>{row.text}</Link>
                       </Heading>
                     </div>
                   ))}
               </div>
             </div>
-            <div className="w-[25%] md:w-full gap-2.5">
+            <div className="w-[25%] md:w-full gap-2.5 flex flex-row-reverse ">
               <Button
                 size="md"
                 shape="round"
-                className="sm:px-5 font-semibold min-w-[94px] bg-[#605c4e] text-[#2b2b2c] text-[0.92rem] hover:border-[.75px] hover:border-[#bbc9aa]"
+                className="sm:px-5 font-semibold min-w-[94px] bg-[#605c4e] text-[#bdbdc2] text-[0.92rem] hover:border-[.75px] hover:border-[#bbc9aa] font-reemkufi hover:text-[#dfdbdb]"
                 onClick={() => navigate("/login")}
               >
-                Log in
+                Log In
               </Button>
             </div>
           </div>)

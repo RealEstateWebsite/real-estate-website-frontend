@@ -11,3 +11,4 @@
 -the reset password page shouldn't have a create-account option there
 -many of the pages are not responsive
 -Do a complete overturn of the ui
+-Style the focus for the ui
