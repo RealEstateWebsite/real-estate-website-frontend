@@ -12,3 +12,5 @@
 -many of the pages are not responsive
 -Do a complete overturn of the ui
 -Style the focus for the ui
+-Start with the login page according to the figma design
+-Refactor unnecsary code

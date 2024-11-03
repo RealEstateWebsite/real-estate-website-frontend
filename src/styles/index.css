@@ -78,3 +78,9 @@ h6{
 p{
   font-size: 16px;
 }
+#loginPage {
+  background-image: url("/images/img_image_1.png");
+   background-repeat: no-repeat;
+  background-position: 0px;
+  background-clip: border-box;
+}

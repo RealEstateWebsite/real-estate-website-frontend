@@ -95,9 +95,10 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       appElement={document.getElementById("root")}
       isOpen={isOpen}
       className="min-w-[480px]"
+      overlayClassName="bg-[#d4dae4] py-6"
     >
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara">
+      <form onSubmit={handleSubmit} className="focus-visible:border-0 focus-within:border-0 static ">
+        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:border-0" id="loginPage">
           <div className="flex flex-col items-center justify-start w-full gap-[29px] my-[9px]">
             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
               <div className="flex flex-row justify-center w-full pt-[5px]">
@@ -112,7 +113,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     <Button
                       size="sm"
                       shape="square"
-                      className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all"
+                      className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all focus-visible:border-[#605ce4]"
                       onClick={() => navigate("/")}
                     >
                       <FaTimes />
@@ -124,7 +125,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     name="username"
                     placeholder="Username"
                     prefix={<AiOutlineUser size={28} />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border-[2.5px] border-solid my-6 bg-transparent"
                     onChange={(e) => setUsername(e.target.value)}
                   />
                   <Input
@@ -142,7 +143,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                         )}
                       </button>
                     }
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid font-ser"
+                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border-[2.5px] border-solid bg-transparent mb-2"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -155,9 +156,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   id="remember"
                   className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi"
                   onClick={(e) => {
-                    console.log(checked);
                     setChecked(e.target.checked);
-                    console.log(checked);
                   }}
                 />
                 <Link
@@ -168,7 +167,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 </Link>
               </div>
             </div>
-            {error && <div className="text-red-600">{error}</div>}
+            { error && <div className="text-red-600 font-[300]">{error}</div> || <div className="py-[0.6rem]"></div>}
             {success && <div className="text-green-600">{success}</div>}
             <div className="flex flex-col items-center justify-start w-full gap-[18px]">
               <Button
@@ -195,7 +194,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
             <div className="h-px w-full bg-blue_gray-100_01" />
             <div className="flex flex-row sm:flex-col justify-center items-center w-full gap-2 sm:gap-2">
               <Heading
-                as="h2"
+                as="p"
                 className="text-[#1D1D1D] opacity-[95] tracking-[-0.40px] text-center ml-[25px] sm:ml-5"
               >
                 Don't have an account?
