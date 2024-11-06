@@ -98,22 +98,22 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       overlayClassName="bg-[#d4dae4] py-6 focus-within:border-0"
     >
       <form onSubmit={handleSubmit} className="">
-        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline" id="loginPage">
+        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline opacity-[90%]" id="loginPage">
           <div className="flex flex-col items-center justify-start w-full gap-[29px] my-[9px]">
             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
               <div className="flex flex-row justify-center w-full pt-[5px]">
                 <div className="flex flex-col items-center justify-start w-full gap-[15px]">
                   <div className="flex flex-row justify-between items-center w-full pb-6 border-[#363020] border-b-[1.5px]">
                     <Heading
-                      as="h2"
-                      className="tracking-[-0.72px] text-[32px] font-[750]"
+                      as="h4"
+                      className="tracking-[-0.72px]  font-[750] text-[#020202]"
                     >
                       Log In
                     </Heading>
                     <Button
                       size="sm"
                       shape="square"
-                      className="w-[30px] mt-1 hover:bg-white-A700 hover:text-black hover:border-black hover: border-[0.25px] duration-700 transition-all focus-visible:border-[#605ce4]"
+                      className="w-[30px] mt-1 bg-[#605c4e]  text-white hover:bg-[#363020] hover:text-black duration-700 transition-all focus-visible:border-[#605ce4]"
                       onClick={() => navigate("/")}
                     >
                       <FaTimes />
@@ -125,8 +125,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     name="username"
                     placeholder="Username"
                     prefix={<AiOutlineUser size={28}  color={"363020"} />}
-                    className="w-full gap-3.5 font-semibold border-[#a49966] border-[2.5px] border-solid my-6 bg-transparent "
-                    inputClassName="text-[#363020] placeholder:text-[ #363020]"
+                    className="w-full gap-3.5 font-semibold border-[#363020] border-[2.5px] border-solid my-6 bg-transparent "
                     onChange={(e) => setUsername(e.target.value)}
                   />
                   <Input
@@ -144,7 +143,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                         )}
                       </button>
                     }
-                    className="w-full gap-3.5 font-semibold border-[#a49966] border-[2.5px] border-solid bg-transparent mb-2 text-[#d4dae4]"
+                    className="w-full gap-3.5 font-semibold border-[#363020] focus:border-[#605c4e] border-[2.5px] border-solid bg-transparent mb-2 text-[#d4dae4]"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -155,7 +154,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   name="remember"
                   label="Remember Me"
                   id="remember"
-                  className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi"
+                  className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi "
                   onClick={(e) => {
                     setChecked(e.target.checked);
                   }}
@@ -174,7 +173,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
               <Button
                 size="4xl"
                 shape="round"
-                className="sm:px-5 font-bold w-[80%]"
+                className="sm:px-5 font-bold w-[80%] bg-[#605c4e]"
                 disabled={isLoading}
               >
                 Log in
@@ -183,7 +182,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 color="white_A700"
                 size="4xl"
                 shape="round"
-                className=" gap-2.5 sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid w-[20%]"
+                className=" gap-2.5 sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid w-[20%] bg-[#bbc9aa]"
                 onClick={handleGoogleSignIn}
               >
                 {/* <Img src="images/img_icon_20px_google.svg" alt="Google" className="w-[150px]" />
@@ -198,7 +197,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
               >
                 Don't have an account?
               </Heading>
-              <Link to="/create-account" className="font-candara hover:underline text-[#272727ea]">
+              <Link to="/create-account" className="font-candara underline text-[#272727ea]">
                 Try Creating One
               </Link>
             </div>
