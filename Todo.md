@@ -14,3 +14,4 @@
 -Style the focus for the ui
 -Start with the login page according to the figma design
 -Refactor unnecsary code
+-Make the background darker than it is now or lighter with lighter or darker text as necessary.

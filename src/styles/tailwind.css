@@ -75,3 +75,11 @@ li:focus-visible {
 li:hover {
   cursor: pointer;
 }
+
+[type='checkbox'] {
+  background-color: rgb(211, 211, 204);
+}
+
+#remember[type='checkbox']:checked {
+  background-color: #363020;
+}

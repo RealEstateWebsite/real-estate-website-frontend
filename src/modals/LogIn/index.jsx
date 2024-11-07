@@ -94,11 +94,11 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       {...props}
       appElement={document.getElementById("root")}
       isOpen={isOpen}
-      className="min-w-[480px] focus-visible:border-0 focus-visible:border-transparent "
-      overlayClassName="bg-[#d4dae4] py-6 focus-within:border-0"
+      className="min-w-[480px] focus-visible:border-0 focus-visible:border-transparent h-full "
+      overlayClassName="bg-[#d4dae4] py-6 focus-within:border-0 h-full"
     >
-      <form onSubmit={handleSubmit} className="">
-        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline opacity-[90%]" id="loginPage">
+      <form onSubmit={handleSubmit} className="w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline opacity-[90%] h-full" id="loginPage">
           <div className="flex flex-col items-center justify-start w-full gap-[29px] my-[9px]">
             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
               <div className="flex flex-row justify-center w-full pt-[5px]">
@@ -154,7 +154,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                   name="remember"
                   label="Remember Me"
                   id="remember"
-                  className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi "
+                  className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi  checked:text-[#602302]"
                   onClick={(e) => {
                     setChecked(e.target.checked);
                   }}
@@ -167,7 +167,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 </Link>
               </div>
             </div>
-            { error && <div className="text-red-600 font-[300]">{error}</div> || <div className="py-[0.6rem]"></div>}
+            { error && <div className="text-red-600 font-[400] text-[16px]">{error}</div> || <div className="py-[0.6rem]"></div>}
             {success && <div className="text-green-600">{success}</div>}
             <div className="flex flex-row items-center justify-start w-full gap-[18px]">
               <Button
@@ -187,7 +187,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
               >
                 {/* <Img src="images/img_icon_20px_google.svg" alt="Google" className="w-[150px]" />
                  */}
-                 <FaGoogle size="25px" />
+                 <FaGoogle size="25px" color={"363020"} />
               </Button>
             </div>
             <div className="flex flex-row sm:flex-col justify-center items-center w-full gap-2 sm:gap-2 border-[#363020] border-t-[1.5px] pt-4">
