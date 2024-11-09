@@ -20,14 +20,14 @@ const variants = {
   },
 };
 const sizes = {
-  "2xl": "h-[56px] px-[35px] text-base",
-  xs: "h-[25px] text-lg",
+  "2xl": "h-[56px] px-[35px] ",
+  xs: "h-[25px] ",
   sm: "h-[30px]",
   "3xl": "h-[60px] px-3.5",
-  md: "h-[36px] px-3.5 text-sm",
-  lg: "h-[44px] px-4 text-base",
-  "4xl": "h-[60px] px-[35px] text-lg",
-  xl: "h-[48px] px-6 text-base",
+  md: "h-[36px] px-3.5 ",
+  lg: "h-[44px] px-4 t",
+  "4xl": "h-[60px] px-[35px]",
+  xl: "h-[48px] px-6 ",
 };
 
 const Button = ({
