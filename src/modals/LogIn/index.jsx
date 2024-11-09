@@ -94,11 +94,11 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       {...props}
       appElement={document.getElementById("root")}
       isOpen={isOpen}
-      className="min-w-[480px] focus-visible:border-0 focus-visible:border-transparent h-full "
+      className="min-w-[480px] focus-visible:outline-0 h-full "
       overlayClassName="bg-[#d4dae4] py-6 focus-within:border-0 h-full"
     >
       <form onSubmit={handleSubmit} className="w-full h-full">
-        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline opacity-[90%] h-full" id="loginPage">
+        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline h-full" id="loginPage">
           <div className="flex flex-col items-center justify-start w-full gap-[29px] my-[9px]">
             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
               <div className="flex flex-row justify-center w-full pt-[5px]">
@@ -113,7 +113,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     <Button
                       size="sm"
                       shape="square"
-                      className="w-[30px] mt-1 bg-[#605c4e]  text-white hover:bg-[#363020] hover:text-black duration-700 transition-all focus-visible:border-[#605ce4]"
+                      className="w-[30px] mt-1 bg-[#605c4e]  text-[#bbc9aa] hover:bg-[#363020] hover:text-[#1d1d1d] duration-100 transition-all focus-visible:border-[#605ce4]"
                       onClick={() => navigate("/")}
                     >
                       <FaTimes />

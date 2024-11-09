@@ -18,7 +18,6 @@ module.exports = {
           "400_01": "#c0c0c0",
           "50_02": "#f9fdff",
         },
-        white: { A700: "#ffffff" },
         orange: { A700: "#fd650b" },
         blue_gray: { 100: "#d9d9d9", 600: "#406f85", "100_01": "#d6d6d6", "100_02": "#cfcfcf" },
         yellow: { 50: "#fff7f0" },
