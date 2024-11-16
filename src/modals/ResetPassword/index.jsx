@@ -9,51 +9,54 @@ import { POST_URL, validateEmail } from "utilities/common";
 export default function ResetPassword({ isOpen, ...props }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (validateEmail(email)) {
-      e.preventDefault();
+      console.log(email)      
       try {
         const response = await POST_URL(
-          "https://estateapi-2t2c.onrender.com/user/me/forgot-password",
+          "user/me/forgot-password",
           {
             email,
           }
         );
         const data = await response.json();
-        console.log(response, data);
-        setEmail("");
+        console.log(data)
         if (response.ok) {
           alert(data.message);
           navigate("/enter-otp");
         } else {
-          alert(data.error);
+          setError(data.detail)
+          console.log(data.detail)
         }
       } catch (error) {
         console.error("Fetch error: ", error);
         alert(error.message);
       }
-    }
+    } 
+    setTimeout(setError(""), 5000)
   };
   return (
     <ModalProvider
       {...props}
       appElement={document.getElementById("root")}
       isOpen={isOpen}
-      className="min-w-[480px] bg-[#ffffffc9] focus:outline-0 border border-[#363020] rounded-xl max-w-[900px] min-h-[40vh]"
-      overlayClassName="bg-[#d4dae4] h-[100vh]"
+      className="min-w-[480px] bg-[#d4dae4] focus:outline-0 border border-[#363020] rounded-xl max-w-[1100px] w-[80%] mx-[12%] min-h-[40vh]"
+      overlayClassName="bg-[#fff] h-[100vh]"
     >
-      <form className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
+      <form className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]" name="reset-password" onSubmit={handleSubmit}>
         <div className="flex flex-col items-center justify-start w-full gap-[31px] my-[9px]">
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full gap-[22px]">
               <div className="flex flex-col items-center justify-start w-full gap-2">
-                <div className="flex flex-row justify-between items-center w-full pb-4 border-b-[2px] border-[#363020]">
-                  <h4 className="font-reemkufi">Reset Password</h4>
+                <div className="flex flex-row justify-between items-center w-full pb-4 border-b-[1.5px] border-[#363020]">
+                  <h5 className="font-reemkufi">Reset Password</h5>
                   <Button
                     size="sm"
                     shape="square"
-                    className="w-[30px] mt-1 bg-[#605c4e]  hover:text-[#bbc9aa] hover:bg-[#363020] text-[#1d1d1d] duration-100 transition-all focus-visible:border-[#605ce4]"
+                    className="w-[30px] mt-1 bg-[#605c4e]  text-[#bbc9aa] hover:bg-[#363020] duration-100 transition-all focus-visible:border-[#605ce4]"
                     onClick={() => navigate("/login")}
                   >
                     <FaTimes />
@@ -68,6 +71,7 @@ export default function ResetPassword({ isOpen, ...props }) {
                 Enter the email address associated with your account and we'll
                 send you a link to reset your password.
               </Text>
+              {error &&  <div className="text-red-600 font-[400] text-[16px]">{error}</div>}
             </div>
             <div className="flex flex-col w-[50%] gap-10">
               <Input
@@ -77,15 +81,16 @@ export default function ResetPassword({ isOpen, ...props }) {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email Address"
                 prefix={<FaEnvelope size={32} />}
-                className="w-full gap-3.5 font-semibold border-[#363020] focus:border-[#605c4e] border border-solid"
+                className="w-full gap-3.5 font-semibold border-[#363020] focus:border-[#605c4e] border-[2.5px] border-solid"
               />
               <div className="flex flex-col items-end justify-end w-full gap-[18px]">
                 <Button
                   size="4xl"
                   shape="round"
-                  className=" sm:px-5 font-bold bg-[#605c4e] text-[#f2f2f2] font-[15px] font-candara"
-                  disabled={email === ""}
+                  className=" sm:px-5 font-bold bg-[#605c4e] text-[#c5c5c5] text-[17px] tracking-wider font-candara disabled:bg-[#ffffff41] disabled:text-[#aca7a7]"
+                  disabled={!email}
                   onClick={handleSubmit}
+                  type="submit"         
                 >
                   Send OTP
                 </Button>

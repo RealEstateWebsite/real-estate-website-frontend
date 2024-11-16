@@ -6,7 +6,6 @@ export async function POST_URL(url, data, token) {
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify(data),
-        credentials: "include",
     });
     return response;
 }

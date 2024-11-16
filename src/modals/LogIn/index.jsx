@@ -113,7 +113,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     <Button
                       size="sm"
                       shape="square"
-                      className="w-[30px] mt-1 bg-[#605c4e]  text-[#bbc9aa] hover:bg-[#363020] hover:text-[#1d1d1d] duration-100 transition-all focus-visible:border-[#605ce4]"
+                      className="w-[30px] mt-1 bg-[#605c4e]  text-[#bbc9aa] hover:bg-[#363020]  duration-100 transition-all focus-visible:border-[#605ce4]"
                       onClick={() => navigate("/")}
                     >
                       <FaTimes />
