@@ -135,7 +135,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                     placeholder="Password"
                     prefix={<PiKeyhole size={34}   color={"363020"}/>}
                     suffix={
-                      <button onClick={togglePasswordVisibility}>
+                      <button onClick={togglePasswordVisibility} type="button">
                         {showPassword ? (
                           <PiEye size={32}  color={"363020"} />
                         ) : (

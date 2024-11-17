@@ -56,6 +56,7 @@ const Input = React.forwardRef(
 
 Input.propTypes = {
   className: PropTypes.string,
+  inputClassName: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,

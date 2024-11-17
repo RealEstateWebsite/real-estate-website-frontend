@@ -5,13 +5,15 @@
 -Do the remember me for the login page
 -Do the i agree for the create account page ..Done
 -fix the create account page height scaling.. Done
--login page has an error where when the eye icon is clicked, it submits straight away and returns an error
+-login page has an error where when the eye icon is clicked, it submits straight away and returns an error ..done
 -make an error handler for the create account. it should use an array to store and map through the values in the array and display them.
 -the homepage shouldn't have a sell, buy or rent option. That should be kept in its own route
--the reset password page shouldn't have a create-account option there
+-the reset password page shouldn't have a create-account option there ..done
 -many of the pages are not responsive
 -Do a complete overturn of the ui
 -Style the focus for the ui
--Start with the login page according to the figma design
+-Start with the login page according to the figma design ..done
 -Refactor unnecsary code
 -Make the background darker than it is now or lighter with lighter or darker text as necessary.
+-Set up an Error 404 page
+-Create a modal for the create account page that contains the sites terms and conditions and must be accepted to proceed
