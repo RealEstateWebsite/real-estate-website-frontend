@@ -17,3 +17,4 @@
 -Make the background darker than it is now or lighter with lighter or darker text as necessary.
 -Set up an Error 404 page
 -Create a modal for the create account page that contains the sites terms and conditions and must be accepted to proceed
+-Remove unnecessary components
