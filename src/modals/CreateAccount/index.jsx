@@ -135,17 +135,15 @@ export default function CreateAccount({ isOpen, ...props }) {
       className="min-w-[480px] h-full max-w-[1000px] bg-white my-[3%] opacity-[85%] border-[#000000a6] border-[1.5px] rounded-md"
       overlayClassName="overflow-y-auto bg-[#d4dae4]"
     >
-      <div className="flex flex-row justify-center w-full p-[29px] sm:p-5 bg-white-A700 rounded-[10px]">
-        {/* <div className=" flex-1 bg-[#f4f4f4] flex items-center justify-center text-center p-20">
-          <div className="carousel-content">
-            <div className="flex overflow-hidden w-full h-auto carousel-images">
-              <img src="images/img_image_2.png" />
-              <img src="images/img_image_3.png" />
-              <img src="images/img_image_4.png" />
+      <div className="flex flex-row justify-center w-full  gap-2 sm:p-5 bg-white-A700">
+        <div className=" flex-1 bg-[#f4f4f4] flex items-center justify-center text-center">
+            <div className="flex w-full h-full p-0">
+              <img src="images/img_image_3.png" className="object-center max-h-[900px] max-w-[600px]" />
+              {/* <img src="images/img_image_3.png" />
+              <img src="images/img_image_4.png" /> */}
             </div>
-          </div>
-        </div> */}
-        <div className="flex flex-1 flex-col items-center justify-center w-full mt-2.5 mb-[7px] gap-[29px]">
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center p-[15px] w-full mt-2.5 mb-[7px] gap-[29px]">
           <div className="flex flex-col items-start justify-start w-full gap-[15px]">
             <div className="flex flex-col items-center justify-start w-full gap-6">
               <div className="flex flex-row justify-between items-center w-full">
