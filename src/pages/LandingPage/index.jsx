@@ -4,12 +4,18 @@ import Header from "../../components/Navbar";
 import LandingPageCard from "../../components/LandingPageCard";
 import { TabPanel, TabList, Tab, Tabs } from "react-tabs";
 import { Link } from "react-router-dom";
-import {FaEye, FaSearchLocation, FaWallet, FaRegSmile, FaDollarSign, FaFire} from "react-icons/fa"
-import {GoLocation} from "react-icons/go"
+import {
+  FaEye,
+  FaSearchLocation,
+  FaWallet,
+  FaRegSmile,
+  FaDollarSign,
+  FaFire,
+} from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
 
 export default function LandingPagePage() {
-
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState(null);
   return (
     <>
       <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-auto bg-white-A700">
@@ -17,32 +23,61 @@ export default function LandingPagePage() {
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
           <div className="flex flex-row justify-end w-full py-[50px] md:py-5 bg-yellow-50 px-[50px] md:px-6">
             <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1396px]">
-              <div className="flex flex-col items-center justify-start w-[44%] md:w-full gap-10">
+              <div className="flex flex-col items-center justify-start w-[44%] md:w-full gap-10 flex-1">
                 <div className="flex flex-col items-center justify-start w-full gap-[15px]">
-                  <Heading size="5xl" as="h1" className="tracking-[-0.92px]">
-                    <>
-                      Find a perfect property
-                      <br />
-                      Where you'll love to live
-                    </>
+                  <Heading as="h3" className="tracking-[-0.92px]">
+                    Find the perfect property,
+                    <br />
+                    Where you'll love to live
                   </Heading>
-                  <Text size="lg" as="p" className="!text-[#44465a]">
-                    We helps businesses customize, automate and scale up their ad production and delivery.
-                  </Text>
+                  <p className="!text-[#44465a]">
+                    We help businesses customize and scale up their ad
+                    production and delivery.
+                  </p>
                 </div>
-                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-[#2b2d42] rounded-[16px]">
+                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-[#363020] rounded-[16px]">
                   <Tabs
                     className="flex flex-col items-center justify-start w-full gap-[38px]"
                     selectedTabClassName="!text-white-A700 bg-gray-900 rounded-[10px]"
                     selectedTabPanelClassName="relative tab-panel--selected"
                   >
-                    <TabList className="flex flex-row justify-between w-full gap-[110px] p-[9px] sm:gap-10">
-                      <Tab className={`py-2 px-4 md:ml-4 text-lg font-bold ${active == 0 ? 'bg-black text-white': ''}`} onClick={() => setActive(0)}>Buy</Tab>
-                      <Tab className="py-2 px-4 md:ml-4 text-gray-900 text-lg font-bold" onClick={() => setActive(1)}>Sell</Tab>
-                      <Tab className="py-2 px-4 text-gray-900 text-lg font-bold" onClick={() => setActive(2)}>Rent</Tab>
+                    <TabList className="flex flex-row justify-between w-full gap-[110px] p-[9px] sm:gap-10 font-reemkufi border-b border-solid border-b-[#c7c7c3] pb-4">
+                      <Tab
+                        className={`py-2 px-4 md:ml-4 text-lg font-bold ${
+                          active == 0
+                            ? "bg-black text-white"
+                            : "text-[#cfcdcf] border-[0.5px] rounded-[0.78rem] border-solid border-black "
+                        }`}
+                        onClick={() => setActive(0)}
+                      >
+                        BUY
+                      </Tab>
+                      <Tab
+                        className={`py-2 px-4 md:ml-4 text-lg font-bold ${
+                          active == 1
+                            ? "bg-black text-white"
+                            : "text-[#cfcdcf] border-[0.5px] rounded-[0.78rem] border-solid border-black"
+                        }`}
+                        onClick={() => setActive(1)}
+                      >
+                        SELL
+                      </Tab>
+                      <Tab
+                        className={`py-2 px-4 md:ml-4 text-lg font-bold ${
+                          active == 2
+                            ? "bg-black text-white"
+                            : "text-[#cfcdcf] border-[0.5px] rounded-[0.78rem] border-solid border-black"
+                        }`}
+                        onClick={() => setActive(2)}
+                      >
+                        RENT
+                      </Tab>
                     </TabList>
                     {[...Array(3)].map((_, index) => (
-                      <TabPanel key={`tab-panel${index}`} className="items-center w-full absolute">
+                      <TabPanel
+                        key={`tab-panel${index}`}
+                        className="items-center w-full absolute"
+                      >
                         <div className="flex flex-col items-center justify-start w-full">
                           <div className="flex flex-col items-center justify-start w-full gap-6">
                             <div className="flex flex-col items-center justify-start w-full gap-5">
@@ -50,7 +85,12 @@ export default function LandingPagePage() {
                                 shape="round"
                                 name="city"
                                 placeholder="Location"
-                                suffix={<Img src="images/img_icon_20px_map.svg" alt="icon / 20px / map" />}
+                                suffix={
+                                  <Img
+                                    src="images/img_icon_20px_map.svg"
+                                    alt="icon / 20px / map"
+                                  />
+                                }
                                 className="w-full gap-[35px] font-semibold border-blue_gray-100_01 border border-solid"
                               />
                               <Input
@@ -68,7 +108,11 @@ export default function LandingPagePage() {
                                 type="number"
                               />
                             </div>
-                            <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold">
+                            <Button
+                              size="4xl"
+                              shape="round"
+                              className="w-full sm:px-5 font-bold"
+                            >
                               Search
                             </Button>
                           </div>
@@ -78,8 +122,12 @@ export default function LandingPagePage() {
                   </Tabs>
                 </div>
               </div>
-              <div className="flex flex-row justify-start">
-                <Img src="images/img_image.png" alt="image_one" className="w-[89%] md:h-auto sm:w-full object-cover" />
+              <div className="flex flex-row justify-start flex-1">
+                <Img
+                  src="images/img_image.png"
+                  alt="image_one"
+                  className="w-[89%] md:h-auto sm:w-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -88,22 +136,26 @@ export default function LandingPagePage() {
           <div className="flex flex-row md:flex-col justify-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
             <div className="flex flex-col items-start justify-center w-[49%] md:h-auto gap-[49px] p-[50px] md:p-5 bg-red-400 rounded-[20px]">
               <div className="flex flex-col items-center justify-start mt-[23px] gap-[15px]">
-                <Heading size="4xl" as="h2" className="tracking-[-0.72px]">
-                  Simple & easy way to find your dream Appointment
+                <Heading as="h4" className="tracking-[-0.72px]">
+                  Simple & easy way to find your dream appointment
                 </Heading>
-                <Text as="p" className="!text-gray-900">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.{" "}
-                </Text>
+                <p className="!text-gray-900">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.{" "}
+                </p>
               </div>
-              <Button shape="round" className="mb-[23px] sm:px-5 font-semibold min-w-[138px] sm:min-w-full">
+              <Button
+                shape="round"
+                className="mb-[23px] sm:px-5 font-semibold min-w-[138px] sm:min-w-full"
+              >
                 Get Started
               </Button>
             </div>
+            {/*  */}
             <div className="w-[49%] md:w-full gap-6 grid-cols-2 sm:grid-cols-1 sm:gap-5 grid">
               <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
-                {/* <Img src="images/img_search_status.svg" alt="image" className="h-[30px] w-[30px] mt-[7px]" /> */}
                 <FaSearchLocation size={40} color={"#fd650b"} />
-                <Heading size="3xl" as="h3" className="mb-[7px] tracking-[-0.56px]">
+                <Heading as="h4" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Search <br />
                     your location
@@ -111,9 +163,8 @@ export default function LandingPagePage() {
                 </Heading>
               </div>
               <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
-                {/* <Img src="images/img_eye.svg" alt="eye_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
                 <FaEye size={40} color={"#FD650B"} />
-                <Heading size="3xl" as="h4" className="mb-[7px] tracking-[-0.56px]">
+                <Heading as="h5" className="mb-[7px] tracking-[-0.56px]">
                   <>
                     Visit <br />
                     Appointment
@@ -121,9 +172,12 @@ export default function LandingPagePage() {
                 </Heading>
               </div>
               <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
-                {/* <Img src="images/img_wallet.svg" alt="wallet_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
                 <FaWallet size={40} color={"#FD650B"} />
-                <Heading size="3xl" as="h5" className="mb-[7px] tracking-[-0.56px]">
+                <Heading
+                  size="3xl"
+                  as="h5"
+                  className="mb-[7px] tracking-[-0.56px]"
+                >
                   <>
                     Get your <br />
                     dream house
@@ -133,7 +187,11 @@ export default function LandingPagePage() {
               <div className="flex flex-col items-start justify-center w-full md:h-auto gap-5 p-[30px] sm:p-5 bg-red-200 rounded-[20px]">
                 {/* <Img src="images/img_emoji_happy.svg" alt="emojihappy_one" className="h-[30px] w-[30px] mt-[7px]" /> */}
                 <FaRegSmile size={40} color={"#FD650B"} />
-                <Heading size="3xl" as="h6" className="mb-[7px] tracking-[-0.56px]">
+                <Heading
+                  size="3xl"
+                  as="h6"
+                  className="mb-[7px] tracking-[-0.56px]"
+                >
                   <>
                     Enjoy your <br />
                     Appointment
@@ -143,6 +201,7 @@ export default function LandingPagePage() {
             </div>
           </div>
         </div>
+        {/* Accomplishments */}
         <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-gray-100">
           <div className="flex flex-row justify-center w-full mx-[70px] md:mx-5 max-w-[1200px]">
             <div className="flex flex-row md:flex-col w-full gap-[100px] md:gap-10">
@@ -151,10 +210,14 @@ export default function LandingPagePage() {
                   <FaDollarSign size={30} color="#fd650b" />
                 </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                  <Heading size="5xl" as="h2" className="tracking-[-0.92px]">
+                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     $15.4M
                   </Heading>
-                  <Heading size="lg" as="h3" className="!text-blue_gray-600 tracking-[-0.40px]">
+                  <Heading
+                    size="lg"
+                    as="h5"
+                    className="!text-blue_gray-600 tracking-[-0.40px]"
+                  >
                     <>
                       Owned from
                       <br />
@@ -171,7 +234,11 @@ export default function LandingPagePage() {
                   <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     25K+
                   </Heading>
-                  <Heading size="lg" as="h5" className="!text-blue_gray-600 tracking-[-0.40px]">
+                  <Heading
+                    size="lg"
+                    as="h5"
+                    className="!text-blue_gray-600 tracking-[-0.40px]"
+                  >
                     Properties for Buy & sell Successfully
                   </Heading>
                 </div>
@@ -184,10 +251,14 @@ export default function LandingPagePage() {
                   <FaFire size={28} color="#fd650b" />
                 </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                  <Heading size="5xl" as="h6" className="tracking-[-0.92px]">
+                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     500
                   </Heading>
-                  <Heading size="lg" as="h5" className="!text-blue_gray-600 tracking-[-0.40px]">
+                  <Heading
+                    size="lg"
+                    as="h5"
+                    className="!text-blue_gray-600 tracking-[-0.40px]"
+                  >
                     <>
                       Daily completed <br />
                       transactions
@@ -196,52 +267,73 @@ export default function LandingPagePage() {
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full mb-[26px] gap-[18px]">
-                <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
+                <Button
+                  color="white_A700"
+                  size="3xl"
+                  shape="circle"
+                  className="w-[60px]"
+                >
                   <Img src="images/img_icon_orange_a700.svg" />
                 </Button>
                 <div className="flex flex-col items-start justify-start w-full gap-4">
-                  <Heading size="5xl" as="h1" className="tracking-[-0.92px]">
+                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     600+
                   </Heading>
-                  <Heading size="lg" as="h5" className="!text-blue_gray-600 tracking-[-0.40px]">
-                    Reagular Clients
+                  <Heading
+                    size="lg"
+                    as="h5"
+                    className="!text-blue_gray-600 tracking-[-0.40px]"
+                  >
+                    Regular Clients
                   </Heading>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center w-full">
+        <div className="flex flex-row justify-center w-full ">
           <div className="flex flex-col items-center justify-start h-[1200px] w-full md:h-auto gap-[53px] md:px-5 max-w-[1200px]">
             <div className="flex flex-row justify-center w-full pt-[5px]">
               <div className="flex flex-col items-center justify-start w-full gap-[17px]">
-                <div className="flex flex-row sm:flex-col justify-between items-start w-full sm:gap-10">
-                  <Heading size="4xl" as="h2" className="tracking-[-0.72px]">
+                <div className="flex flex-row sm:flex-col justify-between items-center w-full sm:gap-10">
+                  <Heading size="4xl" as="h3" className="tracking-[-0.72px]">
                     Featured Properties
                   </Heading>
-                  <Link to="/propertydetails" className="flex flex-row justify-start items-center mt-[7px] gap-2 sm:mt-0">
-                    <Heading size="md" as="h3" className="mt-0.5 !text-orange-A700 !font-bold">
+                  <Link
+                    to="/propertydetails"
+                    className="flex flex-row justify-start items-center mt-[7px] gap-2 sm:mt-0"
+                  >
+                    <Heading
+                      size="md"
+                      as="h6"
+                      className="mt-0.5 !text-orange-A700 !font-bold"
+                    >
                       Explore All
                     </Heading>
-                    <Img src="images/img_icon_24px_v.svg" alt="icon24pxv_one" className="h-[24px] w-[24px]" />
+                    <Img
+                      src="images/img_icon_24px_v.svg"
+                      alt="icon24pxv_one"
+                      className="h-[24px] w-[24px]"
+                    />
                   </Link>
                 </div>
-                <div className="flex flex-row md:flex-col justify-start w-full md:gap-5">
-                  <Button size="xs" shape="square" className="text-gray-900 font-bold min-w-[159px]">
+                <div className="flex flex-row md:flex-col justify-start w-full gap-[10vw]">
+                  <Button shape="round" className=" font-bold p-3 text-white">
                     Resident Property
                   </Button>
-                  <Button size="xs" shape="square" className="ml-[143px] md:ml-5 text-gray-400 font-bold min-w-[186px]">
+                  <Button shape="round" className="font-bold p-3 text-white">
                     Commercial Property
                   </Button>
-                  <Button size="xs" shape="square" className="ml-[116px] md:ml-5 text-gray-400 font-bold min-w-[164px]">
+                  <Button shape="round" className=" font-bold p-3 text-white">
                     Industrial Property
                   </Button>
-                  <Button size="xs" shape="square" className="ml-[137px] md:ml-5 text-gray-400 font-bold min-w-[180px]">
+                  <Button shape="round" className=" font-bold p-3 text-white">
                     Agriculture Property
                   </Button>
                 </div>
               </div>
             </div>
+            {/* Property Cards */}
             <div className="justify-center w-full gap-6 grid-cols-3 md:grid-cols-2 md:gap-5 sm:grid-cols-1 grid">
               <LandingPageCard className="flex flex-col items-center justify-start w-full" />
               <LandingPageCard
@@ -267,21 +359,27 @@ export default function LandingPagePage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full px-14 py-[120px] md:p-5 bg-gray-50_01">
+        <div className="w-[100vw] h-[15vh]"></div>
+        <div className="flex flex-col items-center justify-center w-full px-14 py-[120px] md:p-5 bg-gray-50_01 ">
           <div className="flex flex-col items-center justify-start w-full gap-[150px] max-w-[1200px]">
             <div className="flex flex-row md:flex-col justify-between items-center w-full md:gap-10">
               <div className="flex flex-col items-start justify-start w-[47%] md:w-full gap-[58px]">
                 <div className="flex flex-col items-center justify-start gap-[19px]">
-                  <Heading size="4xl" as="h2" className="tracking-[-0.72px]">
+                  <Heading size="4xl" as="h3" className="tracking-[-0.72px]">
                     Simple & easy way to find your dream Appointment
                   </Heading>
                   <Text as="p" className="!text-gray-700">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. In a free hour, when our
-                    power of choice is untrammelled and when nothing prevents our being able to do what we like best,
-                    every pleasure is to be welcomed.
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. In a free hour, when our power of
+                    choice is untrammelled and when nothing prevents our being
+                    able to do what we like best, every pleasure is to be
+                    welcomed.
                   </Text>
                 </div>
-                <Button shape="round" className="sm:px-5 font-semibold min-w-[138px] sm:min-w-full">
+                <Button
+                  shape="round"
+                  className="sm:px-5 font-semibold min-w-[138px] sm:min-w-full"
+                >
                   Get Started
                 </Button>
               </div>
@@ -324,33 +422,49 @@ export default function LandingPagePage() {
                     <Heading size="4xl" as="h3" className="tracking-[-0.72px]">
                       Best rated host on popular rental sites
                     </Heading>
-                    <Text as="p" className="!text-gray-700">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. In a free hour, when
-                      our power of choice is untrammelled.
-                    </Text>
+                    <p className="!text-gray-700">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. In a free hour, when our power of
+                      choice is untrammelled.
+                    </p>
                   </div>
                   <div className="flex flex-col items-center justify-start w-full gap-3">
                     <div className="flex flex-row justify-start items-center w-full gap-3.5 py-0.5 sm:gap-3.5">
-                      <Img src="images/img_icon_check.svg" alt="iconcheck_one" className="h-[24px] w-[24px]" />
-                      <Heading size="md" as="h4">
+                      <Img
+                        src="images/img_icon_check.svg"
+                        alt="iconcheck_one"
+                        className="h-[24px] w-[24px]"
+                      />
+                      <Heading size="md" as="h6">
                         Find excellent deals
                       </Heading>
                     </div>
                     <div className="flex flex-row justify-start items-center w-full gap-3.5 sm:gap-3.5">
-                      <Img src="images/img_icon_check.svg" alt="iconcheck_three" className="h-[24px] w-[24px]" />
-                      <Heading size="md" as="h5" className="mt-[5px]">
+                      <Img
+                        src="images/img_icon_check.svg"
+                        alt="iconcheck_three"
+                        className="h-[24px] w-[24px]"
+                      />
+                      <Heading size="md" as="h6" className="mt-[5px]">
                         Friendly host & Fast support
                       </Heading>
                     </div>
                     <div className="flex flex-row justify-start items-center w-full gap-3.5 sm:gap-3.5">
-                      <Img src="images/img_icon_check.svg" alt="iconcheck_five" className="h-[24px] w-[24px]" />
+                      <Img
+                        src="images/img_icon_check.svg"
+                        alt="iconcheck_five"
+                        className="h-[24px] w-[24px]"
+                      />
                       <Heading size="md" as="h6" className="mt-[5px]">
                         Secure payment system
                       </Heading>
                     </div>
                   </div>
                 </div>
-                <Button shape="round" className="sm:px-5 font-semibold min-w-[134px] sm:min-w-full">
+                <Button
+                  shape="round"
+                  className="sm:px-5 font-semibold min-w-[134px] sm:min-w-full"
+                >
                   Learn more
                 </Button>
               </div>
@@ -370,18 +484,31 @@ export default function LandingPagePage() {
                   <div className="flex flex-col items-center justify-start w-full gap-[30px]">
                     <div className="flex flex-row sm:flex-col justify-between items-center w-full sm:gap-10">
                       <div className="flex flex-col items-start justify-center gap-[5px]">
-                        <Heading size="3xl" as="h2" className="mt-0.5 tracking-[-0.56px]">
+                        <Heading
+                          size="3xl"
+                          as="h5"
+                          className="mt-0.5 tracking-[-0.56px]"
+                        >
                           Taylor Wilson
                         </Heading>
-                        <Heading size="md" as="h3">
+                        <Heading size="md" as="h6">
                           Product Manager - Static Mania
                         </Heading>
                       </div>
-                      <Img src="images/img_shape.svg" alt="shape_one" className="h-[51px]" />
+                      <Img
+                        src="images/img_shape.svg"
+                        alt="shape_one"
+                        className="h-[51px]"
+                      />
                     </div>
-                    <Heading size="2xl" as="h4" className="!text-gray-700 !font-semibold !leading-[165%]">
-                      Eget eu massa et consectetur. Mauris donec. Leo a, id sed duis proin sodales. Turpis viverra diam
-                      porttitor mattis morbi ac amet. Euismod commodo. We get you customer relationships that last.{" "}
+                    <Heading
+                      as="h6"
+                      className="text-gray-600 font-normal "
+                    >
+                      Eget eu massa et consectetur. Mauris donec. Leo a, id sed
+                      duis proin sodales. Turpis viverra diam porttitor mattis
+                      morbi ac amet. Euismod commodo. We get you customer
+                      relationships that last.{" "}
                     </Heading>
                   </div>
                 </div>
@@ -390,16 +517,28 @@ export default function LandingPagePage() {
           </div>
           <div className="flex flex-row justify-end w-full pl-14 pr-[215px] gap-[270px] md:gap-10 md:px-5">
             <div className="flex flex-row justify-start items-center w-[10%] gap-2">
-              <Img src="images/img_icon_24px_v_gray_600.svg" alt="icon24pxv_three" className="h-[24px] w-[24px]" />
-              <Heading size="md" as="h2" className="!text-gray-600 !font-bold">
+              <Img
+                src="images/img_icon_24px_v_gray_600.svg"
+                alt="icon24pxv_three"
+                className="h-[24px] w-[24px]"
+              />
+              <Heading size="md" as="h5" className="!text-gray-600 !font-bold">
                 Previews
               </Heading>
             </div>
             <div className="flex flex-row justify-start items-center w-[7%] gap-2">
-              <Heading size="md" as="h3" className="mt-px !text-orange-A700 !font-bold">
+              <Heading
+                size="md"
+                as="h5"
+                className="mt-px !text-orange-A700 !font-bold"
+              >
                 Next
               </Heading>
-              <Img src="images/img_icon_24px_v.svg" alt="icon24pxv_five" className="h-[24px] w-[24px]" />
+              <Img
+                src="images/img_icon_24px_v.svg"
+                alt="icon24pxv_five"
+                className="h-[24px] w-[24px]"
+              />
             </div>
           </div>
         </div>
@@ -407,14 +546,26 @@ export default function LandingPagePage() {
           <div className="flex flex-col items-center justify-start w-full gap-[118px] max-w-[1200px]">
             <div className="flex flex-col items-center justify-start w-full gap-[60px]">
               <div className="flex flex-row sm:flex-col justify-between items-center w-full sm:gap-10">
-                <Heading size="4xl" as="h2" className="!text-white-A700 tracking-[-0.72px]">
+                <Heading
+                  size="4xl"
+                  as="h3"
+                  className="text-white tracking-[-0.72px]"
+                >
                   News & Consult
                 </Heading>
                 <div className="flex flex-row justify-start items-center gap-2">
-                  <Heading size="md" as="h3" className="mt-0.5 !text-orange-A700 !font-bold">
+                  <Heading
+                    size="md"
+                    as="h6"
+                    className="mt-0.5 !text-orange-A700 !font-bold"
+                  >
                     Explore All
                   </Heading>
-                  <Img src="images/img_icon_24px_v.svg" alt="icon24pxv_seven" className="h-[24px] w-[24px]" />
+                  <Img
+                    src="images/img_icon_24px_v.svg"
+                    alt="icon24pxv_seven"
+                    className="h-[24px] w-[24px]"
+                  />
                 </div>
               </div>
               <div className="flex flex-row md:flex-col w-full gap-6">
@@ -425,11 +576,19 @@ export default function LandingPagePage() {
                     className="w-full md:h-auto sm:w-full object-cover rounded-[10px]"
                   />
                   <div className="flex flex-col items-center justify-start w-full gap-[23px]">
-                    <Heading size="2xl" as="h4" className="!text-white-A700 tracking-[-0.48px]">
+                    <Heading
+                      size="2xl"
+                      as="h5"
+                      className="text-white tracking-[-0.48px]"
+                    >
                       9 Easy-to-Ambitious DIY Projects to Improve Your Home
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
-                      <Heading size="md" as="h5" className="mt-px !text-deep_orange-400 !font-bold">
+                      <Heading
+                        size="md"
+                        as="h6"
+                        className="mt-px !text-deep_orange-400 !font-bold"
+                      >
                         Read the Article
                       </Heading>
                       <Img
@@ -447,11 +606,19 @@ export default function LandingPagePage() {
                     className="w-full md:h-auto sm:w-full object-cover rounded-[10px]"
                   />
                   <div className="flex flex-col items-center justify-start w-full gap-[23px]">
-                    <Heading size="2xl" as="h6" className="!text-white-A700 tracking-[-0.48px]">
-                      Serie Shophouse Launch In July, Opportunity For Investors
+                    <Heading
+                      size="2xl"
+                      as="h5"
+                      className="text-white tracking-[-0.48px]"
+                    >
+                      Serie Shophouse Launch Next Year, Opportunity For Investors
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
-                      <Heading size="md" as="h6" className="mt-px !text-deep_orange-400 !font-bold">
+                      <Heading
+                        size="md"
+                        as="h6"
+                        className="mt-px !text-deep_orange-400 !font-bold"
+                      >
                         Read the Article
                       </Heading>
                       <Img
@@ -469,11 +636,20 @@ export default function LandingPagePage() {
                     className="w-full md:h-auto sm:w-full object-cover rounded-[10px]"
                   />
                   <div className="flex flex-col items-center justify-start w-full gap-[23px]">
-                    <Heading size="2xl" as="h4" className="!text-white-A700 tracking-[-0.48px]">
-                      Looking for a New Place? Use This Time to Create Your Wishlist
+                    <Heading
+                      size="2xl"
+                      as="h5"
+                      className="text-white tracking-[-0.48px]"
+                    >
+                      Looking for a New Place? Use This Time to Create Your
+                      Wishlist
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
-                      <Heading size="md" as="h6" className="mt-px !text-deep_orange-400 !font-bold">
+                      <Heading
+                        size="md"
+                        as="h6"
+                        className="mt-px !text-deep_orange-400 !font-bold"
+                      >
                         Read the Article
                       </Heading>
                       <Img
@@ -488,12 +664,17 @@ export default function LandingPagePage() {
             </div>
             <div className="flex flex-col items-center justify-start w-full gap-[30px] p-10 sm:p-5 bg-gray-400_01 rounded-[10px]">
               <div className="flex flex-col items-center justify-start w-[54%] md:w-full pt-[3px] gap-[5px]">
-                <Heading size="3xl" as="h3" className="tracking-[-0.56px] text-center">
+                <Heading
+                  size="3xl"
+                  as="h4"
+                  className="tracking-[-0.56px] text-center"
+                >
                   For Recent Update, News.
                 </Heading>
-                <Text as="p" className="!text-gray-900 text-center">
-                  We helps businesses customize, automate and scale up their ad production and delivery.
-                </Text>
+                <p className="text-gray-900 text-center">
+                We helps businesses customize, automate and scale up their ad
+                production and delivery.
+                </p>
               </div>
               <div className="flex flex-row sm:flex-col justify-start w-[54%] md:w-full gap-2 sm:gap-5">
                 <Input
@@ -505,20 +686,32 @@ export default function LandingPagePage() {
                   placeholder="Enter your Email"
                   className="w-[78%] md:w-full font-semibold"
                 />
-                <Button shape="round" className="sm:px-5 font-semibold min-w-[126px]">
+                <Button
+                  shape="round"
+                  className="sm:px-5 font-semibold min-w-[126px]"
+                >
                   Subscribe
                 </Button>
               </div>
             </div>
           </div>
         </div>
-        <footer className="flex justify-center items-center w-full px-14 py-[74px] md:p-5 bg-white-A700">
+        {/* footer */}
+        {/* <footer className="flex justify-center items-center w-full px-14 py-[74px] md:p-5 bg-white-A700">
           <div className="flex flex-col items-center justify-center w-full mt-[5px] gap-[115px] mx-auto max-w-[1200px]">
             <div className="flex flex-row md:flex-col justify-start items-center w-full gap-px md:gap-5">
               <div className="flex flex-col items-center justify-start w-[29%] md:w-full gap-[43px]">
                 <div className="flex flex-row justify-start items-start w-full gap-[11px]">
-                  <Img src="images/img_real_estate_1.svg" alt="realestateone" className="h-[40px] w-[40px]" />
-                  <Text size="lg" as="p" className="mt-[5px] !text-orange-A700 !font-markoone">
+                  <Img
+                    src="images/img_real_estate_1.svg"
+                    alt="realestateone"
+                    className="h-[40px] w-[40px]"
+                  />
+                  <Text
+                    size="lg"
+                    as="p"
+                    className="mt-[5px] !text-orange-A700 !font-markoone"
+                  >
                     Relasto
                   </Text>
                 </div>
@@ -538,15 +731,35 @@ export default function LandingPagePage() {
                   </div>
                   <div className="flex flex-row justify-start w-full gap-3">
                     <div className="flex flex-col items-center justify-start h-[30px] w-[30px]">
-                      <Img src="images/img_icon_facebook.svg" alt="iconfacebook" className="h-[30px] w-[30px]" />
+                      <Img
+                        src="images/img_icon_facebook.svg"
+                        alt="iconfacebook"
+                        className="h-[30px] w-[30px]"
+                      />
                     </div>
                     <div className="flex flex-col items-center justify-start h-[30px] w-[30px]">
-                      <Img src="images/img_icon_twitter.svg" alt="icontwitter_one" className="h-[30px] w-[30px]" />
+                      <Img
+                        src="images/img_icon_twitter.svg"
+                        alt="icontwitter_one"
+                        className="h-[30px] w-[30px]"
+                      />
                     </div>
-                    <Img src="images/img_icon_instragram.svg" alt="iconinstragram" className="h-[30px] w-[30px]" />
-                    <Img src="images/img_icon_linked_in.svg" alt="iconlinkedin" className="h-[30px] w-[30px]" />
+                    <Img
+                      src="images/img_icon_instragram.svg"
+                      alt="iconinstragram"
+                      className="h-[30px] w-[30px]"
+                    />
+                    <Img
+                      src="images/img_icon_linked_in.svg"
+                      alt="iconlinkedin"
+                      className="h-[30px] w-[30px]"
+                    />
                     <div className="flex flex-col items-center justify-start h-[30px] w-[30px]">
-                      <Img src="images/img_icon_youtube.svg" alt="iconyoutube_one" className="h-[30px] w-[30px]" />
+                      <Img
+                        src="images/img_icon_youtube.svg"
+                        alt="iconyoutube_one"
+                        className="h-[30px] w-[30px]"
+                      />
                     </div>
                   </div>
                 </div>
@@ -613,7 +826,7 @@ export default function LandingPagePage() {
             </div>
             <Heading as="h6">© 2022. All rights reserved.</Heading>
           </div>
-        </footer>
+        </footer> */}
       </div>
     </>
   );

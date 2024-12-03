@@ -56,7 +56,7 @@ export default function Header({ ...props }) {
     <header {...props} className="bg-[#363020] w-full fixed z-50 ">
       <div className="flex justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1200px]">
         <div
-          className="flex flex-row justify-start items-start gap-[11px] hover:cursor-pointer"
+          className="flex flex-row justify-start items-start gap-[11px] hover:cursor-default selection:bg-transparent"
         >
           {/* <Text
             size="lg"
