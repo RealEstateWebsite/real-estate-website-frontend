@@ -18,10 +18,10 @@ export default function AgentListPage() {
       <div className="flex flex-col items-center justify-start w-full gap-[100px] overflow-auto bg-gray-50_01">
         <div className="flex flex-col items-center justify-start w-full gap-14">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
-          <div className="flex flex-row justify-center w-full">
+          <div className="flex flex-row justify-center w-full pt-[8vh]">
             <div className="flex flex-col items-start justify-start w-full pt-[5px] gap-[18px] md:px-5 max-w-[1200px]">
-              <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
-                Some Nearby Good Agents
+              <Heading as="h3" className="tracking-[-0.72px] font-semibold">
+                Our Agents Currently Available
               </Heading>
               <div className="flex flex-row md:flex-col justify-start gap-4 md:gap-5">
                 <Input

@@ -23,7 +23,7 @@ export default function LandingPageCard({
         <div className="flex flex-col items-center justify-start w-full gap-[25px] my-2.5 md:px-5 max-w-[344px]">
           <div className="flex flex-row justify-start items-center w-full gap-3">
             <Img src="images/img_icon_map_2.svg" alt="image_two" className="h-[24px] w-[24px]" />
-            <Heading as="h5">{address}</Heading>
+            <Heading as="h5" className="text-[23px]">{address}</Heading>
           </div>
           <div className="flex flex-col items-center justify-start w-full gap-[19px]">
             <div className="flex flex-row justify-between w-full">
