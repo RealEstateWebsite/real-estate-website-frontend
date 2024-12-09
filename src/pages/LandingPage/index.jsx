@@ -18,10 +18,10 @@ export default function LandingPagePage() {
   const [active, setActive] = useState(null);
   return (
     <>
-      <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-auto bg-white-A700">
+      <div className="flex flex-col items-center justify-start w-full gap-[99px] overflow-hidden bg-white-A700">
         <div className="flex flex-col items-center justify-start w-full">
           <Header className="flex justify-center items-center w-full md:h-auto p-[19px] bg-white-A700" />
-          <div className="flex flex-row justify-end w-full py-[50px] md:py-5 bg-yellow-50 px-[50px] md:px-6">
+          <div className="flex flex-row justify-end w-full py-[50px] md:py-5 bg-stone-300 px-[50px] md:px-6">
             <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1396px]">
               <div className="flex flex-col items-center justify-start w-[44%] md:w-full gap-10 flex-1">
                 <div className="flex flex-col items-center justify-start w-full gap-[15px]">
@@ -35,7 +35,7 @@ export default function LandingPagePage() {
                     production and delivery.
                   </p>
                 </div>
-                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-[#363020] rounded-[16px]">
+                <div className="flex flex-row justify-center w-full p-6 sm:p-5 bg-[#363020ce] rounded-[16px]">
                   <Tabs
                     className="flex flex-col items-center justify-start w-full gap-[38px]"
                     selectedTabClassName="!text-white-A700 bg-gray-900 rounded-[10px]"
@@ -111,7 +111,7 @@ export default function LandingPagePage() {
                             <Button
                               size="4xl"
                               shape="round"
-                              className="w-full sm:px-5 font-bold"
+                              className="w-full sm:px-5 font-bold text-[#f0f0f0]"
                             >
                               Search
                             </Button>
@@ -146,7 +146,7 @@ export default function LandingPagePage() {
               </div>
               <Button
                 shape="round"
-                className="mb-[23px] sm:px-5 font-semibold min-w-[138px] sm:min-w-full"
+                className="mb-[23px] sm:px-5 font-semibold min-w-[138px] sm:min-w-full text-[#f0f0f0]"
               >
                 Get Started
               </Button>
@@ -202,90 +202,59 @@ export default function LandingPagePage() {
           </div>
         </div>
         {/* Accomplishments */}
-        <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-gray-100">
+        <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-[#605c4e]">
           <div className="flex flex-row justify-center w-full mx-[70px] md:mx-5 max-w-[1200px]">
             <div className="flex flex-row md:flex-col w-full gap-[100px] md:gap-10">
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
                   <FaDollarSign size={30} color="#fd650b" />
                 </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
+                  <Heading as="h4" className="tracking-[-0.92px]">
                     $15.4M
                   </Heading>
-                  <Heading
-                    size="lg"
-                    as="h5"
-                    className="!text-blue_gray-600 tracking-[-0.40px]"
-                  >
-                    <>
-                      Owned from
-                      <br />
-                      Properties transactions
-                    </>
-                  </Heading>
+                  <p className="text-[#f0f0f0]  tracking-[-0.40px] text-[26.5px] font-candara">
+                    From Property Transactions
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
                   <GoLocation size={28} color="#fd650b" />
                 </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
+                  <Heading as="h4" className="tracking-[-0.92px]">
                     25K+
                   </Heading>
-                  <Heading
-                    size="lg"
-                    as="h5"
-                    className="!text-blue_gray-600 tracking-[-0.40px]"
-                  >
-                    Properties for Buy & sell Successfully
-                  </Heading>
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara tracking-[-0.40px]">
+                    Properties Bought and Sold Successfully
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
-                {/* <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-                  <Img src="images/img_icon.svg" />
-                </Button> */}
-                <div className=" bg-white-A700 w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
                   <FaFire size={28} color="#fd650b" />
                 </div>
                 <div className="flex flex-col items-start justify-start w-full gap-[13px]">
                   <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     500
                   </Heading>
-                  <Heading
-                    size="lg"
-                    as="h5"
-                    className="!text-blue_gray-600 tracking-[-0.40px]"
-                  >
-                    <>
-                      Daily completed <br />
-                      transactions
-                    </>
-                  </Heading>
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara">
+                    Daily completed Transactions
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col items-start justify-start w-[19%] md:w-full mb-[26px] gap-[18px]">
-                <Button
-                  color="white_A700"
-                  size="3xl"
-                  shape="circle"
-                  className="w-[60px]"
-                >
+                <div className="w-[60px] h-[60px] rounded-full flex items-center justify-center">
                   <Img src="images/img_icon_orange_a700.svg" />
-                </Button>
+                </div>
                 <div className="flex flex-col items-start justify-start w-full gap-4">
                   <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
                     600+
                   </Heading>
-                  <Heading
-                    size="lg"
-                    as="h5"
-                    className="!text-blue_gray-600 tracking-[-0.40px]"
-                  >
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara">
                     Regular Clients
-                  </Heading>
+                  </p>
                 </div>
               </div>
             </div>
@@ -360,7 +329,7 @@ export default function LandingPagePage() {
           </div>
         </div>
         <div className="w-[100vw] h-[15vh]"></div>
-        <div className="flex flex-col items-center justify-center w-full px-14 py-[120px] md:p-5 bg-gray-50_01 ">
+        <div className="flex flex-col items-center justify-center w-full px-14 py-[120px] md:p-5 bg-gray-300">
           <div className="flex flex-col items-center justify-start w-full gap-[150px] max-w-[1200px]">
             <div className="flex flex-row md:flex-col justify-between items-center w-full md:gap-10">
               <div className="flex flex-col items-start justify-start w-[47%] md:w-full gap-[58px]">
@@ -378,7 +347,7 @@ export default function LandingPagePage() {
                 </div>
                 <Button
                   shape="round"
-                  className="sm:px-5 font-semibold min-w-[138px] sm:min-w-full"
+                  className="sm:px-5 font-semibold min-w-[138px] sm:min-w-full text-[#f0f0f0]"
                 >
                   Get Started
                 </Button>
@@ -463,7 +432,7 @@ export default function LandingPagePage() {
                 </div>
                 <Button
                   shape="round"
-                  className="sm:px-5 font-semibold min-w-[134px] sm:min-w-full"
+                  className="sm:px-5 font-semibold min-w-[134px] sm:min-w-full text-[#f0f0f0]"
                 >
                   Learn more
                 </Button>
@@ -501,10 +470,7 @@ export default function LandingPagePage() {
                         className="h-[51px]"
                       />
                     </div>
-                    <Heading
-                      as="h6"
-                      className="text-gray-600 font-normal "
-                    >
+                    <Heading as="h6" className="text-gray-600 font-normal ">
                       Eget eu massa et consectetur. Mauris donec. Leo a, id sed
                       duis proin sodales. Turpis viverra diam porttitor mattis
                       morbi ac amet. Euismod commodo. We get you customer
@@ -611,7 +577,8 @@ export default function LandingPagePage() {
                       as="h5"
                       className="text-white tracking-[-0.48px]"
                     >
-                      Serie Shophouse Launch Next Year, Opportunity For Investors
+                      Serie Shophouse Launch Next Year, Opportunity For
+                      Investors
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
                       <Heading
@@ -672,8 +639,8 @@ export default function LandingPagePage() {
                   For Recent Update, News.
                 </Heading>
                 <p className="text-gray-900 text-center">
-                We helps businesses customize, automate and scale up their ad
-                production and delivery.
+                  We helps businesses customize, automate and scale up their ad
+                  production and delivery.
                 </p>
               </div>
               <div className="flex flex-row sm:flex-col justify-start w-[54%] md:w-full gap-2 sm:gap-5">
@@ -688,7 +655,7 @@ export default function LandingPagePage() {
                 />
                 <Button
                   shape="round"
-                  className="sm:px-5 font-semibold min-w-[126px]"
+                  className="sm:px-5 font-semibold min-w-[126px] text-[#f0f0f0]"
                 >
                   Subscribe
                 </Button>

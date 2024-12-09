@@ -55,68 +55,64 @@ export default function AboutUsPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row md:flex-col w-full gap-[100px] p-[50px] md:gap-10 md:p-5 bg-gray-50">
-            <div className="flex flex-col items-start justify-start w-[17%] md:w-full ml-[70px] gap-[18px] md:ml-5">
-              <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-              <FaDollarSign size={30} color="#fd650b" />
-              </Button>
-              <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                <Heading as="h4" className="tracking-[-0.92px]">
-                  $15.4M
-                </Heading>
-                <Heading size="lg" as="h6" className="!text-blue_gray-600 tracking-[-0.40px]">
-                  <>
-                    Owned from
-                    <br />
-                    Properties transactions
-                  </>
-                </Heading>
+          <div className="flex flex-row justify-center w-full p-[50px] md:p-5 bg-[#605c4e]">
+          <div className="flex flex-row justify-center w-full mx-[70px] md:mx-5 max-w-[1200px]">
+            <div className="flex flex-row md:flex-col w-full gap-[100px] md:gap-10">
+              <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <FaDollarSign size={30} color="#fd650b" />
+                </div>
+                <div className="flex flex-col items-start justify-start w-full gap-[13px]">
+                  <Heading as="h4" className="tracking-[-0.92px]">
+                    $15.4M
+                  </Heading>
+                  <p className="text-[#f0f0f0]  tracking-[-0.40px] text-[26.5px] font-candara">
+                    From Property Transactions
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-start justify-start w-[17%] md:w-full gap-[18px]">
-              <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-              <GoLocation size={28} color="#fd650b" />
-              </Button>
-              <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
-                  25K+
-                </Heading>
-                <Heading size="lg" as="h6" className="!text-blue_gray-600 tracking-[-0.40px]">
-                  Properties for Buy & sell Successfully
-                </Heading>
+              <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <GoLocation size={28} color="#fd650b" />
+                </div>
+                <div className="flex flex-col items-start justify-start w-full gap-[13px]">
+                  <Heading as="h4" className="tracking-[-0.92px]">
+                    25K+
+                  </Heading>
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara tracking-[-0.40px]">
+                    Properties Bought and Sold Successfully
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-start justify-start w-[17%] md:w-full gap-[18px]">
-              <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-                {/* <Img src="images/img_icon.svg" /> */}
-                <FaFire size={28} color="#fd650b" />
-              </Button>
-              <div className="flex flex-col items-start justify-start w-full gap-[13px]">
-                <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
-                  500
-                </Heading>
-                <Heading size="lg" as="h6" className="!text-blue_gray-600 tracking-[-0.40px]">
-                  <>
-                    Daily completed <br />
-                    transactions
-                  </>
-                </Heading>
+              <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[18px]">
+                <div className=" w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <FaFire size={28} color="#fd650b" />
+                </div>
+                <div className="flex flex-col items-start justify-start w-full gap-[13px]">
+                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
+                    500
+                  </Heading>
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara">
+                    Daily completed Transactions
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-start justify-start w-[17%] md:w-full mb-[26px] mr-[70px] gap-[18px] md:mr-5">
-              <Button color="white_A700" size="3xl" shape="circle" className="w-[60px]">
-                <Img src="images/img_icon_orange_a700.svg" />
-              </Button>
-              <div className="flex flex-col items-start justify-start w-full gap-4">
-                <Heading  as="h4" className="tracking-[-0.92px]">
-                  600+
-                </Heading>
-                <Heading as="h6" className="!text-blue_gray-600 tracking-[-0.40px]">
-                  Regular Clients
-                </Heading>
+              <div className="flex flex-col items-start justify-start w-[19%] md:w-full mb-[26px] gap-[18px]">
+                <div className="w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                  <Img src="images/img_icon_orange_a700.svg" />
+                </div>
+                <div className="flex flex-col items-start justify-start w-full gap-4">
+                  <Heading size="5xl" as="h4" className="tracking-[-0.92px]">
+                    600+
+                  </Heading>
+                  <p className="text-[#f0f0f0] text-[26.5px] font-candara">
+                    Regular Clients
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+        </div>
           <div className="flex flex-row justify-start w-full pl-[120px] pr-14 md:px-5">
             <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 max-w-[1147px]">
               <div className="flex flex-col items-center justify-start w-[47%] md:w-full gap-14">
@@ -570,7 +566,7 @@ export default function AboutUsPage() {
                 />
                 <Button
                   shape="round"
-                  className="sm:px-5 font-semibold min-w-[126px]"
+                  className="sm:px-5 font-semibold min-w-[126px] text-[#f0f0f0]"
                 >
                   Subscribe
                 </Button>

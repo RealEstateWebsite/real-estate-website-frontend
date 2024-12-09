@@ -20,3 +20,4 @@
 -Remove unnecessary components
 -Add an about us link to the landing page
 -Create necessary components like footer and employee card and remove unnecessary ones
+-Create a card component for the agent list page, retireve data from the backend and loop through the first set(12 or 15) before going through the remaining.

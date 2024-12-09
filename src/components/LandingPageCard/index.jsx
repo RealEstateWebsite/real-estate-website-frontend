@@ -56,7 +56,7 @@ export default function LandingPageCard({
             </div>
           </div>
           <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
-            <Button className="h-[48px] px-[31px] sm:px-5 text-white-A700 text-base font-semibold bg-gray-900 min-w-[156px] rounded-[10px]">
+            <Button className="h-[48px] px-[31px] sm:px-5 text-white-A700 text-base font-semibold bg-gray-900 min-w-[156px] rounded-[10px] text-[#f0f0f0]">
               {viewDetails}
             </Button>
             <Heading size="2xl" as="h5" className="tracking-[-0.48px]">
