@@ -197,7 +197,7 @@ export default function AboutUsPage() {
               />
             </div>
           </div>
-          <div className="flex flex-row justify-end w-full pl-14 pr-[120px] md:px-5">
+          <div className="flex flex-row justify-end w-full px-14 py-10 md:px-5 bg-[#252422]">
             <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 max-w-[1150px]">
               <Img
                 src="images/img_rectangle_20_589x496.png"
@@ -206,24 +206,19 @@ export default function AboutUsPage() {
               />
               <div className="flex flex-col items-center justify-start w-[44%] md:w-full gap-14">
                 <div className="flex flex-col items-start justify-start w-full pt-[5px] gap-3.5">
-                  <Heading size="4xl" as="h3" className="tracking-[-0.72px] pb-8">
+                  <Heading as="h3" className="text-[#fffcf2]">
                     Our vision is simple.
                   </Heading>
-                  <Text as="p" className="!text-gray-700">
-                    <>
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. In a free hour, On the
+                  <p className="text-[#f7f7f1]"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. In a free hour, On the
                       other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-                      demoralized by the charms of pleasure of the moment.
-                      <br />
-                      In a free hour, On the other hand, we denounce with righteous indignation and dislike men .
-                    </>
-                  </Text>
+                      demoralized by the charms of pleasure of the moment.<br />
+                      In a free hour, On the other hand, we denounce with righteous indignation and dislike men .</p>
                 </div>
                 <div className="flex flex-col items-start justify-center w-full gap-[9px]">
-                  <Heading size="lg" as="h4" className="tracking-[-0.40px] text-[28px]">
+                  <Heading as="h4" className="tracking-[-0.40px] text-[#f7f7f1] text-[28px]">
                     Kausar Pial
                   </Heading>
-                  <Heading size="md" as="h4" className="mb-0.5 !text-gray-700 text-[24px]">
+                  <Heading as="h6" className="mb-0.5 text-[#ccc5b9] text-[22px]">
                     CEO at Static Mania
                   </Heading>
                 </div>
