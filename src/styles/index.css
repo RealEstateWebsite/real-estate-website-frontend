@@ -89,3 +89,11 @@ p{
   background-position: 0px;
   background-clip: border-box;
 }
+
+p{
+  font-family: Candara;
+}
+
+img[src="images/img_cover_image.png"] {
+  filter:blur(4px)
+}
