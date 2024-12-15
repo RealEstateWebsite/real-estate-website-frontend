@@ -70,7 +70,7 @@ const ProjectRoutes = () => {
         element: <AgentProfile />,
       },
       {
-        path: "contactpage",
+        path: "contact-us",
         element: <ContactPage />,
       },
       {
