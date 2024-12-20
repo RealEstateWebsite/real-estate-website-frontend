@@ -97,3 +97,13 @@ p{
 img[src="images/img_cover_image.png"] {
   filter:blur(4px)
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

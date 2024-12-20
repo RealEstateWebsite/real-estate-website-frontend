@@ -2,7 +2,7 @@ import React from "react";
 import { Img, Heading, Button, TextArea, Input, Text } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Navbar";
-import { FaRegUser,FaPhoneAlt } from "react-icons/fa";
+import { FaRegUser,FaPhoneAlt, FaReddit, FaFacebook, FaTwitter, FaRss, FaLinkedin } from "react-icons/fa";
 import { PiEnvelope } from "react-icons/pi";
 
 export default function ContactPage() {
@@ -72,14 +72,14 @@ export default function ContactPage() {
                         shape="round"
                         name="inputbox_one"
                         placeholder="Message"
-                        className="w-full sm:pb-5 sm:pr-5 text-gray-600_02 font-semibold"
+                        className="w-full sm:pb-5 sm:pr-5 text-gray-600_02 font-semibold resize-none"
                       />
                     </div>
                   </div>
                   <Button
                     size="2xl"
                     shape="round"
-                    className="w-full sm:px-5 font-semibold"
+                    className="w-full sm:px-5 font-semibold text-white"
                   >
                     Send Request
                   </Button>
@@ -88,12 +88,12 @@ export default function ContactPage() {
                 <div className="flex flex-col items-center justify-start w-[46%] md:w-full gap-10">
                   <div className="flex flex-col items-center justify-start w-[96%] md:w-full gap-4">
                     <div className="flex flex-col items-start justify-start w-full gap-[3px]">
-                      <Heading size="lg" as="h3" className="tracking-[-0.40px]">
+                      <Heading size="lg" as="h5" className="tracking-[-0.40px]">
                         Office Address
                       </Heading>
                       <Heading
                         size="md"
-                        as="h4"
+                        as="h6"
                         className="!text-gray-600_02 !leading-[180%]"
                       >
                         <>
@@ -111,18 +111,19 @@ export default function ContactPage() {
                         />
                         <Heading
                           size="md"
-                          as="h5"
+                          as="h6"
                           className="!text-gray-600_02"
                         >
                           (123) 456-7890
                         </Heading>
                       </div>
                       <div className="flex flex-row justify-start items-center w-full gap-3 py-0.5">
-                        <Img
+                        {/* <Img
                           src="images/img_icon_24px_email.svg"
                           alt="icon24pxemail"
                           className="h-[24px] w-[24px]"
-                        />
+                        /> */}
+                        <PiEnvelope color={"gray"} size={24} />
                         <Heading
                           size="md"
                           as="h6"
@@ -138,31 +139,11 @@ export default function ContactPage() {
                       Social
                     </Heading>
                     <div className="flex flex-row justify-start gap-4">
-                      <Img
-                        src="images/img_social_icon_facebook.svg"
-                        alt="socialicon_one"
-                        className="h-[30px] w-[30px]"
-                      />
-                      <Img
-                        src="images/img_social_icon_linkedin.svg"
-                        alt="socialicon"
-                        className="h-[30px] w-[30px]"
-                      />
-                      <Img
-                        src="images/img_social_icon_twitter.svg"
-                        alt="socialicon_five"
-                        className="h-[30px] w-[30px]"
-                      />
-                      <Img
-                        src="images/img_social_icon_youtube.svg"
-                        alt="socialicon"
-                        className="h-[30px] w-[30px]"
-                      />
-                      <Img
-                        src="images/img_social_icon_rss.svg"
-                        alt="socialiconrss"
-                        className="h-[30px] w-[30px]"
-                      />
+                      <FaFacebook size={30} />
+                      <FaLinkedin size={30} />
+                      <FaTwitter size={30} />
+                      <FaReddit size={30} />
+                      <FaRss size={30} />
                     </div>
                   </div>
                 </div>
@@ -170,7 +151,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        <Footer className="flex justify-center items-center w-full pl-[74px] pr-14 gap-[115px] py-[74px] md:p-5 bg-white-A700" />
+        {/* <Footer className="flex justify-center items-center w-full pl-[74px] pr-14 gap-[115px] py-[74px] md:p-5 bg-white-A700" /> */}
       </div>
     </>
   );
