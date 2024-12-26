@@ -11,6 +11,8 @@ import {
   FaRegSmile,
   FaDollarSign,
   FaFire,
+  FaArrowLeft,
+  FaArrowDown
 } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 
@@ -273,7 +275,7 @@ export default function LandingPagePage() {
                     className="flex flex-row justify-start items-center mt-[7px] gap-2 sm:mt-0"
                   >
                     <Heading
-                      size="md"
+                      
                       as="h6"
                       className="mt-0.5 !text-orange-A700 !font-bold"
                     >
@@ -404,7 +406,7 @@ export default function LandingPagePage() {
                         alt="iconcheck_one"
                         className="h-[24px] w-[24px]"
                       />
-                      <Heading size="md" as="h6">
+                      <Heading  as="h6">
                         Find excellent deals
                       </Heading>
                     </div>
@@ -414,7 +416,7 @@ export default function LandingPagePage() {
                         alt="iconcheck_three"
                         className="h-[24px] w-[24px]"
                       />
-                      <Heading size="md" as="h6" className="mt-[5px]">
+                      <Heading  as="h6" className="mt-[5px]">
                         Friendly host & Fast support
                       </Heading>
                     </div>
@@ -424,7 +426,7 @@ export default function LandingPagePage() {
                         alt="iconcheck_five"
                         className="h-[24px] w-[24px]"
                       />
-                      <Heading size="md" as="h6" className="mt-[5px]">
+                      <Heading  as="h6" className="mt-[5px]">
                         Secure payment system
                       </Heading>
                     </div>
@@ -460,7 +462,7 @@ export default function LandingPagePage() {
                         >
                           Taylor Wilson
                         </Heading>
-                        <Heading size="md" as="h6">
+                        <Heading  as="h6">
                           Product Manager - Static Mania
                         </Heading>
                       </div>
@@ -483,18 +485,14 @@ export default function LandingPagePage() {
           </div>
           <div className="flex flex-row justify-end w-full pl-14 pr-[215px] gap-[270px] md:gap-10 md:px-5">
             <div className="flex flex-row justify-start items-center w-[10%] gap-2">
-              <Img
-                src="images/img_icon_24px_v_gray_600.svg"
-                alt="icon24pxv_three"
-                className="h-[24px] w-[24px]"
-              />
-              <Heading size="md" as="h5" className="!text-gray-600 !font-bold">
-                Previews
+              <FaArrowDown size={32} color={"gray"} />
+              <Heading  as="h5" className="!text-gray-600 !font-bold">
+                Reviews
               </Heading>
             </div>
             <div className="flex flex-row justify-start items-center w-[7%] gap-2">
               <Heading
-                size="md"
+                
                 as="h5"
                 className="mt-px !text-orange-A700 !font-bold"
               >
@@ -521,7 +519,7 @@ export default function LandingPagePage() {
                 </Heading>
                 <div className="flex flex-row justify-start items-center gap-2">
                   <Heading
-                    size="md"
+                    
                     as="h6"
                     className="mt-0.5 !text-orange-A700 !font-bold"
                   >
@@ -551,7 +549,7 @@ export default function LandingPagePage() {
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
                       <Heading
-                        size="md"
+                        
                         as="h6"
                         className="mt-px !text-deep_orange-400 !font-bold"
                       >
@@ -582,7 +580,7 @@ export default function LandingPagePage() {
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
                       <Heading
-                        size="md"
+                        
                         as="h6"
                         className="mt-px !text-deep_orange-400 !font-bold"
                       >
@@ -613,7 +611,7 @@ export default function LandingPagePage() {
                     </Heading>
                     <div className="flex flex-row justify-start items-center w-full gap-2">
                       <Heading
-                        size="md"
+                        
                         as="h6"
                         className="mt-px !text-deep_orange-400 !font-bold"
                       >
@@ -733,7 +731,7 @@ export default function LandingPagePage() {
               </div>
               <div className="flex flex-row md:flex-col justify-between items-center w-[72%] md:w-full md:gap-10">
                 <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[15px]">
-                  <Heading size="md" as="h6" className="!font-bold">
+                  <Heading  as="h6" className="!font-bold">
                     Features
                   </Heading>
                   <div className="flex flex-col items-start justify-start w-full gap-[15px]">
@@ -745,7 +743,7 @@ export default function LandingPagePage() {
                   </div>
                 </div>
                 <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[15px]">
-                  <Heading size="md" as="h6" className="!font-bold">
+                  <Heading  as="h6" className="!font-bold">
                     Information
                   </Heading>
                   <div className="flex flex-col items-start justify-start w-full pt-[3px] gap-[15px]">
@@ -757,7 +755,7 @@ export default function LandingPagePage() {
                   </div>
                 </div>
                 <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[15px]">
-                  <Heading size="md" as="h6" className="!font-bold">
+                  <Heading  as="h6" className="!font-bold">
                     Documentation{" "}
                   </Heading>
                   <div className="flex flex-col items-start justify-center w-full gap-[15px]">
@@ -772,7 +770,7 @@ export default function LandingPagePage() {
                   </div>
                 </div>
                 <div className="flex flex-col items-start justify-start w-[19%] md:w-full gap-[15px]">
-                  <Heading size="md" as="h6" className="!font-bold">
+                  <Heading  as="h6" className="!font-bold">
                     Others
                   </Heading>
                   <div className="flex flex-col items-start justify-center w-full gap-[15px]">

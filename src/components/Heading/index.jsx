@@ -17,7 +17,7 @@ const Heading = ({ children, className = "", as, ...restProps }) => {
   const Component = as || "h6";
 
   return (
-    <Component className={`text-gray-900 !font-reemkufi ${className} `} {...restProps}>
+    <Component className={` !font-reemkufi ${className} `} {...restProps}>
       {children}
     </Component>
   );
