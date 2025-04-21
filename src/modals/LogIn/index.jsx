@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Heading, Button, Img, CheckBox, Input } from "../../components";
+import { Heading, Button, CheckBox, Input } from "../../components";
 import { default as ModalProvider } from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes } from 'react-icons/fa'
-import { PiEye, PiEyeClosed, PiKeyhole } from 'react-icons/pi'
-import { AiOutlineUser } from 'react-icons/ai'
+import { FaTimes, FaGoogle } from "react-icons/fa";
+import { PiEye, PiEyeClosed, PiKeyhole } from "react-icons/pi";
+import { AiOutlineUser } from "react-icons/ai";
 import { POST_URL, validateEmail } from "utilities/common";
 
 export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false); // for the toggle switch || remember me
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +17,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const isValidated = !!(validateEmail(email) && password);
+  // const isValidated = !!(validateEmail(email) && password);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -28,34 +28,38 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
     setIsLoading(true);
 
     try {
-      const response = await POST_URL("/user/login", {
-        email,
-        password
+      const response = await POST_URL("user/login", {
+        username,
+        password,
       });
       const data = await response.json();
       console.log(response, data);
-      setEmail("");
+      setUsername("");
       setPassword("");
 
       if (response.ok) {
         setSuccess("Login Successful", data.message);
-        const url = "/";
+        // const url = "/";
         // console.log(url);
+        let rememberMe = document.getElementById("remember").isChecked
+        if (rememberMe) {
+          console.log(rememberMe)
+        }
         navigate("/");
       } else {
-        setError("Login failed...", data.error)
+        setError("Login failed...", data.error);
       }
     } catch (error) {
       console.error("Fetch error: ", error);
-      setError("Login failed", error.message);
+      setError(`Login failed:  ${error.message.split(" ")[0]}`);
     } finally {
       setIsLoading(false);
       setTimeout(() => {
         setError("");
         setSuccess("");
-      }, 5000)
+      }, 5000);
     }
-  }
+  };
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -71,7 +75,7 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
         // console.log(url);
         navigate("/");
       } else {
-        setError("Login failed...", data.error)
+        setError("Login failed...", data.error);
       }
     } catch (error) {
       console.error("Fetch error: ", error);
@@ -81,55 +85,66 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
       setTimeout(() => {
         setError("");
         setSuccess("");
-      }, 5000)
+      }, 5000);
     }
-  }
+  };
 
   return (
-    <ModalProvider {...props} appElement={document.getElementById("root")} isOpen={isOpen} className="min-w-[480px]">
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
+    <ModalProvider
+      {...props}
+      appElement={document.getElementById("root")}
+      isOpen={isOpen}
+      className="min-w-[480px] focus-visible:outline-0 h-full "
+      overlayClassName="bg-[#d4dae4] py-6 focus-within:border-0 h-full"
+    >
+      <form onSubmit={handleSubmit} className="w-full h-full">
+        <div className="flex flex-col items-center justify-center w-full p-[29px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px] font-candara focus-visible:outline h-full" id="loginPage">
           <div className="flex flex-col items-center justify-start w-full gap-[29px] my-[9px]">
             <div className="flex flex-col items-center justify-start w-full gap-[13px]">
               <div className="flex flex-row justify-center w-full pt-[5px]">
                 <div className="flex flex-col items-center justify-start w-full gap-[15px]">
-                  <div className="flex flex-row justify-between items-start w-full">
-                    <Heading size="4xl" as="h1" className="tracking-[-0.72px]">
-                      Log in
+                  <div className="flex flex-row justify-between items-center w-full pb-6 border-[#363020] border-b-[1.5px]">
+                    <Heading
+                      as="h4"
+                      className="tracking-[-0.72px]  font-[750] text-[#020202]"
+                    >
+                      Log In
                     </Heading>
-                    <Button size="sm" shape="square" className="w-[30px] mt-1" onClick={() => navigate("/")}>
-                      {/* <Img src="images/img_frame_1000001678.svg" /> */}
+                    <Button
+                      size="sm"
+                      shape="square"
+                      className="w-[30px] mt-1 bg-[#605c4e]  text-[#bbc9aa] hover:bg-[#363020]  duration-100 transition-all focus-visible:border-[#605ce4]"
+                      onClick={() => navigate("/")}
+                    >
                       <FaTimes />
                     </Button>
                   </div>
                   <Input
                     shape="round"
-                    type="email"
-                    name="email"
-                    placeholder="user / email address"
-                    prefix={<AiOutlineUser size={28} />}
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
-                    value={email}
-                    onChange={setEmail}
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    prefix={<AiOutlineUser size={28}  color={"363020"} />}
+                    className="w-full gap-3.5 font-semibold border-[#363020] border-[2.5px] border-solid my-6 bg-transparent "
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                   <Input
                     shape="round"
                     type={showPassword ? "text" : "password"}
                     name="password"
                     placeholder="Password"
-                    prefix={<PiKeyhole size={32} />}
+                    prefix={<PiKeyhole size={34}   color={"363020"}/>}
                     suffix={
-                      <button
-                        onClick={togglePasswordVisibility}
-                      >
-                        {
-                          showPassword ? <PiEye size={32} /> : <PiEyeClosed size={32} />
-                        }
+                      <button onClick={togglePasswordVisibility} type="button">
+                        {showPassword ? (
+                          <PiEye size={32}  color={"363020"} />
+                        ) : (
+                          <PiEyeClosed size={32}  color={"363020"} />
+                        )}
                       </button>
                     }
-                    className="w-full gap-3.5 font-semibold border-blue_gray-100_01 border border-solid"
-                    value={password}
-                    onChange={setPassword}
+                    className="w-full gap-3.5 font-semibold border-[#363020] focus:border-[#605c4e] border-[2.5px] border-solid bg-transparent mb-2 text-[#d4dae4]"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -137,52 +152,54 @@ export default function LogIn({ isOpen, setIsOpen, ...props }) {
                 <CheckBox
                   shape="round"
                   name="remember"
-                  label="Remember"
+                  label="Remember Me"
                   id="remember"
-                  className="mb-0.5 gap-2 text-left font-bold"
-                  checked={checked}
-                  onChange={setChecked}
+                  className="mb-0.5 gap-2 text-left font-[550] text-[18px] font-reemkufi  checked:text-[#602302]"
+                  onClick={(e) => {
+                    setChecked(e.target.checked);
+                  }}
                 />
-                <a href="#">
-                  <Heading size="md" as="h2" className="text-right !font-bold">
-                    <Link to="/reset-password">
-                      Forgot Password
-                    </Link>
-                  </Heading>
-                </a>
+                <Link
+                  to="/reset-password"
+                  className="text-right font-[400] hover:underline"
+                >
+                  Forgot Password?
+                </Link>
               </div>
             </div>
-            {error && <div className="text-red-600">{error}</div>}
+            { error && <div className="text-red-600 font-[400] text-[16px]">{error}</div> || <div className="py-[0.6rem]"></div>}
             {success && <div className="text-green-600">{success}</div>}
-            <div className="flex flex-col items-center justify-start w-full gap-[18px]">
-              <Button size="4xl" shape="round" className="w-full sm:px-5 font-bold" disabled={isLoading || isValidated}>
+            <div className="flex flex-row items-center justify-start w-full gap-[18px]">
+              <Button
+                size="4xl"
+                shape="round"
+                className="sm:px-5 font-bold w-[80%] bg-[#605c4e]"
+                disabled={isLoading}
+              >
                 Log in
               </Button>
               <Button
                 color="white_A700"
                 size="4xl"
                 shape="round"
-                leftIcon={<Img src="images/img_icon_20px_google.svg" alt="icon / 20px / google" />}
-                className="w-full gap-2.5 sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid"
+                className=" gap-2.5 sm:px-5 text-gray-900 font-bold border-gray-600_02 border border-solid w-[20%] bg-[#bbc9aa]"
                 onClick={handleGoogleSignIn}
               >
-                Log in with Google
+                {/* <Img src="images/img_icon_20px_google.svg" alt="Google" className="w-[150px]" />
+                 */}
+                 <FaGoogle size="25px" color={"363020"} />
               </Button>
             </div>
-            <div className="h-px w-full bg-blue_gray-100_01" />
-            <div className="flex flex-row sm:flex-col justify-center w-full gap-2 sm:gap-2">
-              <a href="#" className="ml-[25px] sm:ml-5">
-                <Heading size="lg" as="h2" className="!text-gray-600_02 tracking-[-0.40px] text-center">
-                  Don&apos;t have an account?
-                </Heading>
-              </a>
-              <a href="#" className="mr-[25px] sm:mr-5">
-                <Heading size="lg" as="h3" className="tracking-[-0.40px]">
-                  <Link to='/create-account'>
-                    Create Account
-                  </Link>
-                </Heading>
-              </a>
+            <div className="flex flex-row sm:flex-col justify-center items-center w-full gap-2 sm:gap-2 border-[#363020] border-t-[1.5px] pt-4">
+              <Heading
+                as="p"
+                className="text-[#1D1D1D] opacity-[95] tracking-[-0.40px] text-center ml-[25px] sm:ml-5"
+              >
+                Don't have an account?
+              </Heading>
+              <Link to="/create-account" className="font-candara underline text-[#272727ea]">
+                Try Creating One
+              </Link>
             </div>
           </div>
         </div>

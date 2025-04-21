@@ -1,42 +1,58 @@
 @font-face {
-  font-display: swap;
-  font-style: normal;
-  src: url("/fonts/MarkoOneRegular.ttf");
-  font-family: "Marko One";
+  font-family: "Candara";
+  src: url("/fonts/CANDARA.TTF");
   font-weight: 400;
+  font-display: swap;
+  font-style:normal;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/ManropeSemiBold.ttf");
-  font-family: "Manrope";
-  font-weight: 600;
+  src: url("/fonts/CANDARAB.TTF");
+  font-family: "Candara";
+  font-weight: 700;
+}
+/* @font-face {
+  font-family: "Candara";
+  src: url("/fonts/CANDARAI.TTF");
+  font-weight: 400;
+  font-style:italic;
+  font-display: swap;
+  font-style:normal;
+} */
+@font-face {
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/CANDARAL.TTF");
+  font-family: "Candara";
+  font-weight: 300;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/ManropeBold.ttf");
-  font-family: "Manrope";
+  src: url("/fonts/CANDARALI.TTF");
+  font-family: "Candara";
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/CANDARAZ.TTF");
+  font-family: "Candara";
+  font-weight: 500;
+}
+@font-face {
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/REEMKUFI-BOLD.TTF");
+  font-family: "ReemKufi";
   font-weight: 700;
 }
 @font-face {
   font-display: swap;
   font-style: normal;
-  src: url("/fonts/ManropeExtraBold.ttf");
-  font-family: "Manrope";
-  font-weight: 800;
-}
-@font-face {
-  font-display: swap;
-  font-style: normal;
-  src: url("/fonts/ManropeRegular.ttf");
-  font-family: "Manrope";
+  src: url("/fonts/REEMKUFI-REGULAR.TTF");
+  font-family: "ReemKufi";
   font-weight: 400;
-}
-@font-face {
-  font-display: swap;
-  font-style: normal;
-  src: url("/fonts/ManropeMedium.ttf");
-  font-family: "Manrope";
-  font-weight: 500;
 }

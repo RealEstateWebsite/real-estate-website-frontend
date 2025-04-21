@@ -6,7 +6,7 @@ const shapes = {
 };
 const variants = {
   outline: {
-    gray_900: "border-gray-900 border-2 border-solid text-gray-900",
+    brown: "border-[#605c4e] border-2 border-solid text-gray-900",
   },
 };
 const sizes = {
@@ -25,7 +25,7 @@ const CheckBox = React.forwardRef(
       shape = "",
       variant = "outline",
       size = "xs",
-      color = "gray_900",
+      color = "brown",
       ...restProps
     },
     ref,

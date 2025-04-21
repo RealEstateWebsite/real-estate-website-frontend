@@ -1,7 +1,11 @@
+html {
+  width:100%;
+  height:100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: Manrope;
 }
 * {
   box-sizing: border-box;
@@ -57,4 +61,49 @@ input:focus {
 }
 table {
   table-layout: fixed;
+}
+h1 {
+  font-size: 89.76px;
+}
+h2 {
+  font-size: 67.34px;
+}
+h3 {
+  font-size: 50.52px;
+}
+h4 {
+  font-size: 37.9px;
+}
+h5{
+  font-size:28.43px;
+}
+h6{
+  font-size:21.33px;
+}
+p{
+  font-size: 16px;
+}
+#loginPage {
+  background-image: url("/images/img_image_1.png");
+   background-repeat: no-repeat;
+  background-position: 0px;
+  background-clip: border-box;
+}
+
+p{
+  font-family: Candara;
+}
+
+img[src="images/img_cover_image.png"] {
+  filter:blur(4px)
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -1,0 +1,25 @@
+## Todos for the frontend
+
+-Fix the reset password page exit button.. Done
+-Accept errors in the create account page and display them properly to the end user .. Done
+-Do the remember me for the login page
+-Do the i agree for the create account page ..Done
+-fix the create account page height scaling.. Done
+-login page has an error where when the eye icon is clicked, it submits straight away and returns an error ..done
+-make an error handler for the create account. it should use an array to store and map through the values in the array and display them.
+-the homepage shouldn't have a sell, buy or rent option. That should be kept in its own route
+-the reset password page shouldn't have a create-account option there ..done
+-many of the pages are not responsive
+-Do a complete overturn of the ui
+-Style the focus for the ui
+-Start with the login page according to the figma design ..done
+-Refactor unnecsary code
+-Make the background darker than it is now or lighter with lighter or darker text as necessary.
+-Set up an Error 404 page
+-Create a modal for the create account page that contains the sites terms and conditions and must be accepted to  ..Done
+-Remove unnecessary components
+-Add an about us link to the landing page
+-Create necessary components like footer and employee card and remove unnecessary ones
+-Create a card component for the agent list page, retireve data from the backend and loop through the first set(12 or 15) before going through the remaining.
+-Add an animation for the numbers bar that scrolls to the actual number once visible
+-Add an animation to the blog details page, the continue reading arrow animation to move right when hovered on
